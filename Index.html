@@ -431,12 +431,12 @@
                    far less exposure if the link ever gets forwarded).
                ------------------------------------------------------------- */
             const IDENTITY = {
-                mobile: '03334672220',
+                mobile: '3334672220',
                 cnic: '3520108802298'
             };
             const MAX_IDENTITY_ATTEMPTS = 2;
 
-            const GIFT_IMAGE_URL = 'assets/gift-photo.jpg';
+            const GIFT_IMAGE_URL = 'assets/gift-photo.jpeg';
             const GIFT_IMAGE_FALLBACK = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect width="200" height="200" fill="%23f2e1d4"/%3E%3Crect x="25" y="55" width="150" height="90" rx="24" fill="%23dcc3b2"/%3E%3Crect x="70" y="15" width="60" height="55" rx="30" fill="%23eddbc9"/%3E%3Cpath d="M75 130 L125 130 L115 155 L85 155 Z" fill="%23b18a76"/%3E%3Ccircle cx="100" cy="105" r="20" fill="%23f6e3d5"/%3E%3Ctext x="100" y="185" font-family="Arial" font-size="14" fill="%234a3225" text-anchor="middle"%3E🎁 آپ کا تحفہ%3C/text%3E%3C/svg%3E';
 
             const total = STEPS.length;
@@ -448,6 +448,7 @@
             let identityVerified = false;                       // mobile+CNIC gate passed?
             let identityAttempts = 0;                           // failed identity tries
             let identityRevealed = false;                       // fallback shown after 2 fails
+            let declined = false;                               // user tapped "not now"
 
             const stepContent = document.getElementById('stepContent');
             const keyArea = document.getElementById('keyArea');
@@ -552,6 +553,21 @@
                     return;
                 }
 
+                if (declined) {
+                    stepContent.innerHTML = `
+                        <div class="icon-big">💛</div>
+                        <h2>ٹھیک ہے، کوئی بات نہیں</h2>
+                        <div class="desc">جب آپ کا موڈ ہو، واپس آ کر اپنا پارسل کھول لیجیے گا۔</div>
+                    `;
+                    keyArea.innerHTML = `<button class="btn btn-primary" id="restartOpenBtn">🔓 اب موڈ ہے، کھولیں</button>`;
+                    document.getElementById('restartOpenBtn').addEventListener('click', () => {
+                        declined = false;
+                        awaitingConfirm = true;
+                        renderFinal();
+                    });
+                    return;
+                }
+
                 if (awaitingConfirm) {
                     keyArea.innerHTML = `
                         <div class="confirm-area">
@@ -569,6 +585,7 @@
                     });
                     document.getElementById('noBtn').addEventListener('click', () => {
                         awaitingConfirm = false;
+                        declined = true;
                         renderFinal();
                     });
                     return;
