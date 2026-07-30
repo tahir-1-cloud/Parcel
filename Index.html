@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>🎁 Surprise Parcel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f2ebe4;
+            background-image: radial-gradient(circle at 30% 20%, #f8f0e8, #e6d7cc);
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .card {
+            max-width: 520px;
+            width: 100%;
+            background: rgba(250, 244, 238, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 48px;
+            padding: 36px 30px 40px;
+            box-shadow: 0 30px 50px -20px rgba(60, 40, 30, 0.25), 0 0 0 1px rgba(255, 235, 220, 0.5);
+            border: 1px solid rgba(255, 240, 225, 0.4);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* ---- progress dots ---- */
+        .progress {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 22px;
+        }
+        .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #ddc7b6;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .dot.done { background: #b18a76; transform: scale(1.15); }
+        .dot.current { background: #8a6650; box-shadow: 0 0 0 4px rgba(138,102,80,0.15); }
+
+        .step-content {
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 4px;
+        }
+
+        .step-content .icon-big {
+            font-size: 3.6rem;
+            line-height: 1.2;
+            margin-bottom: 6px;
+            filter: drop-shadow(0 10px 12px rgba(80, 50, 30, 0.08));
+        }
+
+        .step-content h2 {
+            font-size: 1.7rem;
+            font-weight: 500;
+            letter-spacing: -0.4px;
+            color: #2f241c;
+            margin: 4px 0 8px;
+        }
+
+        .step-content .desc {
+            font-size: 1.05rem;
+            background: rgba(235, 218, 205, 0.3);
+            padding: 12px 24px;
+            border-radius: 60px;
+            color: #3d2e23;
+            max-width: 92%;
+            border: 1px solid #ebd7ca;
+            line-height: 1.6;
+        }
+
+        /* ---- key ritual: reveal then enter ---- */
+        .key-area {
+            margin-top: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .reveal-box {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            background: #ece0d6;
+            color: #6b4d3a;
+            padding: 10px 26px;
+            border-radius: 60px;
+            border: 1px dashed #cba98d;
+            min-height: 20px;
+            opacity: 0;
+            transform: translateY(-6px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+        .reveal-box.shown {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .key-input-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        input[type="text"] {
+            background: rgba(250, 240, 230, 0.7);
+            border: 2px solid #dcc4b4;
+            border-radius: 60px;
+            padding: 14px 24px;
+            font-size: 1.05rem;
+            width: 180px;
+            text-align: center;
+            color: #2c1e15;
+            outline: none;
+            transition: 0.2s;
+        }
+        input[type="text"]:focus {
+            border-color: #b18a76;
+            background: #fcf3eb;
+            box-shadow: 0 0 0 4px #eddccc;
+        }
+        input[type="text"].shake {
+            animation: shake 0.4s ease;
+            border-color: #c17a5f;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        .error-line {
+            font-size: 0.85rem;
+            color: #b5563a;
+            min-height: 18px;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+        .error-line.shown { opacity: 1; }
+
+        .btn {
+            background: #ece0d6;
+            border: 1px solid #f0e0d4;
+            border-radius: 60px;
+            padding: 13px 26px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #2d1f16;
+            cursor: pointer;
+            transition: all 0.15s;
+            box-shadow: 0 4px 0 #b99a86, 0 8px 18px rgba(70, 40, 20, 0.12);
+            letter-spacing: 0.2px;
+            min-width: 100px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn:active { transform: translateY(4px); box-shadow: 0 0px 0 #b99a86; }
+        .btn:disabled { opacity: 0.5; pointer-events: none; }
+
+        .btn-primary {
+            background: #dcc3b2;
+            border-color: #cfb7a6;
+            box-shadow: 0 4px 0 #a58673;
+        }
+        .btn-primary:active { box-shadow: 0 0px 0 #a58673; }
+
+        .btn-ghost {
+            background: transparent;
+            box-shadow: none;
+            border: 1px solid #d6c2b0;
+            color: #6b5646;
+        }
+        .btn-ghost:active { transform: translateY(1px); }
+
+        /* ---- confirm (final step) ---- */
+        .confirm-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .confirm-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+        /* ---- gift reveal ---- */
+        .gift-image-container {
+            margin: 16px 0 4px;
+            border-radius: 36px;
+            overflow: hidden;
+            box-shadow: 0 20px 30px -12px #6b4d3a;
+            border: 3px solid #f0dfd2;
+            background: #e2cebf;
+            width: 100%;
+        }
+        .gift-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-height: 280px;
+            object-fit: cover;
+        }
+        .hidden { display: none !important; }
+
+        /* ---- mood picker (after reveal) ---- */
+        .mood-area {
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px dashed #dcc7b6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+        .mood-title {
+            font-size: 1.02rem;
+            font-weight: 600;
+            color: #3d2e23;
+        }
+        .mood-sub {
+            font-size: 0.88rem;
+            color: #7a6253;
+            max-width: 90%;
+            line-height: 1.6;
+        }
+        .mood-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+        .mood-btn {
+            background: #ece0d6;
+            border: 1px solid #f0e0d4;
+            border-radius: 60px;
+            padding: 8px 16px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .mood-btn:hover { transform: translateY(-2px); }
+        .mood-btn.selected {
+            background: #dcc3b2;
+            border-color: #a58673;
+            box-shadow: 0 0 0 3px rgba(165,134,115,0.2);
+        }
+        .mood-response {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 4px;
+        }
+        .mood-response-text {
+            font-size: 0.92rem;
+            color: #3d2e23;
+            background: rgba(235, 218, 205, 0.4);
+            padding: 10px 18px;
+            border-radius: 16px;
+            max-width: 90%;
+            line-height: 1.6;
+        }
+
+        .footnote {
+            margin-top: 22px;
+            font-size: 0.8rem;
+            color: #7a6253;
+            background: #eee0d5;
+            padding: 6px 20px;
+            border-radius: 60px;
+            display: inline-block;
+            border: 1px solid #dccbbc;
+            letter-spacing: 0.3px;
+        }
+
+        /* ---- falling flowers ---- */
+        .flower-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            overflow: hidden;
+        }
+        .flower {
+            position: absolute;
+            font-size: 2rem;
+            animation: fall linear forwards;
+            opacity: 0;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg) scale(0.5); opacity: 0; }
+            10% { opacity: 1; transform: translateY(0vh) rotate(20deg) scale(1); }
+            100% { transform: translateY(110vh) rotate(720deg) scale(0.3); opacity: 0.7; }
+        }
+
+        @media (max-width: 480px) {
+            .card { padding: 28px 18px; }
+            .step-content h2 { font-size: 1.45rem; }
+            .step-content .desc { font-size: 0.92rem; padding: 10px 16px; }
+            .btn { padding: 11px 18px; min-width: 80px; font-size: 0.92rem; }
+            input[type="text"] { width: 140px; padding: 12px 18px; font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="app">
+        <div class="progress" id="progress"></div>
+        <div class="step-content" id="stepContent"></div>
+        <div class="key-area" id="keyArea"></div>
+        <div class="gift-image-container hidden" id="giftWrapper">
+            <img id="giftImage" src="" alt="🎁 تحفہ">
+        </div>
+        <div class="mood-area hidden" id="moodArea"></div>
+        <div class="footnote">✨ قدم بہ قدم · خوشی کا تحفہ</div>
+    </div>
+
+    <div class="flower-container" id="flowerContainer"></div>
+
+    <script>
+        (function () {
+            /* =============================================================
+               EDIT HERE — 5 steps. Each needs: icon, title, desc, and the
+               "key" the person types after tapping "Reveal Key".
+               The key is shown to them on click — this is a ritual, not a
+               puzzle, so nobody gets stuck.
+
+               Keys below are random 5-character codes (not real words),
+               so nobody else could guess or already know them. Change
+               them to anything you like — just keep each one unique-ish.
+
+               Honest note: since "Reveal Key" shows the code on screen,
+               what actually keeps this private is not sharing the link
+               with anyone else — not the code itself.
+               ============================================================= */
+            const STEPS = [
+                {
+                    icon: '🔑',
+                    title: 'پہلا قدم',
+                    desc: 'صبا ایزی لوڈ والی، وہ پہلی عظیم خاتون تھیں',
+                    key: 'X7QK2'
+                },
+                {
+                    icon: '🌟',
+                    title: 'دوسرا قدم',
+                    desc: 'جس نے خواتین میں آن لائن Earning کی بنیاد رکھی',
+                    key: 'M3RTD'
+                },
+                {
+                    icon: '💎',
+                    title: 'تیسرا قدم',
+                    desc: 'آپ کے تحفے کے قریب آ رہے ہیں...',
+                    key: 'P9LZW'
+                },
+                {
+                    icon: '🎀',
+                    title: 'چوتھا قدم',
+                    desc: 'تیار ہو جائیں، اگلا قدم آخری ہے',
+                    key: 'V4HCX'
+                },
+                {
+                    icon: '🎁',
+                    title: 'آخری قدم',
+                    desc: 'یہ آپ کے پارسل کی آخری چابی ہے',
+                    key: 'SABA'
+                }
+            ];
+
+            // Mood options shown below the opened gift. Edit freely.
+            const MOODS = [
+                { emoji: '😍', label: 'بہت خوش' },
+                { emoji: '😂', label: 'ہنسی آ گئی' },
+                { emoji: '😮', label: 'حیران رہ گیا/گئی' },
+                { emoji: '😡', label: 'غصہ آ گیا 😤' },
+                { emoji: '🥹', label: 'دل کو لگ گئی' },
+                { emoji: '😴', label: 'بورنگ تھا 😅' }
+            ];
+
+            // Optional: put the sender's WhatsApp number here (with country
+            // code, no + or spaces, e.g. '923001234567') to open a chat
+            // with them directly. Leave empty to use the device's normal
+            // share options instead.
+            const SENDER_WHATSAPP_NUMBER = '';
+
+            /* -------------------------------------------------------------
+               Identity gate before the actual reveal — mobile number +
+               CNIC, since only the intended person would know both.
+
+               IMPORTANT — read this before deploying:
+               This is a plain static site: whatever is written here is
+               visible to anyone who opens "view source" on the deployed
+               page, exactly like the step keys above. Putting a real CNIC
+               here means it sits in plain text in your public GitHub repo
+               and on the live Vercel URL. If that's a concern, consider:
+                 - making the GitHub repo private, or
+                 - only sharing the deployed link with the one person, or
+                 - using just the last 4 digits of each instead of the
+                   full numbers (still personal enough to be "only them",
+                   far less exposure if the link ever gets forwarded).
+               ------------------------------------------------------------- */
+            const IDENTITY = {
+                mobile: '03334672220',
+                cnic: '3520108802298'
+            };
+            const MAX_IDENTITY_ATTEMPTS = 2;
+
+            const GIFT_IMAGE_URL = 'assets/gift-photo.jpg';
+            const GIFT_IMAGE_FALLBACK = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect width="200" height="200" fill="%23f2e1d4"/%3E%3Crect x="25" y="55" width="150" height="90" rx="24" fill="%23dcc3b2"/%3E%3Crect x="70" y="15" width="60" height="55" rx="30" fill="%23eddbc9"/%3E%3Cpath d="M75 130 L125 130 L115 155 L85 155 Z" fill="%23b18a76"/%3E%3Ccircle cx="100" cy="105" r="20" fill="%23f6e3d5"/%3E%3Ctext x="100" y="185" font-family="Arial" font-size="14" fill="%234a3225" text-anchor="middle"%3E🎁 آپ کا تحفہ%3C/text%3E%3C/svg%3E';
+
+            const total = STEPS.length;
+            let step = 1;                                    // 1..5
+            let revealed = new Array(total).fill(false);      // reveal-key clicked?
+            let unlocked = new Array(total).fill(false);       // correct key entered?
+            let awaitingConfirm = false;                       // final step: showing yes/no?
+            let opened = false;                                 // parcel actually opened?
+            let identityVerified = false;                       // mobile+CNIC gate passed?
+            let identityAttempts = 0;                           // failed identity tries
+            let identityRevealed = false;                       // fallback shown after 2 fails
+
+            const stepContent = document.getElementById('stepContent');
+            const keyArea = document.getElementById('keyArea');
+            const progressEl = document.getElementById('progress');
+            const giftWrapper = document.getElementById('giftWrapper');
+            const giftImg = document.getElementById('giftImage');
+            const moodArea = document.getElementById('moodArea');
+            const flowerContainer = document.getElementById('flowerContainer');
+
+            function renderProgress() {
+                progressEl.innerHTML = '';
+                for (let i = 1; i <= total; i++) {
+                    const d = document.createElement('span');
+                    d.className = 'dot' + (unlocked[i - 1] ? ' done' : '') + (i === step ? ' current' : '');
+                    progressEl.appendChild(d);
+                }
+            }
+
+            function renderStepText() {
+                const data = STEPS[step - 1];
+                stepContent.innerHTML = `
+                    <div class="icon-big">${data.icon}</div>
+                    <h2>${data.title}</h2>
+                    <div class="desc">${data.desc}</div>
+                `;
+            }
+
+            function renderKeyArea() {
+                const data = STEPS[step - 1];
+                const isFinal = step === total;
+
+                // Final step already unlocked -> show confirm or reveal, no key UI
+                if (isFinal && unlocked[step - 1]) {
+                    renderFinal();
+                    return;
+                }
+
+                keyArea.innerHTML = `
+                    <div class="reveal-box" id="revealBox">${data.key}</div>
+                    <button class="btn btn-ghost" id="revealBtn">🔍 Reveal Key</button>
+                    <div class="key-input-group">
+                        <input type="text" id="keyInput" placeholder="کلید یہاں لکھیں" autocomplete="off">
+                        <button class="btn btn-primary" id="enterBtn">✓ Enter</button>
+                    </div>
+                    <div class="error-line" id="errorLine">❌ غلط کلید، دوبارہ کوشش کریں</div>
+                `;
+
+                const revealBox = document.getElementById('revealBox');
+                const revealBtn = document.getElementById('revealBtn');
+                const keyInput = document.getElementById('keyInput');
+                const enterBtn = document.getElementById('enterBtn');
+                const errorLine = document.getElementById('errorLine');
+
+                if (revealed[step - 1]) revealBox.classList.add('shown');
+
+                revealBtn.addEventListener('click', () => {
+                    revealed[step - 1] = true;
+                    revealBox.classList.add('shown');
+                    keyInput.focus();
+                });
+
+                function tryUnlock() {
+                    const val = keyInput.value.trim();
+                    if (!val) return;
+                    if (val.toUpperCase() === data.key.toUpperCase()) {
+                        unlocked[step - 1] = true;
+                        renderProgress();
+                        if (isFinal) {
+                            renderFinal();
+                        } else {
+                            setTimeout(() => goToStep(step + 1), 450);
+                        }
+                    } else {
+                        errorLine.classList.add('shown');
+                        keyInput.classList.add('shake');
+                        setTimeout(() => keyInput.classList.remove('shake'), 400);
+                    }
+                }
+
+                enterBtn.addEventListener('click', tryUnlock);
+                keyInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') { e.preventDefault(); tryUnlock(); }
+                });
+                keyInput.addEventListener('input', () => errorLine.classList.remove('shown'));
+            }
+
+            function renderFinal() {
+                if (opened) {
+                    stepContent.innerHTML = `
+                        <div class="icon-big">🎉</div>
+                        <h2>مبارک ہو!</h2>
+                        <div class="desc">🎁 آپ کا پارسل کھل گیا</div>
+                    `;
+                    keyArea.innerHTML = '';
+                    giftWrapper.classList.remove('hidden');
+                    if (!giftImg.dataset.set) {
+                        giftImg.src = GIFT_IMAGE_URL;
+                        giftImg.onerror = () => { giftImg.src = GIFT_IMAGE_FALLBACK; };
+                        giftImg.dataset.set = '1';
+                    }
+                    renderMood();
+                    return;
+                }
+
+                if (awaitingConfirm) {
+                    keyArea.innerHTML = `
+                        <div class="confirm-area">
+                            <div class="desc" style="font-size:1rem;">کیا آپ واقعی اپنا پارسل ابھی کھولنا چاہتے ہیں؟</div>
+                            <div class="confirm-row">
+                                <button class="btn btn-primary" id="yesBtn">✅ جی ہاں، کھولیں</button>
+                                <button class="btn btn-ghost" id="noBtn">ابھی نہیں</button>
+                            </div>
+                        </div>
+                    `;
+                    document.getElementById('yesBtn').addEventListener('click', () => {
+                        opened = true;
+                        renderFinal();
+                        launchFlowers();
+                    });
+                    document.getElementById('noBtn').addEventListener('click', () => {
+                        awaitingConfirm = false;
+                        renderFinal();
+                    });
+                    return;
+                }
+
+                if (!identityVerified) {
+                    renderIdentityGate();
+                    return;
+                }
+
+                // identity verified but confirm not yet triggered (edge case) — ask now
+                awaitingConfirm = true;
+                renderFinal();
+            }
+
+            function renderIdentityGate() {
+                const attemptsLeft = MAX_IDENTITY_ATTEMPTS - identityAttempts;
+                keyArea.innerHTML = `
+                    <div class="confirm-area">
+                        <div class="desc" style="font-size:1rem;">پارسل کھولنے سے پہلے اپنی شناخت کی تصدیق کریں</div>
+                        <div class="key-input-group">
+                            <input type="text" id="mobileInput" placeholder="موبائل نمبر" autocomplete="off" inputmode="numeric">
+                        </div>
+                        <div class="key-input-group">
+                            <input type="text" id="cnicInput" placeholder="شناختی کارڈ نمبر (CNIC)" autocomplete="off" inputmode="numeric">
+                        </div>
+                        <button class="btn btn-primary" id="verifyBtn">✓ تصدیق کریں</button>
+                        <div class="error-line" id="identityError">❌ نمبر یا شناختی کارڈ درست نہیں${attemptsLeft > 0 ? ` — ${attemptsLeft} کوشش باقی` : ''}</div>
+                        ${identityRevealed ? `
+                            <div class="reveal-box shown" style="direction: ltr;">📱 ${IDENTITY.mobile} &nbsp;|&nbsp; 🪪 ${IDENTITY.cnic}</div>
+                            <div class="mood-sub">یہ نمبر اوپر فیلڈز میں لکھ کر دوبارہ تصدیق کریں</div>
+                        ` : ''}
+                    </div>
+                `;
+
+                const mobileInput = document.getElementById('mobileInput');
+                const cnicInput = document.getElementById('cnicInput');
+                const verifyBtn = document.getElementById('verifyBtn');
+                const identityError = document.getElementById('identityError');
+
+                function normalize(v) { return v.replace(/[\s-]/g, ''); }
+
+                function tryVerify() {
+                    const mobileOk = normalize(mobileInput.value) === IDENTITY.mobile;
+                    const cnicOk = normalize(cnicInput.value) === IDENTITY.cnic;
+
+                    if (mobileOk && cnicOk) {
+                        identityVerified = true;
+                        awaitingConfirm = true;
+                        renderFinal();
+                        return;
+                    }
+
+                    identityAttempts++;
+                    if (identityAttempts >= MAX_IDENTITY_ATTEMPTS) identityRevealed = true;
+                    identityError.classList.add('shown');
+                    mobileInput.classList.add('shake');
+                    cnicInput.classList.add('shake');
+                    setTimeout(() => renderIdentityGate(), 420);
+                }
+
+                verifyBtn.addEventListener('click', tryVerify);
+                [mobileInput, cnicInput].forEach((el) => {
+                    el.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter') { e.preventDefault(); tryVerify(); }
+                    });
+                });
+            }
+
+            function renderMood() {
+                moodArea.classList.remove('hidden');
+                moodArea.innerHTML = `
+                    <div class="mood-title">ویسے، ابھی آپ کا موڈ کیا ہو گیا؟ 😅</div>
+                    <div class="mood-sub">ہمیں کیا پتا — خوش ہوئے؟ ہنسی آئی؟ غصہ آ گیا؟ خود ہی بتا دیں 👇</div>
+                    <div class="mood-grid" id="moodGrid"></div>
+                    <div class="mood-response hidden" id="moodResponse">
+                        <div class="mood-response-text" id="moodResponseText"></div>
+                        <button class="btn btn-primary" id="shareMoodBtn">📤 بھیجنے والے کو بتائیں</button>
+                    </div>
+                `;
+
+                const moodGrid = document.getElementById('moodGrid');
+                const moodResponse = document.getElementById('moodResponse');
+                const moodResponseText = document.getElementById('moodResponseText');
+                let selectedMood = null;
+
+                MOODS.forEach((m) => {
+                    const b = document.createElement('button');
+                    b.className = 'mood-btn';
+                    b.innerHTML = `<span>${m.emoji}</span><span>${m.label}</span>`;
+                    b.addEventListener('click', () => {
+                        selectedMood = m;
+                        moodGrid.querySelectorAll('.mood-btn').forEach((el) => el.classList.remove('selected'));
+                        b.classList.add('selected');
+                        moodResponseText.textContent = `تو ابھی آپ کا موڈ ہے: "${m.label} ${m.emoji}" — یہ بات اپنے بھیجنے والے کو بھی بتا دیں!`;
+                        moodResponse.classList.remove('hidden');
+                    });
+                    moodGrid.appendChild(b);
+                });
+
+                document.getElementById('shareMoodBtn').addEventListener('click', () => {
+                    if (!selectedMood) return;
+                    const message = `میں نے ابھی اپنا پارسل کھولا ہے 🎁 اور میرا موڈ ہے: ${selectedMood.label} ${selectedMood.emoji}`;
+                    shareMood(message);
+                });
+            }
+
+            function shareMood(message) {
+                if (SENDER_WHATSAPP_NUMBER) {
+                    window.open(`https://wa.me/${SENDER_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+                    return;
+                }
+                if (navigator.share) {
+                    navigator.share({ text: message }).catch(() => {});
+                } else if (navigator.clipboard) {
+                    navigator.clipboard.writeText(message).then(() => {
+                        alert('کاپی ہو گیا! اب کہیں بھی پیسٹ کر کے بھیج دیں 💌');
+                    });
+                } else {
+                    alert(message);
+                }
+            }
+
+            function goToStep(n) {
+                if (n < 1 || n > total) return;
+                step = n;
+                renderProgress();
+                renderStepText();
+                renderKeyArea();
+            }
+
+            function launchFlowers() {
+                const flowers = ['🌸', '🌺', '🌻', '🌷', '🌹', '🌼'];
+                for (let i = 0; i < 35; i++) {
+                    setTimeout(() => {
+                        const f = document.createElement('div');
+                        f.className = 'flower';
+                        f.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+                        f.style.left = Math.random() * 100 + '%';
+                        f.style.fontSize = (1.5 + Math.random() * 2) + 'rem';
+                        f.style.animationDuration = (3 + Math.random() * 3) + 's';
+                        f.style.animationDelay = (Math.random() * 2) + 's';
+                        flowerContainer.appendChild(f);
+                        setTimeout(() => f.remove(), 6000);
+                    }, i * 80);
+                }
+            }
+
+            goToStep(1);
+        })();
+    </script>
+
+</body>
+</html>
