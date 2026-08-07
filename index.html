@@ -2,14 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-    <title>🎁 Surprise Parcel</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"
+    />
+
+    <title>Something I Made For You 🌸</title>
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family:
+                Inter,
+                "Segoe UI",
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                sans-serif;
+        }
+
+        :root {
+            --bg-1: #fff7f8;
+            --bg-2: #f7e8eb;
+            --card: rgba(255, 250, 251, 0.82);
+
+            --text: #30242a;
+            --muted: #806c75;
+
+            --rose: #b96f82;
+            --rose-dark: #8f4d61;
+            --rose-light: #f1d9df;
+
+            --gold: #b99a64;
+
+            --shadow:
+                0 30px 80px rgba(91, 47, 62, 0.15),
+                0 10px 30px rgba(91, 47, 62, 0.08);
         }
 
         body {
@@ -17,726 +47,1472 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #f2ebe4;
-            background-image: radial-gradient(circle at 30% 20%, #f8f0e8, #e6d7cc);
+
             padding: 20px;
+
+            color: var(--text);
+
+            background:
+                radial-gradient(
+                    circle at 15% 15%,
+                    rgba(255,255,255,.95),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(232,190,201,.5),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    var(--bg-1),
+                    var(--bg-2)
+                );
+
             overflow-x: hidden;
         }
 
-        .card {
-            max-width: 520px;
-            width: 100%;
-            background: rgba(250, 244, 238, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 48px;
-            padding: 36px 30px 40px;
-            box-shadow: 0 30px 50px -20px rgba(60, 40, 30, 0.25), 0 0 0 1px rgba(255, 235, 220, 0.5);
-            border: 1px solid rgba(255, 240, 225, 0.4);
-            text-align: center;
-            position: relative;
-            z-index: 10;
+        /* =========================
+           BACKGROUND
+        ========================= */
+
+        .background-glow {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
         }
 
-        /* ---- progress dots ---- */
+        .glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: .35;
+        }
+
+        .glow.one {
+            width: 260px;
+            height: 260px;
+            background: #f6cdd8;
+            top: -100px;
+            left: -80px;
+        }
+
+        .glow.two {
+            width: 320px;
+            height: 320px;
+            background: #ead3c2;
+            right: -130px;
+            bottom: -100px;
+        }
+
+        /* =========================
+           CARD
+        ========================= */
+
+        .card {
+            position: relative;
+            z-index: 10;
+
+            width: min(560px, 100%);
+
+            padding: 34px 28px 30px;
+
+            background: var(--card);
+
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+
+            border-radius: 42px;
+
+            border: 1px solid rgba(255,255,255,.8);
+
+            box-shadow: var(--shadow);
+
+            overflow: hidden;
+        }
+
+        /* =========================
+           TOP
+        ========================= */
+
+        .top-line {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 22px;
+
+            color: var(--muted);
+
+            font-size: .72rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+        }
+
+        .tiny-heart {
+            animation: heartbeat 1.8s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%,100% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.18);
+            }
+
+            30% {
+                transform: scale(1);
+            }
+        }
+
+        /* =========================
+           PROGRESS
+        ========================= */
+
         .progress {
             display: flex;
             justify-content: center;
-            gap: 8px;
-            margin-bottom: 22px;
+            align-items: center;
+
+            gap: 7px;
+
+            margin-bottom: 30px;
         }
-        .dot {
-            width: 9px;
-            height: 9px;
+
+        .progress-dot {
+            width: 7px;
+            height: 7px;
+
             border-radius: 50%;
-            background: #ddc7b6;
-            transition: background 0.3s ease, transform 0.3s ease;
+
+            background: #e3cbd2;
+
+            transition:
+                .35s ease;
         }
-        .dot.done { background: #b18a76; transform: scale(1.15); }
-        .dot.current { background: #8a6650; box-shadow: 0 0 0 4px rgba(138,102,80,0.15); }
+
+        .progress-dot.active {
+            width: 24px;
+            border-radius: 20px;
+
+            background: var(--rose);
+
+            box-shadow:
+                0 0 0 4px rgba(185,111,130,.12);
+        }
+
+        .progress-dot.done {
+            background: var(--rose-dark);
+        }
+
+        /* =========================
+           STEP
+        ========================= */
 
         .step-content {
-            min-height: 150px;
+            min-height: 310px;
+
             display: flex;
             flex-direction: column;
+
             align-items: center;
             justify-content: center;
-            padding: 8px 4px;
+
+            text-align: center;
+
+            animation:
+                stepIn .55s ease both;
         }
 
-        .step-content .icon-big {
-            font-size: 3.6rem;
-            line-height: 1.2;
-            margin-bottom: 6px;
-            filter: drop-shadow(0 10px 12px rgba(80, 50, 30, 0.08));
+        @keyframes stepIn {
+            from {
+                opacity: 0;
+                transform:
+                    translateY(18px)
+                    scale(.98);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
         }
 
-        .step-content h2 {
-            font-size: 1.7rem;
-            font-weight: 500;
-            letter-spacing: -0.4px;
-            color: #2f241c;
-            margin: 4px 0 8px;
+        .step-number {
+            margin-bottom: 12px;
+
+            color: var(--rose);
+
+            font-size: .72rem;
+            font-weight: 700;
+
+            letter-spacing: .25em;
+
+            text-transform: uppercase;
         }
 
-        .step-content .desc {
-            font-size: 1.05rem;
-            background: rgba(235, 218, 205, 0.3);
-            padding: 12px 24px;
-            border-radius: 60px;
-            color: #3d2e23;
-            max-width: 92%;
-            border: 1px solid #ebd7ca;
-            line-height: 1.6;
-        }
+        .big-icon {
+            width: 92px;
+            height: 92px;
 
-        /* ---- key ritual: reveal then enter ---- */
-        .key-area {
-            margin-top: 18px;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+
+            margin-bottom: 20px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #fff,
+                    #f7e4e8
+                );
+
+            box-shadow:
+                0 15px 35px rgba(120,60,80,.12),
+                inset 0 0 0 1px rgba(185,111,130,.08);
+
+            font-size: 3rem;
+
+            animation:
+                floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%,100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-7px);
+            }
+        }
+
+        h1 {
+            max-width: 470px;
+
+            margin-bottom: 14px;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                clamp(2rem, 7vw, 3rem);
+
+            line-height: 1.1;
+
+            font-weight: 500;
+
+            letter-spacing: -.04em;
+        }
+
+        h2 {
+            max-width: 470px;
+
+            margin-bottom: 14px;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size:
+                clamp(1.7rem, 6vw, 2.4rem);
+
+            line-height: 1.15;
+
+            font-weight: 500;
+        }
+
+        .description {
+            max-width: 430px;
+
+            color: var(--muted);
+
+            font-size: 1rem;
+
+            line-height: 1.85;
+        }
+
+        .highlight {
+            color: var(--rose-dark);
+            font-weight: 600;
+        }
+
+        .quote {
+            max-width: 430px;
+
+            margin-top: 20px;
+            padding: 17px 22px;
+
+            border-left: 2px solid var(--rose);
+
+            background:
+                rgba(255,255,255,.55);
+
+            border-radius: 0 18px 18px 0;
+
+            color: #66535b;
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size: 1.05rem;
+
+            line-height: 1.7;
+
+            text-align: left;
+        }
+
+        /* =========================
+           INTERACTIVE CHOICES
+        ========================= */
+
+        .choices {
+            display: flex;
+            flex-wrap: wrap;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            margin-top: 24px;
+
             width: 100%;
         }
 
-        .reveal-box {
-            font-size: 1.2rem;
-            font-weight: 600;
-            letter-spacing: 0.14em;
-            background: #ece0d6;
-            color: #6b4d3a;
-            padding: 10px 26px;
-            border-radius: 60px;
-            border: 1px dashed #cba98d;
-            min-height: 20px;
-            opacity: 0;
-            transform: translateY(-6px);
-            transition: opacity 0.35s ease, transform 0.35s ease;
+        .choice {
+            padding: 12px 18px;
+
+            border: 1px solid #ead4da;
+
+            border-radius: 50px;
+
+            background: rgba(255,255,255,.7);
+
+            color: #5c4750;
+
+            cursor: pointer;
+
+            font-size: .92rem;
+
+            transition:
+                .25s ease;
         }
-        .reveal-box.shown {
-            opacity: 1;
+
+        .choice:hover {
+            transform: translateY(-3px);
+
+            border-color: var(--rose);
+
+            background: #fff;
+
+            box-shadow:
+                0 8px 20px rgba(100,50,70,.08);
+        }
+
+        .choice.selected {
+            background: var(--rose);
+
+            border-color: var(--rose);
+
+            color: white;
+
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .action-area {
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-top: 18px;
+        }
+
+        .btn {
+            min-width: 180px;
+
+            padding: 13px 24px;
+
+            border: none;
+
+            border-radius: 50px;
+
+            cursor: pointer;
+
+            font-size: .95rem;
+            font-weight: 600;
+
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease,
+                background .2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn-primary {
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--rose),
+                    var(--rose-dark)
+                );
+
+            color: white;
+
+            box-shadow:
+                0 10px 25px rgba(143,77,97,.25);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,.7);
+
+            border: 1px solid #ead4da;
+
+            color: #684f59;
+        }
+
+        .btn:active {
             transform: translateY(0);
         }
 
-        .key-input-group {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
+        /* =========================
+           FINAL IMAGE
+        ========================= */
+
+        .flower-reveal {
             width: 100%;
-        }
 
-        input[type="text"] {
-            background: rgba(250, 240, 230, 0.7);
-            border: 2px solid #dcc4b4;
-            border-radius: 60px;
-            padding: 14px 24px;
-            font-size: 1.05rem;
-            width: 180px;
-            text-align: center;
-            color: #2c1e15;
-            outline: none;
-            transition: 0.2s;
-        }
-        input[type="text"]:focus {
-            border-color: #b18a76;
-            background: #fcf3eb;
-            box-shadow: 0 0 0 4px #eddccc;
-        }
-        input[type="text"].shake {
-            animation: shake 0.4s ease;
-            border-color: #c17a5f;
-        }
+            margin-top: 22px;
 
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-6px); }
-            75% { transform: translateX(6px); }
-        }
+            border-radius: 30px;
 
-        .error-line {
-            font-size: 0.85rem;
-            color: #b5563a;
-            min-height: 18px;
-            opacity: 0;
-            transition: opacity 0.25s ease;
-        }
-        .error-line.shown { opacity: 1; }
-
-        .btn {
-            background: #ece0d6;
-            border: 1px solid #f0e0d4;
-            border-radius: 60px;
-            padding: 13px 26px;
-            font-size: 1rem;
-            font-weight: 500;
-            color: #2d1f16;
-            cursor: pointer;
-            transition: all 0.15s;
-            box-shadow: 0 4px 0 #b99a86, 0 8px 18px rgba(70, 40, 20, 0.12);
-            letter-spacing: 0.2px;
-            min-width: 100px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        .btn:active { transform: translateY(4px); box-shadow: 0 0px 0 #b99a86; }
-        .btn:disabled { opacity: 0.5; pointer-events: none; }
-
-        .btn-primary {
-            background: #dcc3b2;
-            border-color: #cfb7a6;
-            box-shadow: 0 4px 0 #a58673;
-        }
-        .btn-primary:active { box-shadow: 0 0px 0 #a58673; }
-
-        .btn-ghost {
-            background: transparent;
-            box-shadow: none;
-            border: 1px solid #d6c2b0;
-            color: #6b5646;
-        }
-        .btn-ghost:active { transform: translateY(1px); }
-
-        /* ---- confirm (final step) ---- */
-        .confirm-area {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 14px;
-            margin-top: 14px;
-        }
-        .confirm-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
-
-        /* ---- gift reveal ---- */
-        .gift-image-container {
-            margin: 16px 0 4px;
-            border-radius: 36px;
             overflow: hidden;
-            box-shadow: 0 20px 30px -12px #6b4d3a;
-            border: 3px solid #f0dfd2;
-            background: #e2cebf;
-            width: 100%;
+
+            border: 5px solid rgba(255,255,255,.85);
+
+            box-shadow:
+                0 25px 60px rgba(95,45,65,.22);
+
+            animation:
+                imageReveal 1.2s cubic-bezier(.2,.8,.2,1) both;
         }
-        .gift-image-container img {
+
+        @keyframes imageReveal {
+            from {
+                opacity: 0;
+                transform:
+                    scale(.82)
+                    translateY(25px);
+                filter: blur(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    scale(1)
+                    translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        .flower-reveal img {
             width: 100%;
-            height: auto;
+
             display: block;
-            max-height: 280px;
+
+            max-height: 430px;
+
             object-fit: cover;
         }
-        .hidden { display: none !important; }
 
-        /* ---- mood picker (after reveal) ---- */
-        .mood-area {
-            margin-top: 18px;
-            padding-top: 18px;
-            border-top: 1px dashed #dcc7b6;
+        /* =========================
+           FINAL MESSAGE
+        ========================= */
+
+        .final-message {
+            margin-top: 25px;
+
+            animation:
+                stepIn .8s ease .2s both;
+        }
+
+        .final-message h2 {
+            margin-bottom: 12px;
+        }
+
+        .final-message p {
+            color: var(--muted);
+
+            line-height: 1.9;
+
+            font-size: 1rem;
+        }
+
+        .signature {
+            margin-top: 20px;
+
+            color: var(--rose-dark);
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size: 1.15rem;
+
+            font-style: italic;
+        }
+
+        /* =========================
+           FEELINGS
+        ========================= */
+
+        .feelings {
+            margin-top: 28px;
+
+            padding-top: 25px;
+
+            border-top:
+                1px dashed #dfc4cc;
+        }
+
+        .feelings-title {
+            margin-bottom: 7px;
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size: 1.3rem;
+        }
+
+        .feelings-sub {
+            color: var(--muted);
+
+            font-size: .86rem;
+
+            margin-bottom: 15px;
+        }
+
+        .emoji-grid {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-        .mood-title {
-            font-size: 1.02rem;
-            font-weight: 600;
-            color: #3d2e23;
-        }
-        .mood-sub {
-            font-size: 0.88rem;
-            color: #7a6253;
-            max-width: 90%;
-            line-height: 1.6;
-        }
-        .mood-grid {
-            display: flex;
+
             flex-wrap: wrap;
+
             justify-content: center;
+
             gap: 8px;
         }
-        .mood-btn {
-            background: #ece0d6;
-            border: 1px solid #f0e0d4;
-            border-radius: 60px;
-            padding: 8px 16px;
-            font-size: 0.95rem;
+
+        .emoji-btn {
+            width: 48px;
+            height: 48px;
+
+            border: 1px solid #ead4da;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,.7);
+
+            font-size: 1.35rem;
+
             cursor: pointer;
-            transition: all 0.15s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
+
+            transition:
+                .2s ease;
         }
-        .mood-btn:hover { transform: translateY(-2px); }
-        .mood-btn.selected {
-            background: #dcc3b2;
-            border-color: #a58673;
-            box-shadow: 0 0 0 3px rgba(165,134,115,0.2);
+
+        .emoji-btn:hover {
+            transform:
+                translateY(-4px)
+                scale(1.06);
+
+            background: white;
         }
-        .mood-response {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            margin-top: 4px;
+
+        .emoji-btn.selected {
+            background: var(--rose-light);
+
+            border-color: var(--rose);
+
+            transform:
+                scale(1.08);
+
+            box-shadow:
+                0 0 0 4px rgba(185,111,130,.1);
         }
-        .mood-response-text {
-            font-size: 0.92rem;
-            color: #3d2e23;
-            background: rgba(235, 218, 205, 0.4);
-            padding: 10px 18px;
-            border-radius: 16px;
-            max-width: 90%;
+
+        .reaction {
+            margin-top: 15px;
+
+            padding: 12px 18px;
+
+            border-radius: 18px;
+
+            background: rgba(255,255,255,.65);
+
+            color: #644f58;
+
             line-height: 1.6;
+
+            animation:
+                stepIn .35s ease both;
         }
 
-        .footnote {
-            margin-top: 22px;
-            font-size: 0.8rem;
-            color: #7a6253;
-            background: #eee0d5;
-            padding: 6px 20px;
-            border-radius: 60px;
-            display: inline-block;
-            border: 1px solid #dccbbc;
-            letter-spacing: 0.3px;
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            margin-top: 25px;
+
+            text-align: center;
+
+            color: #a28d95;
+
+            font-size: .72rem;
+
+            letter-spacing: .12em;
+
+            text-transform: uppercase;
         }
 
-        /* ---- falling flowers ---- */
-        .flower-container {
+        /* =========================
+           PETALS
+        ========================= */
+
+        .petals {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+
+            inset: 0;
+
             pointer-events: none;
-            z-index: 999;
+
             overflow: hidden;
-        }
-        .flower {
-            position: absolute;
-            font-size: 2rem;
-            animation: fall linear forwards;
-            opacity: 0;
-        }
-        @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(0deg) scale(0.5); opacity: 0; }
-            10% { opacity: 1; transform: translateY(0vh) rotate(20deg) scale(1); }
-            100% { transform: translateY(110vh) rotate(720deg) scale(0.3); opacity: 0.7; }
+
+            z-index: 100;
         }
 
-        @media (max-width: 480px) {
-            .card { padding: 28px 18px; }
-            .step-content h2 { font-size: 1.45rem; }
-            .step-content .desc { font-size: 0.92rem; padding: 10px 16px; }
-            .btn { padding: 11px 18px; min-width: 80px; font-size: 0.92rem; }
-            input[type="text"] { width: 140px; padding: 12px 18px; font-size: 0.95rem; }
+        .petal {
+            position: absolute;
+
+            top: -50px;
+
+            font-size: 1.6rem;
+
+            animation:
+                petalFall linear forwards;
+        }
+
+        @keyframes petalFall {
+
+            0% {
+                transform:
+                    translateY(-10vh)
+                    rotate(0deg)
+                    scale(.7);
+
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            100% {
+                transform:
+                    translateY(115vh)
+                    translateX(80px)
+                    rotate(720deg)
+                    scale(1);
+
+                opacity: 0;
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 520px) {
+
+            body {
+                padding: 12px;
+            }
+
+            .card {
+                padding:
+                    25px 18px 24px;
+
+                border-radius: 32px;
+            }
+
+            .step-content {
+                min-height: 340px;
+            }
+
+            .big-icon {
+                width: 78px;
+                height: 78px;
+
+                font-size: 2.5rem;
+            }
+
+            .description {
+                font-size: .94rem;
+            }
+
+            .quote {
+                font-size: .95rem;
+            }
+
+            .flower-reveal img {
+                max-height: 330px;
+            }
+
+            .btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
+
 <body>
 
-    <div class="card" id="app">
-        <div class="progress" id="progress"></div>
-        <div class="step-content" id="stepContent"></div>
-        <div class="key-area" id="keyArea"></div>
-        <div class="gift-image-container hidden" id="giftWrapper">
-            <img id="giftImage" src="" alt="🎁 تحفہ">
-        </div>
-        <div class="mood-area hidden" id="moodArea"></div>
-        <div class="footnote">✨ قدم بہ قدم · خوشی کا تحفہ</div>
+    <div class="background-glow">
+        <div class="glow one"></div>
+        <div class="glow two"></div>
     </div>
 
-    <div class="flower-container" id="flowerContainer"></div>
+    <div class="card">
 
-    <script>
-        (function () {
-            /* =============================================================
-               EDIT HERE — 5 steps. Each needs: icon, title, desc, and the
-               "key" the person types after tapping "Reveal Key".
-               The key is shown to them on click — this is a ritual, not a
-               puzzle, so nobody gets stuck.
+        <div class="top-line">
+            <span>Something personal</span>
+            <span class="tiny-heart">♡</span>
+        </div>
 
-               Keys below are random 5-character codes (not real words),
-               so nobody else could guess or already know them. Change
-               them to anything you like — just keep each one unique-ish.
+        <div class="progress" id="progress"></div>
 
-               Honest note: since "Reveal Key" shows the code on screen,
-               what actually keeps this private is not sharing the link
-               with anyone else — not the code itself.
-               ============================================================= */
-            const STEPS = [
-                {
-                    icon: '🔑',
-                    title: 'پہلا قدم',
-                    desc: ' وہ پہلی عظیم خاتون تھیں',
-                    key: 'X7QK2'
-                },
-                {
-                    icon: '🌟',
-                    title: 'دوسرا قدم',
-                    desc: 'جس نے خواتین میں',
-                    key: 'M3RTD'
-                },
-                {
-                    icon: '💎',
-                    title: 'تیسرا قدم',
-                    desc: 'آپ کے تحفے کے قریب آ رہے ہیں...',
-                    key: 'P9LZW'
-                },
-                {
-                    icon: '🎀',
-                    title: 'چوتھا قدم',
-                    desc: 'تیار ہو جائیں، اگلا قدم آخری ہے',
-                    key: 'V4HCX'
-                },
-                {
-                    icon: '🎁',
-                    title: 'آخری قدم',
-                    desc: 'یہ آپ کے پارسل کی آخری چابی ہے',
-                    key: 'SABA'
-                }
-            ];
+        <div id="stepContent"></div>
 
-            // Mood options shown below the opened gift. Edit freely.
-            const MOODS = [
-                { emoji: '😍', label: 'بہت خوش' },
-                { emoji: '😂', label: 'ہنسی آ گئی' },
-                { emoji: '😮', label: 'حیران رہ گئی' },
-                { emoji: '😡', label: 'غصہ آ گیا 😤' },
-                { emoji: '🥹', label: 'دل کو لگ گئی' },
-                { emoji: '😴', label: 'بورنگ تھا 😅' }
-            ];
+        <div class="action-area" id="actionArea"></div>
 
-            // Optional: put the sender's WhatsApp number here (with country
-            // code, no + or spaces, e.g. '923001234567') to open a chat
-            // with them directly. Leave empty to use the device's normal
-            // share options instead.
-            const SENDER_WHATSAPP_NUMBER = '';
+        <div id="finalArea"></div>
 
-            /* -------------------------------------------------------------
-               Identity gate before the actual reveal — mobile number +
-               CNIC, since only the intended person would know both.
+        <div class="footer">
+            made with a little courage & a lot of feelings
+        </div>
 
-               IMPORTANT — read this before deploying:
-               This is a plain static site: whatever is written here is
-               visible to anyone who opens "view source" on the deployed
-               page, exactly like the step keys above. Putting a real CNIC
-               here means it sits in plain text in your public GitHub repo
-               and on the live Vercel URL. If that's a concern, consider:
-                 - making the GitHub repo private, or
-                 - only sharing the deployed link with the one person, or
-                 - using just the last 4 digits of each instead of the
-                   full numbers (still personal enough to be "only them",
-                   far less exposure if the link ever gets forwarded).
-               ------------------------------------------------------------- */
-            const IDENTITY = {
-                mobile: '03334672220',
-                cnic: '3520108802298'
-            };
-            const MAX_IDENTITY_ATTEMPTS = 12;
+    </div>
 
-            const GIFT_IMAGE_URL = 'assets/gift-photo.jpeg';
-            const GIFT_IMAGE_FALLBACK = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"%3E%3Crect width="200" height="200" fill="%23f2e1d4"/%3E%3Crect x="25" y="55" width="150" height="90" rx="24" fill="%23dcc3b2"/%3E%3Crect x="70" y="15" width="60" height="55" rx="30" fill="%23eddbc9"/%3E%3Cpath d="M75 130 L125 130 L115 155 L85 155 Z" fill="%23b18a76"/%3E%3Ccircle cx="100" cy="105" r="20" fill="%23f6e3d5"/%3E%3Ctext x="100" y="185" font-family="Arial" font-size="14" fill="%234a3225" text-anchor="middle"%3E🎁 آپ کا تحفہ%3C/text%3E%3C/svg%3E';
+    <div class="petals" id="petals"></div>
 
-            const total = STEPS.length;
-            let step = 1;                                    // 1..5
-            let revealed = new Array(total).fill(false);      // reveal-key clicked?
-            let unlocked = new Array(total).fill(false);       // correct key entered?
-            let awaitingConfirm = false;                       // final step: showing yes/no?
-            let opened = false;                                 // parcel actually opened?
-            let identityVerified = false;                       // mobile+CNIC gate passed?
-            let identityAttempts = 0;                           // failed identity tries
-            let identityRevealed = false;                       // fallback shown after 2 fails
-            let declined = false;                               // user tapped "not now"
 
-            const stepContent = document.getElementById('stepContent');
-            const keyArea = document.getElementById('keyArea');
-            const progressEl = document.getElementById('progress');
-            const giftWrapper = document.getElementById('giftWrapper');
-            const giftImg = document.getElementById('giftImage');
-            const moodArea = document.getElementById('moodArea');
-            const flowerContainer = document.getElementById('flowerContainer');
+<script>
 
-            function renderProgress() {
-                progressEl.innerHTML = '';
-                for (let i = 1; i <= total; i++) {
-                    const d = document.createElement('span');
-                    d.className = 'dot' + (unlocked[i - 1] ? ' done' : '') + (i === step ? ' current' : '');
-                    progressEl.appendChild(d);
-                }
+(function () {
+
+    /*
+    ============================================================
+        CONFIGURATION
+    ============================================================
+    */
+
+    const FLOWER_IMAGE = "assets/flower-photo.jpeg";
+
+
+    /*
+    ============================================================
+        STORY STEPS
+    ============================================================
+    */
+
+    const STEPS = [
+
+        {
+            icon: "🌙",
+            title: "Hey… you.",
+            text:
+                "I could have simply sent you a message… " +
+                "but somehow, that didn't feel enough.",
+            button:
+                "Okay… I'm listening →"
+        },
+
+        {
+            icon: "🤍",
+            title: "Before you continue…",
+            text:
+                "Forget everything else for a moment. " +
+                "No rushing. No guessing. Just stay here for a little while.",
+            button:
+                "I'm here"
+        },
+
+        {
+            icon: "✨",
+            title: "Take a little breath.",
+            text:
+                "Because the next few steps aren't really about a parcel… " +
+                "they're about something I've been carrying in my heart.",
+            button:
+                "Continue slowly →"
+        },
+
+        {
+            icon: "🌷",
+            title: "Some people are different.",
+            text:
+                "You don't always realize when someone starts becoming " +
+                "<span class='highlight'>special</span> to you.",
+            quote:
+                "It happens quietly… in the little conversations, the random smiles, and the moments you remember without trying.",
+            button:
+                "I understand →"
+        },
+
+        {
+            icon: "💭",
+            title: "Can I ask you something?",
+            text:
+                "When you think about the people who make your days a little better…",
+            choices: [
+                "I know someone like that",
+                "Maybe I do 👀",
+                "I'm not answering 😌"
+            ]
+        },
+
+        {
+            icon: "🫶",
+            title: "Here's what I realized.",
+            text:
+                "Your presence has a way of making ordinary moments feel a little less ordinary.",
+            quote:
+                "And honestly… I don't think that's something I should keep pretending I don't notice.",
+            button:
+                "Keep going…"
+        },
+
+        {
+            icon: "🌸",
+            title: "There is something I like about you.",
+            text:
+                "It's not just one thing. It's the little things. " +
+                "The way you are. The way you make conversations feel. " +
+                "The way somehow… you stay on my mind.",
+            button:
+                "One more step →"
+        },
+
+        {
+            icon: "❤️",
+            title: "So here is the honest part.",
+            text:
+                "I don't know exactly where this feeling is supposed to go.",
+            quote:
+                "I just know that somewhere along the way, you became someone I genuinely care about.",
+            button:
+                "I'm still here ❤️"
+        },
+
+        {
+            icon: "🎀",
+            title: "And this little surprise…",
+            text:
+                "isn't meant to ask anything from you.",
+            quote:
+                "It's simply my way of saying: I'm glad you exist, and I'm really glad our paths crossed.",
+            button:
+                "Almost there…"
+        },
+
+        {
+            icon: "🥹",
+            title: "One last thing.",
+            text:
+                "I wanted to give you something beautiful… " +
+                "because sometimes a few words just don't feel like enough.",
+            button:
+                "Show me 🌷"
+        },
+
+        {
+            icon: "🌹",
+            title: "Ready?",
+            text:
+                "No more steps after this.",
+            quote:
+                "Whatever happens next… I hope this little moment makes you smile.",
+            button:
+                "Open my surprise ✨"
+        }
+
+    ];
+
+
+    /*
+    ============================================================
+        STATE
+    ============================================================
+    */
+
+    let currentStep = 0;
+
+    let selectedChoice = null;
+
+    let finalOpened = false;
+
+
+    /*
+    ============================================================
+        ELEMENTS
+    ============================================================
+    */
+
+    const progress =
+        document.getElementById("progress");
+
+    const stepContent =
+        document.getElementById("stepContent");
+
+    const actionArea =
+        document.getElementById("actionArea");
+
+    const finalArea =
+        document.getElementById("finalArea");
+
+    const petals =
+        document.getElementById("petals");
+
+
+    /*
+    ============================================================
+        PROGRESS
+    ============================================================
+    */
+
+    function renderProgress() {
+
+        progress.innerHTML = "";
+
+        STEPS.forEach((_, index) => {
+
+            const dot =
+                document.createElement("span");
+
+            dot.className =
+                "progress-dot";
+
+            if (index < currentStep) {
+                dot.classList.add("done");
             }
 
-            function renderStepText() {
-                const data = STEPS[step - 1];
-                stepContent.innerHTML = `
-                    <div class="icon-big">${data.icon}</div>
-                    <h2>${data.title}</h2>
-                    <div class="desc">${data.desc}</div>
-                `;
+            if (index === currentStep) {
+                dot.classList.add("active");
             }
 
-            function renderKeyArea() {
-                const data = STEPS[step - 1];
-                const isFinal = step === total;
+            progress.appendChild(dot);
 
-                // Final step already unlocked -> show confirm or reveal, no key UI
-                if (isFinal && unlocked[step - 1]) {
-                    renderFinal();
-                    return;
-                }
+        });
 
-                keyArea.innerHTML = `
-                    <div class="reveal-box" id="revealBox">${data.key}</div>
-                    <button class="btn btn-ghost" id="revealBtn">🔍 Reveal Key</button>
-                    <div class="key-input-group">
-                        <input type="text" id="keyInput" placeholder="Enter Your key" autocomplete="off">
-                        <button class="btn btn-primary" id="enterBtn">✓ Enter</button>
-                    </div>
-                    <div class="error-line" id="errorLine">❌ غلط کلید، دوبارہ کوشش کریں</div>
-                `;
+    }
 
-                const revealBox = document.getElementById('revealBox');
-                const revealBtn = document.getElementById('revealBtn');
-                const keyInput = document.getElementById('keyInput');
-                const enterBtn = document.getElementById('enterBtn');
-                const errorLine = document.getElementById('errorLine');
 
-                if (revealed[step - 1]) revealBox.classList.add('shown');
+    /*
+    ============================================================
+        STEP RENDER
+    ============================================================
+    */
 
-                revealBtn.addEventListener('click', () => {
-                    revealed[step - 1] = true;
-                    revealBox.classList.add('shown');
-                    keyInput.focus();
-                });
+    function renderStep() {
 
-                function tryUnlock() {
-                    const val = keyInput.value.trim();
-                    if (!val) return;
-                    if (val.toUpperCase() === data.key.toUpperCase()) {
-                        unlocked[step - 1] = true;
-                        renderProgress();
-                        if (isFinal) {
-                            renderFinal();
-                        } else {
-                            setTimeout(() => goToStep(step + 1), 450);
-                        }
-                    } else {
-                        errorLine.classList.add('shown');
-                        keyInput.classList.add('shake');
-                        setTimeout(() => keyInput.classList.remove('shake'), 400);
-                    }
-                }
+        const step =
+            STEPS[currentStep];
 
-                enterBtn.addEventListener('click', tryUnlock);
-                keyInput.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter') { e.preventDefault(); tryUnlock(); }
-                });
-                keyInput.addEventListener('input', () => errorLine.classList.remove('shown'));
-            }
+        selectedChoice = null;
 
-            function renderFinal() {
-                if (opened) {
-                    stepContent.innerHTML = `
-                        <div class="icon-big">🎉</div>
-                        <h2>مبارک ہو!</h2>
-                        <div class="desc">🎁 آپ کا پارسل کھل گیا</div>
-                    `;
-                    keyArea.innerHTML = '';
-                    giftWrapper.classList.remove('hidden');
-                    if (!giftImg.dataset.set) {
-                        giftImg.src = GIFT_IMAGE_URL;
-                        giftImg.onerror = () => { giftImg.src = GIFT_IMAGE_FALLBACK; };
-                        giftImg.dataset.set = '1';
-                    }
-                    renderMood();
-                    return;
-                }
+        renderProgress();
 
-                if (declined) {
-                    stepContent.innerHTML = `
-                        <div class="icon-big">💛</div>
-                        <h2>ٹھیک ہے، کوئی بات نہیں</h2>
-                        <div class="desc">جب آپ کا موڈ ہو، واپس آ کر اپنا پارسل کھول لیجیے گا۔</div>
-                    `;
-                    keyArea.innerHTML = `<button class="btn btn-primary" id="restartOpenBtn">🔓 اب موڈ ہے، کھولیں</button>`;
-                    document.getElementById('restartOpenBtn').addEventListener('click', () => {
-                        declined = false;
-                        awaitingConfirm = true;
-                        renderFinal();
-                    });
-                    return;
-                }
+        stepContent.innerHTML = `
+            <div class="step-number">
+                Step ${String(currentStep + 1).padStart(2, "0")}
+                / ${String(STEPS.length).padStart(2, "0")}
+            </div>
 
-                if (awaitingConfirm) {
-                    keyArea.innerHTML = `
-                        <div class="confirm-area">
-                            <div class="desc" style="font-size:1rem;">کیا آپ واقعی اپنا پارسل ابھی کھولنا چاہتے ہیں؟</div>
-                            <div class="confirm-row">
-                                <button class="btn btn-primary" id="yesBtn">✅ جی ہاں، کھولیں</button>
-                                <button class="btn btn-ghost" id="noBtn">ابھی نہیں</button>
-                            </div>
+            <div class="big-icon">
+                ${step.icon}
+            </div>
+
+            <h2>
+                ${step.title}
+            </h2>
+
+            <p class="description">
+                ${step.text}
+            </p>
+
+            ${
+                step.quote
+                    ? `
+                        <div class="quote">
+                            ${step.quote}
                         </div>
-                    `;
-                    document.getElementById('yesBtn').addEventListener('click', () => {
-                        opened = true;
-                        renderFinal();
-                        launchFlowers();
-                    });
-                    document.getElementById('noBtn').addEventListener('click', () => {
-                        awaitingConfirm = false;
-                        declined = true;
-                        renderFinal();
-                    });
-                    return;
-                }
-
-                if (!identityVerified) {
-                    renderIdentityGate();
-                    return;
-                }
-
-                // identity verified but confirm not yet triggered (edge case) — ask now
-                awaitingConfirm = true;
-                renderFinal();
+                    `
+                    : ""
             }
+        `;
 
-            function renderIdentityGate() {
-                const attemptsLeft = MAX_IDENTITY_ATTEMPTS - identityAttempts;
-                keyArea.innerHTML = `
-                    <div class="confirm-area">
-                        <div class="desc" style="font-size:1rem;">پارسل کھولنے سے پہلے اپنی شناخت کی تصدیق کریں</div>
-                        <div class="key-input-group">
-                            <input type="text" id="mobileInput" placeholder="موبائل نمبر" autocomplete="off" inputmode="numeric">
-                        </div>
-                        <div class="key-input-group">
-                            <input type="text" id="cnicInput" placeholder="شناختی کارڈ نمبر (CNIC)" autocomplete="off" inputmode="numeric">
-                        </div>
-                        <button class="btn btn-primary" id="verifyBtn">✓ تصدیق کریں</button>
-                         <div class="error-line" id="identityError">❌ نمبر یا شناختی کارڈ درست نہیں۔<br> باقی کوششیں </div>
-                        ${identityRevealed ? `
-                            <div class="reveal-box shown" style="direction: ltr;">📱 ${IDENTITY.mobile} &nbsp;|&nbsp; 🪪 ${IDENTITY.cnic}</div>
-                            <div class="mood-sub">یہ نمبر اوپر فیلڈز میں لکھ کر دوبارہ تصدیق کریں</div>
-                        ` : ''}
-                    </div>
-                `;
 
-                const mobileInput = document.getElementById('mobileInput');
-                const cnicInput = document.getElementById('cnicInput');
-                const verifyBtn = document.getElementById('verifyBtn');
-                const identityError = document.getElementById('identityError');
+        actionArea.innerHTML = "";
 
-                function normalize(v) { return v.replace(/[\s-]/g, ''); }
 
-                function tryVerify() {
-                    const mobileOk = normalize(mobileInput.value) === IDENTITY.mobile;
-                    const cnicOk = normalize(cnicInput.value) === IDENTITY.cnic;
+        /*
+        ------------------------------
+        CHOICES
+        ------------------------------
+        */
 
-                    if (mobileOk && cnicOk) {
-                        identityVerified = true;
-                        awaitingConfirm = true;
-                        renderFinal();
-                        return;
+        if (step.choices) {
+
+            const choices =
+                document.createElement("div");
+
+            choices.className =
+                "choices";
+
+            step.choices.forEach(choice => {
+
+                const button =
+                    document.createElement("button");
+
+                button.className =
+                    "choice";
+
+                button.textContent =
+                    choice;
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        selectedChoice =
+                            choice;
+
+                        choices
+                            .querySelectorAll(".choice")
+                            .forEach(el =>
+                                el.classList.remove("selected")
+                            );
+
+                        button.classList.add(
+                            "selected"
+                        );
+
+                        continueButton.disabled =
+                            false;
+
                     }
+                );
 
-                    identityAttempts++;
-                    if (identityAttempts >= MAX_IDENTITY_ATTEMPTS) identityRevealed = true;
-                    identityError.classList.add('shown');
-                    mobileInput.classList.add('shake');
-                    cnicInput.classList.add('shake');
-                    setTimeout(() => renderIdentityGate(), 420);
+                choices.appendChild(button);
+
+            });
+
+
+            actionArea.appendChild(
+                choices
+            );
+
+
+            const continueButton =
+                document.createElement("button");
+
+            continueButton.className =
+                "btn btn-primary";
+
+            continueButton.textContent =
+                "Continue →";
+
+            continueButton.disabled =
+                true;
+
+            continueButton.style.marginTop =
+                "8px";
+
+            continueButton.addEventListener(
+                "click",
+                nextStep
+            );
+
+            actionArea.appendChild(
+                continueButton
+            );
+
+            return;
+        }
+
+
+        /*
+        ------------------------------
+        NORMAL BUTTON
+        ------------------------------
+        */
+
+        const button =
+            document.createElement("button");
+
+        button.className =
+            "btn btn-primary";
+
+        button.textContent =
+            step.button;
+
+        button.addEventListener(
+            "click",
+            nextStep
+        );
+
+        actionArea.appendChild(
+            button
+        );
+
+    }
+
+
+    /*
+    ============================================================
+        NEXT STEP
+    ============================================================
+    */
+
+    function nextStep() {
+
+        if (
+            currentStep <
+            STEPS.length - 1
+        ) {
+
+            currentStep++;
+
+            renderStep();
+
+        } else {
+
+            openFinalReveal();
+
+        }
+
+    }
+
+
+    /*
+    ============================================================
+        FINAL REVEAL
+    ============================================================
+    */
+
+    function openFinalReveal() {
+
+        if (finalOpened) {
+            return;
+        }
+
+        finalOpened = true;
+
+        progress.innerHTML = "";
+
+        stepContent.innerHTML = `
+            <div class="step-number">
+                THE END OF THE LITTLE JOURNEY
+            </div>
+
+            <div class="big-icon">
+                🌸
+            </div>
+
+            <h1>
+                This one is for you.
+            </h1>
+
+            <p class="description">
+                No more guessing.
+                No more steps.
+                Just a little something I wanted you to have.
+            </p>
+        `;
+
+        actionArea.innerHTML = "";
+
+        finalArea.innerHTML = `
+
+            <div class="flower-reveal">
+
+                <img
+                    src="${FLOWER_IMAGE}"
+                    alt="A flower for you"
+                    onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 600 600%22%3E%3Crect width=%22600%22 height=%22600%22 fill=%22%23f7e8eb%22/%3E%3Ctext x=%22300%22 y=%22290%22 text-anchor=%22middle%22 font-size=%22120%22%3E🌷%3C/text%3E%3Ctext x=%22300%22 y=%22390%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2230%22 fill=%22%238f4d61%22%3EFor you%3C/text%3E%3C/svg%3E'"
+                />
+
+            </div>
+
+
+            <div class="final-message">
+
+                <h2>
+                    A little flower, for someone special. 🌷
+                </h2>
+
+                <p>
+                    I don't know if flowers can say everything
+                    that words sometimes cannot…
+                    but I hope this one says at least a little.
+                </p>
+
+                <p style="margin-top:12px;">
+                    You are appreciated.
+                    You are thought about.
+                    And, whether you realize it or not,
+                    <span class="highlight">
+                        you mean more to me than you probably know.
+                    </span>
+                </p>
+
+                <div class="signature">
+                    — Just someone who wanted to make you smile. 🤍
+                </div>
+
+            </div>
+
+
+            <div class="feelings">
+
+                <div class="feelings-title">
+                    Okay… now it's your turn. 🫣
+                </div>
+
+                <div class="feelings-sub">
+                    Be honest. How did this make you feel?
+                </div>
+
+                <div class="emoji-grid">
+
+                    <button
+                        class="emoji-btn"
+                        data-message="That smile better be real. 🥹❤️"
+                    >
+                        🥹
+                    </button>
+
+                    <button
+                        class="emoji-btn"
+                        data-message="Okayyy… I'll take that as a good sign. 😍"
+                    >
+                        😍
+                    </button>
+
+                    <button
+                        class="emoji-btn"
+                        data-message="I knew I could make you laugh. 😂"
+                    >
+                        😂
+                    </button>
+
+                    <button
+                        class="emoji-btn"
+                        data-message="Speechless? I'll consider that a win. 😳"
+                    >
+                        😳
+                    </button>
+
+                    <button
+                        class="emoji-btn"
+                        data-message="That little heart just made my day. ❤️"
+                    >
+                        ❤️
+                    </button>
+
+                    <button
+                        class="emoji-btn"
+                        data-message="Okay… now you're making me blush. 🙈"
+                    >
+                        🙈
+                    </button>
+
+                </div>
+
+                <div
+                    class="reaction"
+                    id="reaction"
+                    style="display:none;"
+                ></div>
+
+            </div>
+
+        `;
+
+        launchPetals();
+
+        setupReactions();
+
+    }
+
+
+    /*
+    ============================================================
+        EMOJI REACTIONS
+    ============================================================
+    */
+
+    function setupReactions() {
+
+        const buttons =
+            document.querySelectorAll(
+                ".emoji-btn"
+            );
+
+        const reaction =
+            document.getElementById(
+                "reaction"
+            );
+
+        buttons.forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    buttons.forEach(btn =>
+                        btn.classList.remove(
+                            "selected"
+                        )
+                    );
+
+                    button.classList.add(
+                        "selected"
+                    );
+
+                    reaction.textContent =
+                        button.dataset.message;
+
+                    reaction.style.display =
+                        "block";
+
                 }
+            );
 
-                verifyBtn.addEventListener('click', tryVerify);
-                [mobileInput, cnicInput].forEach((el) => {
-                    el.addEventListener('keydown', (e) => {
-                        if (e.key === 'Enter') { e.preventDefault(); tryVerify(); }
-                    });
-                });
-            }
+        });
 
-            function renderMood() {
-                moodArea.classList.remove('hidden');
-                moodArea.innerHTML = `
-                    <div class="mood-title">ویسے، ابھی آپ کا موڈ کیا ہو گیا؟ 😅</div>
-                    <div class="mood-sub">ہمیں کیا پتا — خوش ہوئے؟ ہنسی آئی؟ غصہ آ گیا؟ خود ہی بتا دیں 👇</div>
-                    <div class="mood-grid" id="moodGrid"></div>
-                    <div class="mood-response hidden" id="moodResponse">
-                        <div class="mood-response-text" id="moodResponseText"></div>
-                        <button class="btn btn-primary" id="shareMoodBtn">📤 بھیجنے والے کو بتائیں</button>
-                    </div>
-                `;
+    }
 
-                const moodGrid = document.getElementById('moodGrid');
-                const moodResponse = document.getElementById('moodResponse');
-                const moodResponseText = document.getElementById('moodResponseText');
-                let selectedMood = null;
 
-                MOODS.forEach((m) => {
-                    const b = document.createElement('button');
-                    b.className = 'mood-btn';
-                    b.innerHTML = `<span>${m.emoji}</span><span>${m.label}</span>`;
-                    b.addEventListener('click', () => {
-                        selectedMood = m;
-                        moodGrid.querySelectorAll('.mood-btn').forEach((el) => el.classList.remove('selected'));
-                        b.classList.add('selected');
-                        moodResponseText.textContent = `تو ابھی آپ کا موڈ ہے: "${m.label} ${m.emoji}" — یہ بات اپنے بھیجنے والے کو بھی بتا دیں!`;
-                        moodResponse.classList.remove('hidden');
-                    });
-                    moodGrid.appendChild(b);
-                });
+    /*
+    ============================================================
+        FLOWER PETALS
+    ============================================================
+    */
 
-                document.getElementById('shareMoodBtn').addEventListener('click', () => {
-                    if (!selectedMood) return;
-                    const message = `میں نے ابھی اپنا پارسل کھولا ہے 🎁 اور میرا موڈ ہے: ${selectedMood.label} ${selectedMood.emoji}`;
-                    shareMood(message);
-                });
-            }
+    function launchPetals() {
 
-            function shareMood(message) {
-                if (SENDER_WHATSAPP_NUMBER) {
-                    window.open(`https://wa.me/${SENDER_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
-                    return;
-                }
-                if (navigator.share) {
-                    navigator.share({ text: message }).catch(() => {});
-                } else if (navigator.clipboard) {
-                    navigator.clipboard.writeText(message).then(() => {
-                        alert('کاپی ہو گیا! اب کہیں بھی پیسٹ کر کے بھیج دیں 💌');
-                    });
-                } else {
-                    alert(message);
-                }
-            }
+        const flowers = [
+            "🌸",
+            "🌷",
+            "🌹",
+            "🌺",
+            "🌼",
+            "💮",
+            "❤️"
+        ];
 
-            function goToStep(n) {
-                if (n < 1 || n > total) return;
-                step = n;
-                renderProgress();
-                renderStepText();
-                renderKeyArea();
-            }
+        for (
+            let i = 0;
+            i < 45;
+            i++
+        ) {
 
-            function launchFlowers() {
-                const flowers = ['🌸', '🌺', '🌻', '🌷', '🌹', '🌼'];
-                for (let i = 0; i < 35; i++) {
-                    setTimeout(() => {
-                        const f = document.createElement('div');
-                        f.className = 'flower';
-                        f.textContent = flowers[Math.floor(Math.random() * flowers.length)];
-                        f.style.left = Math.random() * 100 + '%';
-                        f.style.fontSize = (1.5 + Math.random() * 2) + 'rem';
-                        f.style.animationDuration = (3 + Math.random() * 3) + 's';
-                        f.style.animationDelay = (Math.random() * 2) + 's';
-                        flowerContainer.appendChild(f);
-                        setTimeout(() => f.remove(), 6000);
-                    }, i * 80);
-                }
-            }
+            setTimeout(() => {
 
-            goToStep(1);
-        })();
-    </script>
+                const petal =
+                    document.createElement(
+                        "div"
+                    );
+
+                petal.className =
+                    "petal";
+
+                petal.textContent =
+                    flowers[
+                        Math.floor(
+                            Math.random() *
+                            flowers.length
+                        )
+                    ];
+
+                petal.style.left =
+                    Math.random() * 100 + "%";
+
+                petal.style.fontSize =
+                    (
+                        1 +
+                        Math.random() * 1.5
+                    ) + "rem";
+
+                petal.style.animationDuration =
+                    (
+                        4 +
+                        Math.random() * 4
+                    ) + "s";
+
+                petals.appendChild(
+                    petal
+                );
+
+                setTimeout(() => {
+
+                    petal.remove();
+
+                }, 8500);
+
+            }, i * 90);
+
+        }
+
+    }
+
+
+    /*
+    ============================================================
+        START
+    ============================================================
+    */
+
+    renderStep();
+
+})();
+
+</script>
 
 </body>
 </html>
