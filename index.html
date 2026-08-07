@@ -1,1517 +1,1349 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"
-    />
-
-    <title>Something I Made For You 🌸</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family:
-                Inter,
-                "Segoe UI",
-                system-ui,
-                -apple-system,
-                BlinkMacSystemFont,
-                sans-serif;
-        }
-
-        :root {
-            --bg-1: #fff7f8;
-            --bg-2: #f7e8eb;
-            --card: rgba(255, 250, 251, 0.82);
-
-            --text: #30242a;
-            --muted: #806c75;
-
-            --rose: #b96f82;
-            --rose-dark: #8f4d61;
-            --rose-light: #f1d9df;
-
-            --gold: #b99a64;
-
-            --shadow:
-                0 30px 80px rgba(91, 47, 62, 0.15),
-                0 10px 30px rgba(91, 47, 62, 0.08);
-        }
-
-        body {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            padding: 20px;
-
-            color: var(--text);
-
-            background:
-                radial-gradient(
-                    circle at 15% 15%,
-                    rgba(255,255,255,.95),
-                    transparent 35%
-                ),
-                radial-gradient(
-                    circle at 85% 80%,
-                    rgba(232,190,201,.5),
-                    transparent 35%
-                ),
-                linear-gradient(
-                    135deg,
-                    var(--bg-1),
-                    var(--bg-2)
-                );
-
-            overflow-x: hidden;
-        }
-
-        /* =========================
-           BACKGROUND
-        ========================= */
-
-        .background-glow {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 0;
-        }
-
-        .glow {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: .35;
-        }
-
-        .glow.one {
-            width: 260px;
-            height: 260px;
-            background: #f6cdd8;
-            top: -100px;
-            left: -80px;
-        }
-
-        .glow.two {
-            width: 320px;
-            height: 320px;
-            background: #ead3c2;
-            right: -130px;
-            bottom: -100px;
-        }
-
-        /* =========================
-           CARD
-        ========================= */
-
-        .card {
-            position: relative;
-            z-index: 10;
-
-            width: min(560px, 100%);
-
-            padding: 34px 28px 30px;
-
-            background: var(--card);
-
-            backdrop-filter: blur(22px);
-            -webkit-backdrop-filter: blur(22px);
-
-            border-radius: 42px;
-
-            border: 1px solid rgba(255,255,255,.8);
-
-            box-shadow: var(--shadow);
-
-            overflow: hidden;
-        }
-
-        /* =========================
-           TOP
-        ========================= */
-
-        .top-line {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            margin-bottom: 22px;
-
-            color: var(--muted);
-
-            font-size: .72rem;
-            letter-spacing: .18em;
-            text-transform: uppercase;
-        }
-
-        .tiny-heart {
-            animation: heartbeat 1.8s infinite;
-        }
-
-        @keyframes heartbeat {
-            0%,100% {
-                transform: scale(1);
-            }
-
-            15% {
-                transform: scale(1.18);
-            }
-
-            30% {
-                transform: scale(1);
-            }
-        }
-
-        /* =========================
-           PROGRESS
-        ========================= */
-
-        .progress {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            gap: 7px;
-
-            margin-bottom: 30px;
-        }
-
-        .progress-dot {
-            width: 7px;
-            height: 7px;
-
-            border-radius: 50%;
-
-            background: #e3cbd2;
-
-            transition:
-                .35s ease;
-        }
-
-        .progress-dot.active {
-            width: 24px;
-            border-radius: 20px;
-
-            background: var(--rose);
-
-            box-shadow:
-                0 0 0 4px rgba(185,111,130,.12);
-        }
-
-        .progress-dot.done {
-            background: var(--rose-dark);
-        }
-
-        /* =========================
-           STEP
-        ========================= */
-
-        .step-content {
-            min-height: 310px;
-
-            display: flex;
-            flex-direction: column;
-
-            align-items: center;
-            justify-content: center;
-
-            text-align: center;
-
-            animation:
-                stepIn .55s ease both;
-        }
-
-        @keyframes stepIn {
-            from {
-                opacity: 0;
-                transform:
-                    translateY(18px)
-                    scale(.98);
-            }
-
-            to {
-                opacity: 1;
-                transform:
-                    translateY(0)
-                    scale(1);
-            }
-        }
-
-        .step-number {
-            margin-bottom: 12px;
-
-            color: var(--rose);
-
-            font-size: .72rem;
-            font-weight: 700;
-
-            letter-spacing: .25em;
-
-            text-transform: uppercase;
-        }
-
-        .big-icon {
-            width: 92px;
-            height: 92px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            margin-bottom: 20px;
-
-            border-radius: 50%;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    #fff,
-                    #f7e4e8
-                );
-
-            box-shadow:
-                0 15px 35px rgba(120,60,80,.12),
-                inset 0 0 0 1px rgba(185,111,130,.08);
-
-            font-size: 3rem;
-
-            animation:
-                floating 3s ease-in-out infinite;
-        }
-
-        @keyframes floating {
-            0%,100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-7px);
-            }
-        }
-
-        h1 {
-            max-width: 470px;
-
-            margin-bottom: 14px;
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
-            font-size:
-                clamp(2rem, 7vw, 3rem);
-
-            line-height: 1.1;
-
-            font-weight: 500;
-
-            letter-spacing: -.04em;
-        }
-
-        h2 {
-            max-width: 470px;
-
-            margin-bottom: 14px;
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
-            font-size:
-                clamp(1.7rem, 6vw, 2.4rem);
-
-            line-height: 1.15;
-
-            font-weight: 500;
-        }
-
-        .description {
-            max-width: 430px;
-
-            color: var(--muted);
-
-            font-size: 1rem;
-
-            line-height: 1.85;
-        }
-
-        .highlight {
-            color: var(--rose-dark);
-            font-weight: 600;
-        }
-
-        .quote {
-            max-width: 430px;
-
-            margin-top: 20px;
-            padding: 17px 22px;
-
-            border-left: 2px solid var(--rose);
-
-            background:
-                rgba(255,255,255,.55);
-
-            border-radius: 0 18px 18px 0;
-
-            color: #66535b;
-
-            font-family:
-                Georgia,
-                serif;
-
-            font-size: 1.05rem;
-
-            line-height: 1.7;
-
-            text-align: left;
-        }
-
-        /* =========================
-           INTERACTIVE CHOICES
-        ========================= */
-
-        .choices {
-            display: flex;
-            flex-wrap: wrap;
-
-            justify-content: center;
-
-            gap: 10px;
-
-            margin-top: 24px;
-
-            width: 100%;
-        }
-
-        .choice {
-            padding: 12px 18px;
-
-            border: 1px solid #ead4da;
-
-            border-radius: 50px;
-
-            background: rgba(255,255,255,.7);
-
-            color: #5c4750;
-
-            cursor: pointer;
-
-            font-size: .92rem;
-
-            transition:
-                .25s ease;
-        }
-
-        .choice:hover {
-            transform: translateY(-3px);
-
-            border-color: var(--rose);
-
-            background: #fff;
-
-            box-shadow:
-                0 8px 20px rgba(100,50,70,.08);
-        }
-
-        .choice.selected {
-            background: var(--rose);
-
-            border-color: var(--rose);
-
-            color: white;
-
-            transform: translateY(-2px);
-        }
-
-        /* =========================
-           BUTTONS
-        ========================= */
-
-        .action-area {
-            display: flex;
-
-            flex-direction: column;
-
-            align-items: center;
-
-            gap: 12px;
-
-            margin-top: 18px;
-        }
-
-        .btn {
-            min-width: 180px;
-
-            padding: 13px 24px;
-
-            border: none;
-
-            border-radius: 50px;
-
-            cursor: pointer;
-
-            font-size: .95rem;
-            font-weight: 600;
-
-            transition:
-                transform .2s ease,
-                box-shadow .2s ease,
-                background .2s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-        }
-
-        .btn-primary {
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--rose),
-                    var(--rose-dark)
-                );
-
-            color: white;
-
-            box-shadow:
-                0 10px 25px rgba(143,77,97,.25);
-        }
-
-        .btn-secondary {
-            background: rgba(255,255,255,.7);
-
-            border: 1px solid #ead4da;
-
-            color: #684f59;
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        /* =========================
-           FINAL IMAGE
-        ========================= */
-
-        .flower-reveal {
-            width: 100%;
-
-            margin-top: 22px;
-
-            border-radius: 30px;
-
-            overflow: hidden;
-
-            border: 5px solid rgba(255,255,255,.85);
-
-            box-shadow:
-                0 25px 60px rgba(95,45,65,.22);
-
-            animation:
-                imageReveal 1.2s cubic-bezier(.2,.8,.2,1) both;
-        }
-
-        @keyframes imageReveal {
-            from {
-                opacity: 0;
-                transform:
-                    scale(.82)
-                    translateY(25px);
-                filter: blur(8px);
-            }
-
-            to {
-                opacity: 1;
-                transform:
-                    scale(1)
-                    translateY(0);
-                filter: blur(0);
-            }
-        }
-
-        .flower-reveal img {
-            width: 100%;
-
-            display: block;
-
-            max-height: 430px;
-
-            object-fit: cover;
-        }
-
-        /* =========================
-           FINAL MESSAGE
-        ========================= */
-
-        .final-message {
-            margin-top: 25px;
-
-            animation:
-                stepIn .8s ease .2s both;
-        }
-
-        .final-message h2 {
-            margin-bottom: 12px;
-        }
-
-        .final-message p {
-            color: var(--muted);
-
-            line-height: 1.9;
-
-            font-size: 1rem;
-        }
-
-        .signature {
-            margin-top: 20px;
-
-            color: var(--rose-dark);
-
-            font-family:
-                Georgia,
-                serif;
-
-            font-size: 1.15rem;
-
-            font-style: italic;
-        }
-
-        /* =========================
-           FEELINGS
-        ========================= */
-
-        .feelings {
-            margin-top: 28px;
-
-            padding-top: 25px;
-
-            border-top:
-                1px dashed #dfc4cc;
-        }
-
-        .feelings-title {
-            margin-bottom: 7px;
-
-            font-family:
-                Georgia,
-                serif;
-
-            font-size: 1.3rem;
-        }
-
-        .feelings-sub {
-            color: var(--muted);
-
-            font-size: .86rem;
-
-            margin-bottom: 15px;
-        }
-
-        .emoji-grid {
-            display: flex;
-
-            flex-wrap: wrap;
-
-            justify-content: center;
-
-            gap: 8px;
-        }
-
-        .emoji-btn {
-            width: 48px;
-            height: 48px;
-
-            border: 1px solid #ead4da;
-
-            border-radius: 50%;
-
-            background: rgba(255,255,255,.7);
-
-            font-size: 1.35rem;
-
-            cursor: pointer;
-
-            transition:
-                .2s ease;
-        }
-
-        .emoji-btn:hover {
-            transform:
-                translateY(-4px)
-                scale(1.06);
-
-            background: white;
-        }
-
-        .emoji-btn.selected {
-            background: var(--rose-light);
-
-            border-color: var(--rose);
-
-            transform:
-                scale(1.08);
-
-            box-shadow:
-                0 0 0 4px rgba(185,111,130,.1);
-        }
-
-        .reaction {
-            margin-top: 15px;
-
-            padding: 12px 18px;
-
-            border-radius: 18px;
-
-            background: rgba(255,255,255,.65);
-
-            color: #644f58;
-
-            line-height: 1.6;
-
-            animation:
-                stepIn .35s ease both;
-        }
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        .footer {
-            margin-top: 25px;
-
-            text-align: center;
-
-            color: #a28d95;
-
-            font-size: .72rem;
-
-            letter-spacing: .12em;
-
-            text-transform: uppercase;
-        }
-
-        /* =========================
-           PETALS
-        ========================= */
-
-        .petals {
-            position: fixed;
-
-            inset: 0;
-
-            pointer-events: none;
-
-            overflow: hidden;
-
-            z-index: 100;
-        }
-
-        .petal {
-            position: absolute;
-
-            top: -50px;
-
-            font-size: 1.6rem;
-
-            animation:
-                petalFall linear forwards;
-        }
-
-        @keyframes petalFall {
-
-            0% {
-                transform:
-                    translateY(-10vh)
-                    rotate(0deg)
-                    scale(.7);
-
-                opacity: 0;
-            }
-
-            10% {
-                opacity: 1;
-            }
-
-            100% {
-                transform:
-                    translateY(115vh)
-                    translateX(80px)
-                    rotate(720deg)
-                    scale(1);
-
-                opacity: 0;
-            }
-        }
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media (max-width: 520px) {
-
-            body {
-                padding: 12px;
-            }
-
-            .card {
-                padding:
-                    25px 18px 24px;
-
-                border-radius: 32px;
-            }
-
-            .step-content {
-                min-height: 340px;
-            }
-
-            .big-icon {
-                width: 78px;
-                height: 78px;
-
-                font-size: 2.5rem;
-            }
-
-            .description {
-                font-size: .94rem;
-            }
-
-            .quote {
-                font-size: .95rem;
-            }
-
-            .flower-reveal img {
-                max-height: 330px;
-            }
-
-            .btn {
-                width: 100%;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>For Someone Special 🌸</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --bg:#fff8fa;
+    --bg2:#f4e5e9;
+    --card:rgba(255,252,253,.82);
+    --text:#30232a;
+    --muted:#806d76;
+    --rose:#ad6479;
+    --rose2:#8c475e;
+    --soft:#f2dce2;
+    --line:#ead2d9;
+    --white:#fff;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:18px;
+
+    color:var(--text);
+
+    background:
+        radial-gradient(circle at 10% 10%,#fff 0,transparent 35%),
+        radial-gradient(circle at 90% 90%,#ead0d8 0,transparent 35%),
+        linear-gradient(135deg,var(--bg),var(--bg2));
+
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    overflow-x:hidden;
+}
+
+body:before,
+body:after{
+    content:"";
+    position:fixed;
+    width:280px;
+    height:280px;
+    border-radius:50%;
+    filter:blur(80px);
+    opacity:.22;
+    pointer-events:none;
+}
+
+body:before{
+    background:#e6aabd;
+    top:-120px;
+    left:-120px;
+}
+
+body:after{
+    background:#d7b89f;
+    right:-120px;
+    bottom:-120px;
+}
+
+.card{
+    position:relative;
+    z-index:5;
+
+    width:min(600px,100%);
+
+    padding:30px 28px 25px;
+
+    background:var(--card);
+    backdrop-filter:blur(24px);
+    -webkit-backdrop-filter:blur(24px);
+
+    border:1px solid rgba(255,255,255,.9);
+    border-radius:38px;
+
+    box-shadow:
+        0 35px 90px rgba(80,35,52,.16),
+        0 8px 30px rgba(80,35,52,.07);
+
+    overflow:hidden;
+}
+
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    color:#9b828b;
+    font-size:.68rem;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+
+    margin-bottom:22px;
+}
+
+.heart{
+    font-size:1rem;
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.25)}
+}
+
+.progress{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:6px;
+    margin-bottom:30px;
+}
+
+.dot{
+    width:6px;
+    height:6px;
+    border-radius:20px;
+    background:#e3ccd3;
+    transition:.35s;
+}
+
+.dot.done{
+    background:var(--rose2);
+}
+
+.dot.active{
+    width:25px;
+    background:var(--rose);
+    box-shadow:0 0 0 4px rgba(173,100,121,.11);
+}
+
+.content{
+    min-height:340px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    animation:enter .55s ease both;
+}
+
+@keyframes enter{
+    from{
+        opacity:0;
+        transform:translateY(18px) scale(.98);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.step-label{
+    color:var(--rose);
+    font-size:.68rem;
+    font-weight:700;
+    letter-spacing:.25em;
+    text-transform:uppercase;
+    margin-bottom:15px;
+}
+
+.icon{
+    width:88px;
+    height:88px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin-bottom:20px;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(145deg,#fff,#f5e3e7);
+
+    box-shadow:
+        0 15px 35px rgba(100,50,70,.12);
+
+    font-size:2.8rem;
+
+    animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-7px)}
+}
+
+h1,h2{
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-weight:500;
+    letter-spacing:-.035em;
+}
+
+h1{
+    font-size:clamp(2.2rem,8vw,3.25rem);
+    line-height:1.05;
+    margin-bottom:15px;
+}
+
+h2{
+    font-size:clamp(1.8rem,6vw,2.5rem);
+    line-height:1.1;
+    margin-bottom:15px;
+}
+
+.desc{
+    max-width:470px;
+    color:var(--muted);
+    font-size:1rem;
+    line-height:1.85;
+}
+
+.highlight{
+    color:var(--rose2);
+    font-weight:650;
+}
+
+.quote{
+    max-width:470px;
+
+    margin-top:20px;
+    padding:17px 20px;
+
+    border-left:2px solid var(--rose);
+    border-radius:0 18px 18px 0;
+
+    background:rgba(255,255,255,.6);
+
+    color:#67545c;
+
+    font-family:Georgia,serif;
+    font-size:1.04rem;
+    line-height:1.7;
+
+    text-align:left;
+}
+
+.choice-wrap{
+    width:100%;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:9px;
+    margin-top:25px;
+}
+
+.choice{
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.72);
+
+    color:#624d56;
+
+    padding:12px 17px;
+    border-radius:50px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    font-size:.9rem;
+}
+
+.choice:hover{
+    transform:translateY(-3px);
+    background:#fff;
+    border-color:var(--rose);
+}
+
+.choice.selected{
+    background:var(--rose);
+    color:#fff;
+    border-color:var(--rose);
+}
+
+.actions{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:12px;
+}
+
+.btn{
+    min-width:190px;
+
+    border:none;
+    border-radius:50px;
+
+    padding:13px 24px;
+
+    cursor:pointer;
+
+    font-size:.92rem;
+    font-weight:650;
+
+    transition:.25s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+.primary{
+    color:#fff;
+
+    background:
+        linear-gradient(135deg,var(--rose),var(--rose2));
+
+    box-shadow:
+        0 12px 28px rgba(140,71,94,.24);
+}
+
+.secondary{
+    background:rgba(255,255,255,.7);
+    border:1px solid var(--line);
+    color:#654f58;
+}
+
+.btn:disabled{
+    opacity:.45;
+    cursor:not-allowed;
+    transform:none;
+}
+
+.reveal-card{
+    width:100%;
+    margin-top:22px;
+    padding:24px;
+
+    border:1px solid rgba(173,100,121,.14);
+    border-radius:25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.9),
+            rgba(249,231,236,.65)
+        );
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.9);
+}
+
+.reveal-title{
+    font-family:Georgia,serif;
+    font-size:1.3rem;
+    margin-bottom:12px;
+}
+
+.reveal-text{
+    color:var(--muted);
+    line-height:1.8;
+    font-size:.94rem;
+}
+
+.flower{
+    width:100%;
+    margin-top:22px;
+
+    overflow:hidden;
+
+    border-radius:30px;
+    border:5px solid rgba(255,255,255,.9);
+
+    box-shadow:
+        0 25px 65px rgba(75,35,50,.2);
+
+    animation:
+        flowerReveal 1.2s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes flowerReveal{
+    from{
+        opacity:0;
+        transform:scale(.82) translateY(30px);
+        filter:blur(9px);
+    }
+    to{
+        opacity:1;
+        transform:scale(1) translateY(0);
+        filter:blur(0);
+    }
+}
+
+.flower img{
+    display:block;
+    width:100%;
+    max-height:450px;
+    object-fit:cover;
+}
+
+.final-message{
+    margin-top:26px;
+    animation:enter .8s .2s both;
+}
+
+.final-message p{
+    color:var(--muted);
+    line-height:1.9;
+    font-size:1rem;
+    margin-top:12px;
+}
+
+.signature{
+    margin-top:20px;
+    color:var(--rose2);
+    font-family:Georgia,serif;
+    font-style:italic;
+    font-size:1.08rem;
+}
+
+.identity{
+    margin-top:28px;
+    padding:23px;
+
+    border-radius:25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.9),
+            rgba(244,222,228,.6)
+        );
+
+    border:1px solid var(--line);
+
+    text-align:left;
+}
+
+.identity-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:18px;
+}
+
+.identity-label{
+    font-size:.66rem;
+    color:#9a8089;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+}
+
+.verified{
+    padding:6px 10px;
+    border-radius:30px;
+
+    color:#806173;
+    background:#f2dfe5;
+
+    font-size:.68rem;
+    font-weight:700;
+}
+
+.identity-name{
+    font-family:Georgia,serif;
+    font-size:1.7rem;
+    margin-bottom:18px;
+}
+
+.identity-row{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+
+    padding:11px 0;
+
+    border-bottom:1px solid rgba(170,120,135,.14);
+
+    font-size:.87rem;
+}
+
+.identity-row:last-child{
+    border-bottom:0;
+}
+
+.identity-row span:first-child{
+    color:#9a8189;
+}
+
+.identity-row span:last-child{
+    color:#493941;
+    font-weight:600;
+    text-align:right;
+}
+
+.feelings{
+    margin-top:28px;
+    padding-top:25px;
+    border-top:1px dashed #dec4cc;
+}
+
+.feelings h3{
+    font-family:Georgia,serif;
+    font-size:1.4rem;
+    font-weight:500;
+}
+
+.feelings p{
+    color:var(--muted);
+    font-size:.86rem;
+    margin-top:6px;
+}
+
+.emojis{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px;
+    margin-top:17px;
+}
+
+.emoji{
+    width:48px;
+    height:48px;
+
+    border-radius:50%;
+
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.75);
+
+    cursor:pointer;
+
+    font-size:1.35rem;
+
+    transition:.2s;
+}
+
+.emoji:hover{
+    transform:translateY(-4px) scale(1.06);
+}
+
+.emoji.active{
+    background:var(--soft);
+    border-color:var(--rose);
+    transform:scale(1.08);
+}
+
+.reaction{
+    margin-top:15px;
+    padding:12px 17px;
+
+    border-radius:17px;
+
+    background:rgba(255,255,255,.7);
+
+    color:#66505a;
+
+    line-height:1.6;
+
+    animation:enter .35s both;
+}
+
+.footer{
+    margin-top:24px;
+    text-align:center;
+
+    color:#a48e96;
+
+    font-size:.67rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+}
+
+.petals{
+    position:fixed;
+    inset:0;
+    z-index:100;
+
+    pointer-events:none;
+    overflow:hidden;
+}
+
+.petal{
+    position:absolute;
+    top:-50px;
+
+    animation:
+        fall linear forwards;
+}
+
+@keyframes fall{
+    0%{
+        transform:
+            translateY(-10vh)
+            rotate(0deg)
+            scale(.7);
+        opacity:0;
+    }
+
+    10%{
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            translateY(115vh)
+            translateX(100px)
+            rotate(720deg)
+            scale(1);
+        opacity:0;
+    }
+}
+
+.hidden{
+    display:none;
+}
+
+@media(max-width:520px){
+
+    body{
+        padding:10px;
+    }
+
+    .card{
+        padding:24px 17px;
+        border-radius:31px;
+    }
+
+    .content{
+        min-height:350px;
+    }
+
+    .icon{
+        width:78px;
+        height:78px;
+        font-size:2.4rem;
+    }
+
+    .desc{
+        font-size:.94rem;
+    }
+
+    .quote{
+        font-size:.94rem;
+    }
+
+    .btn{
+        width:100%;
+    }
+
+    .actions{
+        width:100%;
+    }
+
+    .flower img{
+        max-height:350px;
+    }
+
+    .identity-row{
+        flex-direction:column;
+        gap:4px;
+    }
+
+    .identity-row span:last-child{
+        text-align:left;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <div class="background-glow">
-        <div class="glow one"></div>
-        <div class="glow two"></div>
+<div class="card">
+
+    <div class="top">
+        <span>A little something for you</span>
+        <span class="heart">♡</span>
     </div>
 
-    <div class="card">
+    <div class="progress" id="progress"></div>
 
-        <div class="top-line">
-            <span>Something personal</span>
-            <span class="tiny-heart">♡</span>
-        </div>
+    <div class="content" id="content"></div>
 
-        <div class="progress" id="progress"></div>
+    <div class="actions" id="actions"></div>
 
-        <div id="stepContent"></div>
+    <div id="final"></div>
 
-        <div class="action-area" id="actionArea"></div>
-
-        <div id="finalArea"></div>
-
-        <div class="footer">
-            made with a little courage & a lot of feelings
-        </div>
-
+    <div class="footer">
+        made with sincerity, loyalty & a little courage
     </div>
 
-    <div class="petals" id="petals"></div>
+</div>
+
+<div class="petals" id="petals"></div>
 
 
 <script>
+(function(){
 
-(function () {
+/* ==========================================================
+   FLOWER
+   ========================================================== */
 
-    /*
-    ============================================================
-        CONFIGURATION
-    ============================================================
-    */
-
-    const FLOWER_IMAGE = "flower-photo.jpeg";
+const FLOWER_IMAGE = "flower-photo.jpeg";
 
 
-    /*
-    ============================================================
-        STORY STEPS
-    ============================================================
-    */
+/* ==========================================================
+   PRIVATE IDENTITY
+   NOTE:
+   These are encoded only to avoid obvious plain-text values.
+   A static website cannot provide real secrecy.
+   ========================================================== */
 
-    const STEPS = [
+const PRIVATE = {
+    name: "Saba Afzal",
 
-        {
-            icon: "🌙",
-            title: "Hey… you.",
-            text:
-                "I could have simply sent you a message… " +
-                "but somehow, that didn't feel enough.",
-            button:
-                "Okay… I'm listening →"
-        },
+    mobile: atob("MDMzMzQ2NzIyMjA="),
 
-        {
-            icon: "🤍",
-            title: "Before you continue…",
-            text:
-                "Forget everything else for a moment. " +
-                "No rushing. No guessing. Just stay here for a little while.",
-            button:
-                "I'm here"
-        },
+    cnic: atob("MzUyMDEwODgwMjI5OA==")
+};
 
-        {
-            icon: "✨",
-            title: "Take a little breath.",
-            text:
-                "Because the next few steps aren't really about a parcel… " +
-                "they're about something I've been carrying in my heart.",
-            button:
-                "Continue slowly →"
-        },
 
-        {
-            icon: "🌷",
-            title: "Some people are different.",
-            text:
-                "You don't always realize when someone starts becoming " +
-                "<span class='highlight'>special</span> to you.",
-            quote:
-                "It happens quietly… in the little conversations, the random smiles, and the moments you remember without trying.",
-            button:
-                "I understand →"
-        },
+/* ==========================================================
+   STORY
+   ========================================================== */
 
-        {
-            icon: "💭",
-            title: "Can I ask you something?",
-            text:
-                "When you think about the people who make your days a little better…",
-            choices: [
-                "I know someone like that",
-                "Maybe I do 👀",
-                "I'm not answering 😌"
-            ]
-        },
+const STEPS = [
 
-        {
-            icon: "🫶",
-            title: "Here's what I realized.",
-            text:
-                "Your presence has a way of making ordinary moments feel a little less ordinary.",
-            quote:
-                "And honestly… I don't think that's something I should keep pretending I don't notice.",
-            button:
-                "Keep going…"
-        },
+{
+    icon:"🌙",
+    title:"Hey… beautiful.",
+    text:
+        "I could have simply sent you a message, " +
+        "but some feelings deserve a little more than a notification.",
+    button:"I'm listening →"
+},
 
-        {
-            icon: "🌸",
-            title: "There is something I like about you.",
-            text:
-                "It's not just one thing. It's the little things. " +
-                "The way you are. The way you make conversations feel. " +
-                "The way somehow… you stay on my mind.",
-            button:
-                "One more step →"
-        },
+{
+    icon:"🤍",
+    title:"Stay here for a moment.",
+    text:
+        "No rush. No guessing. Just take a breath and let this little journey unfold.",
+    quote:
+        "Sometimes the smallest moments become the ones we remember the longest.",
+    button:"I'm here"
+},
 
-        {
-            icon: "❤️",
-            title: "So here is the honest part.",
-            text:
-                "I don't know exactly where this feeling is supposed to go.",
-            quote:
-                "I just know that somewhere along the way, you became someone I genuinely care about.",
-            button:
-                "I'm still here ❤️"
-        },
+{
+    icon:"✨",
+    title:"This isn't really a surprise.",
+    text:
+        "It's a small collection of thoughts I've wanted to put into words for you.",
+    button:"Continue"
+},
 
-        {
-            icon: "🎀",
-            title: "And this little surprise…",
-            text:
-                "isn't meant to ask anything from you.",
-            quote:
-                "It's simply my way of saying: I'm glad you exist, and I'm really glad our paths crossed.",
-            button:
-                "Almost there…"
-        },
+{
+    icon:"🌷",
+    title:"People become special quietly.",
+    text:
+        "Not always through some dramatic moment… sometimes it happens through conversations, little smiles, kindness, and simply being there.",
+    quote:
+        "The heart rarely announces when someone is becoming important. It simply starts remembering them.",
+    button:"That is true"
+},
 
-        {
-            icon: "🥹",
-            title: "One last thing.",
-            text:
-                "I wanted to give you something beautiful… " +
-                "because sometimes a few words just don't feel like enough.",
-            button:
-                "Show me 🌷"
-        },
+{
+    icon:"💭",
+    title:"Can I ask you something?",
+    text:
+        "What matters more to you when two people choose each other?",
+    choices:[
+        "Trust 🤍",
+        "Loyalty ❤️",
+        "Understanding 🌷",
+        "Everything together ✨"
+    ]
+},
 
-        {
-            icon: "🌹",
-            title: "Ready?",
-            text:
-                "No more steps after this.",
-            quote:
-                "Whatever happens next… I hope this little moment makes you smile.",
-            button:
-                "Open my surprise ✨"
+{
+    icon:"🫶",
+    title:"For me, it's loyalty.",
+    text:
+        "Because beautiful words are easy. Real loyalty is what stays when life becomes ordinary, difficult, busy, or imperfect.",
+    quote:
+        "I don't want something that only looks beautiful. I want something that remains beautiful because both people choose it.",
+    button:"Continue →"
+},
+
+{
+    icon:"🌸",
+    title:"And I want you to know this.",
+    text:
+        "I appreciate the person you are — not just the smile, not just the beauty, but the heart behind it.",
+    quote:
+        "Your kindness, your presence, your little ways of being you… those things matter.",
+    button:"One more →"
+},
+
+{
+    icon:"❤️",
+    title:"I believe love should feel safe.",
+    text:
+        "Not like pressure. Not like possession. Not like constantly proving something.",
+    quote:
+        "It should feel like two people saying: I choose you, I respect you, and I will keep choosing you.",
+    button:"Keep going ❤️"
+},
+
+{
+    icon:"🔐",
+    title:"There is a promise hidden here.",
+    text:
+        "If you give me loyalty, you will never have to wonder whether I understand its value.",
+    quote:
+        "If you are loyal to me, I will be twice as loyal to you — not because I have to, but because that's how I want to love.",
+    button:"I like that"
+},
+
+{
+    icon:"🥹",
+    title:"I don't need perfection.",
+    text:
+        "I would rather have honesty, respect, laughter, patience, and two people who know how to stand beside each other.",
+    quote:
+        "Because a beautiful relationship isn't built by perfect people. It's built by sincere people.",
+    button:"Almost there…"
+},
+
+{
+    icon:"🎀",
+    title:"And this little flower?",
+    text:
+        "It's small compared with everything I could say, but I wanted you to have something beautiful that carries a simple message.",
+    button:"Show me 🌷"
+},
+
+{
+    icon:"🌹",
+    title:"One last thought.",
+    text:
+        "If life gives us thousands of ordinary days together, I hope we fill them with enough little beautiful moments to make them extraordinary.",
+    quote:
+        "“The best kind of love is the one that makes you feel at home, while still making your heart feel excited.”",
+    button:"I'm ready"
+},
+
+{
+    icon:"💌",
+    title:"This one is truly for you.",
+    text:
+        "No more questions. No more steps. Just one little reminder of what you mean to me.",
+    button:"Open it ✨"
+},
+
+{
+    icon:"🌸",
+    title:"Ready?",
+    text:
+        "Then let me finally show you what I made for you.",
+    quote:
+        "Some gifts are wrapped in paper. Some are wrapped in feelings.",
+    button:"Open my surprise 🌷"
+}
+
+];
+
+
+let current = 0;
+let finalOpened = false;
+let selected = null;
+
+const progress =
+    document.getElementById("progress");
+
+const content =
+    document.getElementById("content");
+
+const actions =
+    document.getElementById("actions");
+
+const final =
+    document.getElementById("final");
+
+const petals =
+    document.getElementById("petals");
+
+
+/* ==========================================================
+   PROGRESS
+   ========================================================== */
+
+function renderProgress(){
+
+    progress.innerHTML="";
+
+    STEPS.forEach((_,i)=>{
+
+        const dot =
+            document.createElement("span");
+
+        dot.className="dot";
+
+        if(i<current)
+            dot.classList.add("done");
+
+        if(i===current)
+            dot.classList.add("active");
+
+        progress.appendChild(dot);
+    });
+}
+
+
+/* ==========================================================
+   STEP
+   ========================================================== */
+
+function renderStep(){
+
+    const step = STEPS[current];
+
+    selected = null;
+
+    renderProgress();
+
+    content.innerHTML=`
+        <div class="step-label">
+            Chapter ${String(current+1).padStart(2,"0")}
+            · ${STEPS.length}
+        </div>
+
+        <div class="icon">
+            ${step.icon}
+        </div>
+
+        <h2>${step.title}</h2>
+
+        <div class="desc">
+            ${step.text}
+        </div>
+
+        ${
+            step.quote
+            ? `<div class="quote">${step.quote}</div>`
+            : ""
         }
+    `;
 
-    ];
-
-
-    /*
-    ============================================================
-        STATE
-    ============================================================
-    */
-
-    let currentStep = 0;
-
-    let selectedChoice = null;
-
-    let finalOpened = false;
+    actions.innerHTML="";
 
 
-    /*
-    ============================================================
-        ELEMENTS
-    ============================================================
-    */
+    /* choices */
 
-    const progress =
-        document.getElementById("progress");
+    if(step.choices){
 
-    const stepContent =
-        document.getElementById("stepContent");
+        const wrap =
+            document.createElement("div");
 
-    const actionArea =
-        document.getElementById("actionArea");
+        wrap.className="choice-wrap";
 
-    const finalArea =
-        document.getElementById("finalArea");
+        step.choices.forEach(choice=>{
 
-    const petals =
-        document.getElementById("petals");
-
-
-    /*
-    ============================================================
-        PROGRESS
-    ============================================================
-    */
-
-    function renderProgress() {
-
-        progress.innerHTML = "";
-
-        STEPS.forEach((_, index) => {
-
-            const dot =
-                document.createElement("span");
-
-            dot.className =
-                "progress-dot";
-
-            if (index < currentStep) {
-                dot.classList.add("done");
-            }
-
-            if (index === currentStep) {
-                dot.classList.add("active");
-            }
-
-            progress.appendChild(dot);
-
-        });
-
-    }
-
-
-    /*
-    ============================================================
-        STEP RENDER
-    ============================================================
-    */
-
-    function renderStep() {
-
-        const step =
-            STEPS[currentStep];
-
-        selectedChoice = null;
-
-        renderProgress();
-
-        stepContent.innerHTML = `
-            <div class="step-number">
-                Step ${String(currentStep + 1).padStart(2, "0")}
-                / ${String(STEPS.length).padStart(2, "0")}
-            </div>
-
-            <div class="big-icon">
-                ${step.icon}
-            </div>
-
-            <h2>
-                ${step.title}
-            </h2>
-
-            <p class="description">
-                ${step.text}
-            </p>
-
-            ${
-                step.quote
-                    ? `
-                        <div class="quote">
-                            ${step.quote}
-                        </div>
-                    `
-                    : ""
-            }
-        `;
-
-
-        actionArea.innerHTML = "";
-
-
-        /*
-        ------------------------------
-        CHOICES
-        ------------------------------
-        */
-
-        if (step.choices) {
-
-            const choices =
-                document.createElement("div");
-
-            choices.className =
-                "choices";
-
-            step.choices.forEach(choice => {
-
-                const button =
-                    document.createElement("button");
-
-                button.className =
-                    "choice";
-
-                button.textContent =
-                    choice;
-
-                button.addEventListener(
-                    "click",
-                    () => {
-
-                        selectedChoice =
-                            choice;
-
-                        choices
-                            .querySelectorAll(".choice")
-                            .forEach(el =>
-                                el.classList.remove("selected")
-                            );
-
-                        button.classList.add(
-                            "selected"
-                        );
-
-                        continueButton.disabled =
-                            false;
-
-                    }
-                );
-
-                choices.appendChild(button);
-
-            });
-
-
-            actionArea.appendChild(
-                choices
-            );
-
-
-            const continueButton =
+            const btn =
                 document.createElement("button");
 
-            continueButton.className =
-                "btn btn-primary";
+            btn.className="choice";
 
-            continueButton.textContent =
-                "Continue →";
+            btn.textContent=choice;
 
-            continueButton.disabled =
-                true;
+            btn.onclick=()=>{
 
-            continueButton.style.marginTop =
-                "8px";
+                selected=choice;
 
-            continueButton.addEventListener(
-                "click",
-                nextStep
-            );
+                wrap
+                    .querySelectorAll(".choice")
+                    .forEach(x=>
+                        x.classList.remove("selected")
+                    );
 
-            actionArea.appendChild(
-                continueButton
-            );
+                btn.classList.add("selected");
 
-            return;
-        }
+                next.disabled=false;
+            };
+
+            wrap.appendChild(btn);
+        });
+
+        actions.appendChild(wrap);
 
 
-        /*
-        ------------------------------
-        NORMAL BUTTON
-        ------------------------------
-        */
-
-        const button =
+        const next =
             document.createElement("button");
 
-        button.className =
-            "btn btn-primary";
+        next.className="btn primary";
 
-        button.textContent =
-            step.button;
+        next.textContent="Continue →";
 
-        button.addEventListener(
-            "click",
-            nextStep
-        );
+        next.disabled=true;
 
-        actionArea.appendChild(
-            button
-        );
+        next.style.marginTop="10px";
 
+        next.onclick=goNext;
+
+        actions.appendChild(next);
+
+        return;
     }
 
 
-    /*
-    ============================================================
-        NEXT STEP
-    ============================================================
-    */
+    /* normal button */
 
-    function nextStep() {
+    const button =
+        document.createElement("button");
 
-        if (
-            currentStep <
-            STEPS.length - 1
-        ) {
+    button.className="btn primary";
 
-            currentStep++;
+    button.textContent=step.button;
 
-            renderStep();
+    button.onclick=goNext;
 
-        } else {
+    actions.appendChild(button);
+}
 
-            openFinalReveal();
 
-        }
+/* ==========================================================
+   NEXT
+   ========================================================== */
 
+function goNext(){
+
+    if(current < STEPS.length-1){
+
+        current++;
+
+        renderStep();
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+    }else{
+
+        revealFinal();
     }
+}
 
 
-    /*
-    ============================================================
-        FINAL REVEAL
-    ============================================================
-    */
+/* ==========================================================
+   FINAL REVEAL
+   ========================================================== */
 
-    function openFinalReveal() {
+function revealFinal(){
 
-        if (finalOpened) {
-            return;
-        }
+    if(finalOpened) return;
 
-        finalOpened = true;
+    finalOpened=true;
 
-        progress.innerHTML = "";
+    progress.innerHTML="";
 
-        stepContent.innerHTML = `
-            <div class="step-number">
-                THE END OF THE LITTLE JOURNEY
-            </div>
+    content.innerHTML=`
+        <div class="step-label">
+            JUST FOR YOU
+        </div>
 
-            <div class="big-icon">
-                🌸
-            </div>
+        <div class="icon">
+            🌸
+        </div>
 
-            <h1>
-                This one is for you.
-            </h1>
+        <h1>
+            My gorgeous Saba
+        </h1>
 
-            <p class="description">
-                No more guessing.
-                No more steps.
-                Just a little something I wanted you to have.
+        <div class="desc">
+            Some things are difficult to say in one message.
+            So I made you a little journey instead.
+        </div>
+    `;
+
+    actions.innerHTML="";
+
+
+    final.innerHTML=`
+
+        <div class="flower">
+            <img
+                src="${FLOWER_IMAGE}"
+                alt="A beautiful flower for Saba"
+            >
+        </div>
+
+
+        <div class="final-message">
+
+            <h2>
+                My gorgeous 🌸
+            </h2>
+
+            <p>
+                This beautiful flower is for you —
+                just a little reminder of how special
+                and lovely you are.
+                I hope it brings a little smile to your face,
+                because you truly deserve it.
+                ❤️🌸
             </p>
-        `;
 
-        actionArea.innerHTML = "";
+            <p>
+                My sweet, gorgeous, beautiful ❤️
+            </p>
 
-        finalArea.innerHTML = `
+            <p>
+                This little flower is for you 🌸 —
+                a small gift, but given with my whole heart.
+                Please accept it, because it carries
+                all the love, care, and warmth I have for you.
+                You deserve every beautiful thing in this world.
+                ❤️🌸
+            </p>
 
-            <div class="flower-reveal">
-
-                <img
-                    src="${FLOWER_IMAGE}"
-                    alt="A flower for you"
-                    onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 600 600%22%3E%3Crect width=%22600%22 height=%22600%22 fill=%22%23f7e8eb%22/%3E%3Ctext x=%22300%22 y=%22290%22 text-anchor=%22middle%22 font-size=%22120%22%3E🌷%3C/text%3E%3Ctext x=%22300%22 y=%22390%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2230%22 fill=%22%238f4d61%22%3EFor you%3C/text%3E%3C/svg%3E'"
-                />
-
+            <div class="signature">
+                With sincerity, with respect, and with a heart
+                that chooses loyalty. 🤍
             </div>
 
+        </div>
 
-            <div class="final-message">
 
-                <h2>
-                    A little flower, for someone special. 🌷
-                </h2>
+        <div class="identity">
 
-                <p>
-                    I don't know if flowers can say everything
-                    that words sometimes cannot…
-                    but I hope this one says at least a little.
-                </p>
+            <div class="identity-top">
 
-                <p style="margin-top:12px;">
-                    You are appreciated.
-                    You are thought about.
-                    And, whether you realize it or not,
-                    <span class="highlight">
-                        you mean more to me than you probably know.
-                    </span>
-                </p>
+                <div class="identity-label">
+                    Made especially for
+                </div>
 
-                <div class="signature">
-                    — Just someone who wanted to make you smile. 🤍
+                <div class="verified">
+                    ✦ MY PERSON
                 </div>
 
             </div>
 
+            <div class="identity-name">
+                ${PRIVATE.name}
+            </div>
 
-            <div class="feelings">
+            <div class="identity-row">
+                <span>Full Name</span>
+                <span>${PRIVATE.name}</span>
+            </div>
 
-                <div class="feelings-title">
-                    Okay… now it's your turn. 🫣
-                </div>
+            <div class="identity-row">
+                <span>CNIC</span>
+                <span>${PRIVATE.cnic}</span>
+            </div>
 
-                <div class="feelings-sub">
-                    Be honest. How did this make you feel?
-                </div>
+            <div class="identity-row">
+                <span>Phone</span>
+                <span>${PRIVATE.mobile}</span>
+            </div>
 
-                <div class="emoji-grid">
+        </div>
 
-                    <button
-                        class="emoji-btn"
-                        data-message="That smile better be real. 🥹❤️"
-                    >
-                        🥹
-                    </button>
 
-                    <button
-                        class="emoji-btn"
-                        data-message="Okayyy… I'll take that as a good sign. 😍"
-                    >
-                        😍
-                    </button>
+        <div class="reveal-card">
 
-                    <button
-                        class="emoji-btn"
-                        data-message="I knew I could make you laugh. 😂"
-                    >
-                        😂
-                    </button>
+            <div class="reveal-title">
+                And if you ever wonder what I want… 🤍
+            </div>
 
-                    <button
-                        class="emoji-btn"
-                        data-message="Speechless? I'll consider that a win. 😳"
-                    >
-                        😳
-                    </button>
+            <div class="reveal-text">
+                I want honesty when things are easy,
+                patience when things are difficult,
+                laughter on ordinary days,
+                respect in every situation,
+                and loyalty when nobody is watching.
+                <br><br>
+                And if you give me that,
+                I'll give you more of it in return.
+            </div>
 
-                    <button
-                        class="emoji-btn"
-                        data-message="That little heart just made my day. ❤️"
-                    >
-                        ❤️
-                    </button>
+        </div>
 
-                    <button
-                        class="emoji-btn"
-                        data-message="Okay… now you're making me blush. 🙈"
-                    >
-                        🙈
-                    </button>
 
-                </div>
+        <div class="feelings">
 
-                <div
-                    class="reaction"
-                    id="reaction"
-                    style="display:none;"
-                ></div>
+            <h3>
+                Now tell me honestly… 🫣
+            </h3>
+
+            <p>
+                What did this little journey make you feel?
+            </p>
+
+            <div class="emojis">
+
+                <button class="emoji"
+                    data-msg="That smile was exactly what I hoped for. 🥹❤️">
+                    🥹
+                </button>
+
+                <button class="emoji"
+                    data-msg="Okay… that reaction just made this worth it. 😍">
+                    😍
+                </button>
+
+                <button class="emoji"
+                    data-msg="If I made you laugh, mission accomplished. 😂❤️">
+                    😂
+                </button>
+
+                <button class="emoji"
+                    data-msg="Speechless? I'll happily take that. 😳🌸">
+                    😳
+                </button>
+
+                <button class="emoji"
+                    data-msg="That heart means more than you know. ❤️">
+                    ❤️
+                </button>
+
+                <button class="emoji"
+                    data-msg="Now you're making me blush too. 🙈">
+                    🙈
+                </button>
 
             </div>
 
-        `;
+            <div
+                class="reaction"
+                id="reaction"
+                style="display:none">
+            </div>
 
-        launchPetals();
-
-        setupReactions();
-
-    }
+        </div>
+    `;
 
 
-    /*
-    ============================================================
-        EMOJI REACTIONS
-    ============================================================
-    */
+    document
+        .querySelectorAll(".emoji")
+        .forEach(button=>{
 
-    function setupReactions() {
+            button.onclick=()=>{
 
-        const buttons =
-            document.querySelectorAll(
-                ".emoji-btn"
-            );
-
-        const reaction =
-            document.getElementById(
-                "reaction"
-            );
-
-        buttons.forEach(button => {
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    buttons.forEach(btn =>
-                        btn.classList.remove(
-                            "selected"
-                        )
+                document
+                    .querySelectorAll(".emoji")
+                    .forEach(x=>
+                        x.classList.remove("active")
                     );
 
-                    button.classList.add(
-                        "selected"
-                    );
+                button.classList.add("active");
 
-                    reaction.textContent =
-                        button.dataset.message;
+                const reaction =
+                    document.getElementById("reaction");
 
-                    reaction.style.display =
-                        "block";
+                reaction.textContent =
+                    button.dataset.msg;
 
-                }
-            );
+                reaction.style.display="block";
+            };
 
         });
 
+
+    createPetals();
+
+}
+
+
+/* ==========================================================
+   FLOWERS
+   ========================================================== */
+
+function createPetals(){
+
+    const items=[
+        "🌸",
+        "🌷",
+        "🌹",
+        "🌺",
+        "🌼",
+        "💮",
+        "❤️"
+    ];
+
+    for(let i=0;i<55;i++){
+
+        setTimeout(()=>{
+
+            const petal =
+                document.createElement("div");
+
+            petal.className="petal";
+
+            petal.textContent =
+                items[
+                    Math.floor(
+                        Math.random()*items.length
+                    )
+                ];
+
+            petal.style.left =
+                Math.random()*100+"%";
+
+            petal.style.fontSize =
+                (1+Math.random()*1.4)+"rem";
+
+            petal.style.animationDuration =
+                (4+Math.random()*4)+"s";
+
+            petals.appendChild(petal);
+
+            setTimeout(()=>{
+                petal.remove();
+            },8500);
+
+        },i*80);
     }
+}
 
 
-    /*
-    ============================================================
-        FLOWER PETALS
-    ============================================================
-    */
+/* ==========================================================
+   START
+   ========================================================== */
 
-    function launchPetals() {
-
-        const flowers = [
-            "🌸",
-            "🌷",
-            "🌹",
-            "🌺",
-            "🌼",
-            "💮",
-            "❤️"
-        ];
-
-        for (
-            let i = 0;
-            i < 45;
-            i++
-        ) {
-
-            setTimeout(() => {
-
-                const petal =
-                    document.createElement(
-                        "div"
-                    );
-
-                petal.className =
-                    "petal";
-
-                petal.textContent =
-                    flowers[
-                        Math.floor(
-                            Math.random() *
-                            flowers.length
-                        )
-                    ];
-
-                petal.style.left =
-                    Math.random() * 100 + "%";
-
-                petal.style.fontSize =
-                    (
-                        1 +
-                        Math.random() * 1.5
-                    ) + "rem";
-
-                petal.style.animationDuration =
-                    (
-                        4 +
-                        Math.random() * 4
-                    ) + "s";
-
-                petals.appendChild(
-                    petal
-                );
-
-                setTimeout(() => {
-
-                    petal.remove();
-
-                }, 8500);
-
-            }, i * 90);
-
-        }
-
-    }
-
-
-    /*
-    ============================================================
-        START
-    ============================================================
-    */
-
-    renderStep();
+renderStep();
 
 })();
-
 </script>
 
 </body>
