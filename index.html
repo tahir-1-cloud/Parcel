@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>Saba🌸</title>
+<title>Happy Birthday Iqra 🌸</title>
 
 <style>
 *{
@@ -32,1085 +32,194 @@ html{
 
 body{
     min-height:100vh;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     padding:18px;
-
     color:var(--text);
-
-    font-family:
-        Inter,
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
+    font-family:Inter,"Segoe UI",Arial,sans-serif;
     background:
-        radial-gradient(
-            circle at 12% 10%,
-            rgba(255,255,255,.98),
-            transparent 31%
-        ),
-        radial-gradient(
-            circle at 88% 85%,
-            rgba(225,194,186,.48),
-            transparent 35%
-        ),
-        linear-gradient(
-            135deg,
-            var(--ivory),
-            var(--cream)
-        );
-
+        radial-gradient(circle at 12% 10%, rgba(255,255,255,.98), transparent 31%),
+        radial-gradient(circle at 88% 85%, rgba(225,194,186,.48), transparent 35%),
+        linear-gradient(135deg, var(--ivory), var(--cream));
     overflow-x:hidden;
 }
 
-/* =========================================================
-   BACKGROUND
-========================================================= */
-
-.ambient{
-    position:fixed;
-    inset:0;
-
-    pointer-events:none;
-    overflow:hidden;
-
-    z-index:0;
-}
-
-.orb{
-    position:absolute;
-
-    border-radius:50%;
-
-    filter:blur(80px);
-
-    opacity:.28;
-
-    animation:
-        drift 12s ease-in-out infinite alternate;
-}
-
-.orb.one{
-    width:280px;
-    height:280px;
-
-    background:#e8b8c5;
-
-    left:-130px;
-    top:-100px;
-}
-
-.orb.two{
-    width:330px;
-    height:330px;
-
-    background:#d8c09c;
-
-    right:-160px;
-    bottom:-120px;
-
-    animation-delay:-4s;
-}
-
-@keyframes drift{
-    from{
-        transform:translate(0,0) scale(1);
-    }
-
-    to{
-        transform:translate(25px,-20px) scale(1.08);
-    }
-}
-
-/* =========================================================
-   MAIN CARD
-========================================================= */
+.ambient{ position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0; }
+.orb{ position:absolute; border-radius:50%; filter:blur(80px); opacity:.28; animation:drift 12s ease-in-out infinite alternate; }
+.orb.one{ width:280px; height:280px; background:#e8b8c5; left:-130px; top:-100px; }
+.orb.two{ width:330px; height:330px; background:#d8c09c; right:-160px; bottom:-120px; animation-delay:-4s; }
+@keyframes drift{ from{transform:translate(0,0) scale(1);} to{transform:translate(25px,-20px) scale(1.08);} }
 
 .card{
-    position:relative;
-    z-index:5;
-
-    width:min(610px,100%);
-
-    padding:30px 28px 25px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.9);
-
-    border-radius:40px;
-
-    background:var(--glass);
-
-    backdrop-filter:blur(26px);
-    -webkit-backdrop-filter:blur(26px);
-
-    box-shadow:
-        0 40px 100px rgba(74,38,49,.14),
-        0 12px 35px rgba(74,38,49,.07);
-
+    position:relative; z-index:5; width:min(610px,100%);
+    padding:30px 28px 25px; border:1px solid rgba(255,255,255,.9);
+    border-radius:40px; background:var(--glass);
+    backdrop-filter:blur(26px); -webkit-backdrop-filter:blur(26px);
+    box-shadow:0 40px 100px rgba(74,38,49,.14), 0 12px 35px rgba(74,38,49,.07);
     overflow:hidden;
 }
 
-/* =========================================================
-   HEADER
-========================================================= */
+.header{ display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; color:#9c858d; font-size:.67rem; letter-spacing:.2em; text-transform:uppercase; }
+.header-heart{ color:var(--rose); font-size:1rem; animation:heartbeat 2.1s ease-in-out infinite; }
+@keyframes heartbeat{ 0%,100%{transform:scale(1);} 15%{transform:scale(1.18);} 30%{transform:scale(1);} 45%{transform:scale(1.08);} }
 
-.header{
-    display:flex;
+.progress{ height:3px; width:100%; margin-bottom:34px; border-radius:20px; background:#eee0e3; overflow:hidden; }
+.progress-bar{ height:100%; width:0%; border-radius:20px; background:linear-gradient(90deg, var(--rose), var(--champagne)); transition:width 1s cubic-bezier(.2,.8,.2,1); }
 
-    align-items:center;
-    justify-content:space-between;
-
-    margin-bottom:24px;
-
-    color:#9c858d;
-
-    font-size:.67rem;
-
-    letter-spacing:.2em;
-
-    text-transform:uppercase;
-}
-
-.header-heart{
-    color:var(--rose);
-
-    font-size:1rem;
-
-    animation:
-        heartbeat 2.1s ease-in-out infinite;
-}
-
-@keyframes heartbeat{
-
-    0%,100%{
-        transform:scale(1);
-    }
-
-    15%{
-        transform:scale(1.18);
-    }
-
-    30%{
-        transform:scale(1);
-    }
-
-    45%{
-        transform:scale(1.08);
-    }
-}
-
-/* =========================================================
-   PROGRESS - NO NUMBERS
-========================================================= */
-
-.progress{
-    height:3px;
-
-    width:100%;
-
-    margin-bottom:34px;
-
-    border-radius:20px;
-
-    background:#eee0e3;
-
-    overflow:hidden;
-}
-
-.progress-bar{
-    height:100%;
-
-    width:0%;
-
-    border-radius:20px;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--rose),
-            var(--champagne)
-        );
-
-    transition:
-        width 1s cubic-bezier(.2,.8,.2,1);
-}
-
-/* =========================================================
-   CONTENT
-========================================================= */
-
-.content{
-    min-height:350px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    text-align:center;
-
-    animation:
-        contentIn .75s cubic-bezier(.2,.8,.2,1) both;
-}
-
-.content.out{
-    animation:
-        contentOut .28s ease both;
-}
-
-@keyframes contentIn{
-
-    from{
-        opacity:0;
-        transform:
-            translateY(22px)
-            scale(.985);
-        filter:blur(5px);
-    }
-
-    to{
-        opacity:1;
-        transform:
-            translateY(0)
-            scale(1);
-        filter:blur(0);
-    }
-}
-
-@keyframes contentOut{
-
-    from{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-    to{
-        opacity:0;
-        transform:translateY(-12px);
-    }
-}
-
-/* =========================================================
-   ICON
-========================================================= */
+.content{ min-height:350px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; animation:contentIn .75s cubic-bezier(.2,.8,.2,1) both; }
+.content.out{ animation:contentOut .28s ease both; }
+@keyframes contentIn{ from{opacity:0; transform:translateY(22px) scale(.985); filter:blur(5px);} to{opacity:1; transform:translateY(0) scale(1); filter:blur(0);} }
+@keyframes contentOut{ from{opacity:1; transform:translateY(0);} to{opacity:0; transform:translateY(-12px);} }
 
 .icon{
-    width:94px;
-    height:94px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    margin-bottom:22px;
-
-    border-radius:50%;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #f5e2e6
-        );
-
-    border:
-        1px solid
-        rgba(181,111,130,.08);
-
-    box-shadow:
-        0 18px 40px rgba(96,52,68,.12),
-        inset 0 1px 0 #fff;
-
-    font-size:2.8rem;
-
-    animation:
-        gentleFloat 4s ease-in-out infinite;
+    width:94px; height:94px; display:flex; align-items:center; justify-content:center;
+    margin-bottom:22px; border-radius:50%;
+    background:linear-gradient(145deg,#ffffff,#f5e2e6);
+    border:1px solid rgba(181,111,130,.08);
+    box-shadow:0 18px 40px rgba(96,52,68,.12), inset 0 1px 0 #fff;
+    font-size:2.8rem; animation:gentleFloat 4s ease-in-out infinite;
 }
+@keyframes gentleFloat{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-7px);} }
 
-@keyframes gentleFloat{
-
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-7px);
-    }
-}
-
-/* =========================================================
-   TYPOGRAPHY
-========================================================= */
-
-h1,
-h2,
-h3{
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-weight:500;
-
-    letter-spacing:-.035em;
-}
-
-h1{
-    max-width:500px;
-
-    margin-bottom:16px;
-
-    font-size:
-        clamp(2.25rem,8vw,3.5rem);
-
-    line-height:1.04;
-}
-
-h2{
-    max-width:500px;
-
-    margin-bottom:16px;
-
-    font-size:
-        clamp(1.85rem,6vw,2.65rem);
-
-    line-height:1.1;
-}
-
-.description{
-    max-width:475px;
-
-    color:var(--muted);
-
-    font-size:1rem;
-
-    line-height:1.9;
-}
-
-.gold{
-    color:var(--champagne);
-}
-
-.rose{
-    color:var(--deepRose);
-}
-
-/* =========================================================
-   QUOTE
-========================================================= */
+h1,h2,h3{ font-family:Georgia,"Times New Roman",serif; font-weight:500; letter-spacing:-.035em; }
+h1{ max-width:500px; margin-bottom:16px; font-size:clamp(2.25rem,8vw,3.5rem); line-height:1.04; }
+h2{ max-width:500px; margin-bottom:16px; font-size:clamp(1.85rem,6vw,2.65rem); line-height:1.1; }
+.description{ max-width:475px; color:var(--muted); font-size:1rem; line-height:1.9; }
 
 .quote{
-    max-width:470px;
-
-    margin-top:22px;
-
-    padding:
-        18px 21px;
-
-    border-left:
-        2px solid
-        var(--rose);
-
-    border-radius:
-        0 20px 20px 0;
-
-    background:
-        rgba(255,255,255,.58);
-
-    color:#66545b;
-
-    font-family:
-        Georgia,
-        serif;
-
-    font-size:1.04rem;
-
-    line-height:1.8;
-
-    text-align:left;
-
-    box-shadow:
-        0 8px 25px rgba(90,50,65,.04);
+    max-width:470px; margin-top:22px; padding:18px 21px;
+    border-left:2px solid var(--rose); border-radius:0 20px 20px 0;
+    background:rgba(255,255,255,.58); color:#66545b;
+    font-family:Georgia,serif; font-size:1.04rem; line-height:1.8;
+    text-align:left; box-shadow:0 8px 25px rgba(90,50,65,.04);
 }
 
-/* =========================================================
-   SMALL WORD REVEAL
-========================================================= */
+.whisper{ margin-top:20px; color:#a28d94; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
 
-.whisper{
-    margin-top:20px;
-
-    color:#a28d94;
-
-    font-size:.72rem;
-
-    letter-spacing:.14em;
-
-    text-transform:uppercase;
-}
-
-/* =========================================================
-   CHOICES
-========================================================= */
-
-.choice-area{
-    width:100%;
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    justify-content:center;
-
-    gap:10px;
-
-    margin-top:25px;
-}
-
+.choice-area{ width:100%; display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:25px; }
 .choice{
-    padding:
-        12px 18px;
-
-    border:
-        1px solid
-        var(--line);
-
-    border-radius:50px;
-
-    background:
-        rgba(255,255,255,.72);
-
-    color:#624e56;
-
-    cursor:pointer;
-
-    font-size:.9rem;
-
-    transition:
-        .28s ease;
+    padding:12px 18px; border:1px solid var(--line); border-radius:50px;
+    background:rgba(255,255,255,.72); color:#624e56; cursor:pointer;
+    font-size:.9rem; transition:.28s ease;
 }
-
-.choice:hover{
-    transform:
-        translateY(-3px);
-
-    background:#fff;
-
-    border-color:
-        var(--rose);
-
-    box-shadow:
-        0 10px 25px rgba(100,50,70,.07);
-}
-
+.choice:hover{ transform:translateY(-3px); background:#fff; border-color:var(--rose); box-shadow:0 10px 25px rgba(100,50,70,.07); }
 .choice.selected{
-    color:white;
-
-    border-color:
-        var(--rose);
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--rose),
-            var(--deepRose)
-        );
-
-    transform:
-        translateY(-2px);
+    color:white; border-color:var(--rose);
+    background:linear-gradient(135deg, var(--rose), var(--deepRose));
+    transform:translateY(-2px);
 }
 
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-.actions{
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    gap:10px;
-
-    margin-top:12px;
-}
-
+.actions{ display:flex; align-items:center; justify-content:center; gap:10px; margin-top:12px; }
 .btn{
-    min-width:190px;
-
-    padding:
-        13px 25px;
-
-    border-radius:50px;
-
-    cursor:pointer;
-
-    font-size:.92rem;
-
-    font-weight:650;
-
-    transition:
-        transform .25s,
-        box-shadow .25s,
-        opacity .25s;
+    min-width:190px; padding:13px 25px; border-radius:50px; cursor:pointer;
+    font-size:.92rem; font-weight:650; transition:transform .25s, box-shadow .25s, opacity .25s;
 }
-
-.btn:hover{
-    transform:
-        translateY(-3px);
-}
-
+.btn:hover{ transform:translateY(-3px); }
 .primary{
-    border:none;
+    border:none; color:white;
+    background:linear-gradient(135deg, var(--rose), var(--deepRose));
+    box-shadow:0 13px 30px rgba(130,73,93,.23);
+}
+.btn:disabled{ opacity:.42; cursor:not-allowed; transform:none; }
 
-    color:white;
+/* =========== GALLERY (3 surprises) =========== */
 
-    background:
-        linear-gradient(
-            135deg,
-            var(--rose),
-            var(--deepRose)
-        );
-
-    box-shadow:
-        0 13px 30px
-        rgba(130,73,93,.23);
+.gallery{
+    display:flex; flex-direction:column; gap:18px;
+    width:100%; margin-top:26px;
 }
 
-.secondary{
-    color:#654f57;
-
-    background:
-        rgba(255,255,255,.7);
-
-    border:
-        1px solid
-        var(--line);
+.gallery-item{
+    padding:5px; border-radius:31px;
+    background:linear-gradient(135deg, rgba(255,255,255,.95), rgba(185,155,112,.45), rgba(255,255,255,.95));
+    box-shadow:0 28px 70px rgba(75,35,50,.2);
+    animation:flowerOpen 1.2s cubic-bezier(.2,.8,.2,1) both;
 }
-
-.btn:disabled{
-    opacity:.42;
-
-    cursor:not-allowed;
-
-    transform:none;
-}
-
-/* =========================================================
-   FINAL IMAGE
-========================================================= */
-
-.flower-wrap{
-    width:100%;
-
-    margin-top:25px;
-
-    padding:5px;
-
-    border-radius:31px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.95),
-            rgba(185,155,112,.45),
-            rgba(255,255,255,.95)
-        );
-
-    box-shadow:
-        0 28px 70px
-        rgba(75,35,50,.2);
-
-    animation:
-        flowerOpen 1.4s
-        cubic-bezier(.2,.8,.2,1)
-        both;
-}
+.gallery-item:nth-child(2){ animation-delay:.15s; }
+.gallery-item:nth-child(3){ animation-delay:.3s; }
 
 @keyframes flowerOpen{
-
-    0%{
-        opacity:0;
-
-        transform:
-            scale(.76)
-            translateY(35px);
-
-        filter:
-            blur(12px);
-    }
-
-    60%{
-        opacity:1;
-
-        transform:
-            scale(1.025)
-            translateY(-2px);
-
-        filter:blur(0);
-    }
-
-    100%{
-        transform:
-            scale(1)
-            translateY(0);
-    }
+    0%{ opacity:0; transform:scale(.76) translateY(35px); filter:blur(12px); }
+    60%{ opacity:1; transform:scale(1.025) translateY(-2px); filter:blur(0); }
+    100%{ transform:scale(1) translateY(0); }
 }
 
-.flower-inner{
-    overflow:hidden;
+.gallery-inner{ overflow:hidden; border-radius:27px; background:#f6e8e9; }
+.gallery-inner img{
+    display:block; width:100%; max-height:400px; object-fit:cover;
+    transition:transform 1.5s ease;
+}
+.gallery-inner:hover img{ transform:scale(1.025); }
 
-    border-radius:27px;
-
-    background:#f6e8e9;
+.gallery-caption{
+    padding:14px 18px 6px;
+    font-family:Georgia,serif; font-style:italic;
+    color:var(--deepRose); font-size:.98rem; text-align:center;
 }
 
-.flower-inner img{
-    display:block;
-
-    width:100%;
-
-    max-height:470px;
-
-    object-fit:cover;
-
-    transition:
-        transform 1.5s ease;
-}
-
-.flower-inner:hover img{
-    transform:scale(1.025);
-}
-
-/* =========================================================
-   FINAL MESSAGE
-========================================================= */
-
-.final-message{
-    margin-top:28px;
-
-    animation:
-        contentIn .9s
-        .25s
-        both;
-}
-
-.final-message p{
-    margin-top:13px;
-
-    color:var(--muted);
-
-    font-size:1rem;
-
-    line-height:1.95;
-}
-
-.signature{
-    margin-top:22px;
-
-    color:var(--deepRose);
-
-    font-family:Georgia,serif;
-
-    font-size:1.1rem;
-
-    font-style:italic;
-}
-
-/* =========================================================
-   PERSONAL CARD
-========================================================= */
+.final-message{ margin-top:28px; animation:contentIn .9s .25s both; }
+.final-message p{ margin-top:13px; color:var(--muted); font-size:1rem; line-height:1.95; }
+.signature{ margin-top:22px; color:var(--deepRose); font-family:Georgia,serif; font-size:1.1rem; font-style:italic; }
 
 .personal-card{
-    margin-top:29px;
-
-    padding:24px;
-
-    border:
-        1px solid
-        var(--line);
-
-    border-radius:27px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.9),
-            rgba(245,225,230,.65)
-        );
-
-    box-shadow:
-        inset 0 1px 0 #fff;
-
-    text-align:left;
-
-    animation:
-        contentIn .8s
-        .35s
-        both;
+    margin-top:29px; padding:24px; border:1px solid var(--line); border-radius:27px;
+    background:linear-gradient(145deg, rgba(255,255,255,.9), rgba(245,225,230,.65));
+    box-shadow:inset 0 1px 0 #fff; text-align:center; animation:contentIn .8s .35s both;
 }
-
-.personal-top{
-    display:flex;
-
-    align-items:center;
-    justify-content:space-between;
-
-    margin-bottom:19px;
-}
-
-.personal-label{
-    color:#a18a92;
-
-    font-size:.65rem;
-
-    letter-spacing:.2em;
-
-    text-transform:uppercase;
-}
-
-.badge{
-    padding:
-        6px 11px;
-
-    border-radius:50px;
-
-    background:#f0dce2;
-
-    color:#79596a;
-
-    font-size:.66rem;
-
-    font-weight:700;
-}
-
-.personal-name{
-    margin-bottom:18px;
-
-    color:#3b2c32;
-
-    font-family:Georgia,serif;
-
-    font-size:1.75rem;
-}
-
-.personal-row{
-    display:flex;
-
-    justify-content:space-between;
-
-    gap:20px;
-
-    padding:11px 0;
-
-    border-bottom:
-        1px solid
-        rgba(160,110,125,.13);
-
-    font-size:.86rem;
-}
-
-.personal-row:last-child{
-    border-bottom:none;
-}
-
-.personal-row span:first-child{
-    color:#9b848c;
-}
-
-.personal-row span:last-child{
-    color:#493940;
-
-    font-weight:600;
-
-    text-align:right;
-}
-
-/* =========================================================
-   CLOSING CARD
-========================================================= */
+.personal-top{ display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:14px; }
+.personal-label{ color:#a18a92; font-size:.65rem; letter-spacing:.2em; text-transform:uppercase; }
+.badge{ padding:6px 11px; border-radius:50px; background:#f0dce2; color:#79596a; font-size:.66rem; font-weight:700; }
+.personal-name{ color:#3b2c32; font-family:Georgia,serif; font-size:1.9rem; }
 
 .closing-card{
-    margin-top:22px;
-
-    padding:22px;
-
-    border-radius:23px;
-
-    background:
-        rgba(255,255,255,.55);
-
-    border:
-        1px solid
-        rgba(181,111,130,.1);
-
-    animation:
-        contentIn .8s
-        .45s
-        both;
+    margin-top:22px; padding:22px; border-radius:23px;
+    background:rgba(255,255,255,.55); border:1px solid rgba(181,111,130,.1);
+    animation:contentIn .8s .45s both;
 }
+.closing-card h3{ font-size:1.35rem; margin-bottom:11px; }
+.closing-card p{ color:var(--muted); font-size:.94rem; line-height:1.85; }
 
-.closing-card h3{
-    font-size:1.35rem;
-
-    margin-bottom:11px;
-}
-
-.closing-card p{
-    color:var(--muted);
-
-    font-size:.94rem;
-
-    line-height:1.85;
-}
-
-/* =========================================================
-   FEELINGS
-========================================================= */
-
-.feelings{
-    margin-top:30px;
-
-    padding-top:27px;
-
-    border-top:
-        1px dashed
-        #dcc3cb;
-
-    text-align:center;
-}
-
-.feelings h3{
-    font-size:1.45rem;
-}
-
-.feelings-sub{
-    margin-top:7px;
-
-    color:var(--muted);
-
-    font-size:.86rem;
-}
-
-.emoji-grid{
-    display:flex;
-
-    flex-wrap:wrap;
-
-    justify-content:center;
-
-    gap:9px;
-
-    margin-top:18px;
-}
-
+.feelings{ margin-top:30px; padding-top:27px; border-top:1px dashed #dcc3cb; text-align:center; }
+.feelings h3{ font-size:1.45rem; }
+.feelings-sub{ margin-top:7px; color:var(--muted); font-size:.86rem; }
+.emoji-grid{ display:flex; flex-wrap:wrap; justify-content:center; gap:9px; margin-top:18px; }
 .emoji{
-    width:49px;
-    height:49px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border:
-        1px solid
-        var(--line);
-
-    border-radius:50%;
-
-    background:
-        rgba(255,255,255,.72);
-
-    cursor:pointer;
-
-    font-size:1.35rem;
-
-    transition:
-        .23s ease;
+    width:49px; height:49px; display:flex; align-items:center; justify-content:center;
+    border:1px solid var(--line); border-radius:50%; background:rgba(255,255,255,.72);
+    cursor:pointer; font-size:1.35rem; transition:.23s ease;
 }
-
-.emoji:hover{
-    transform:
-        translateY(-4px)
-        scale(1.05);
-
-    background:white;
-}
-
+.emoji:hover{ transform:translateY(-4px) scale(1.05); background:white; }
 .emoji.active{
-    background:
-        var(--softRose);
-
-    border-color:
-        var(--rose);
-
-    transform:
-        scale(1.1);
-
-    box-shadow:
-        0 0 0 4px
-        rgba(181,111,130,.1);
+    background:var(--softRose); border-color:var(--rose);
+    transform:scale(1.1); box-shadow:0 0 0 4px rgba(181,111,130,.1);
 }
-
 .reaction{
-    margin-top:16px;
-
-    padding:
-        13px 17px;
-
-    border-radius:17px;
-
-    background:
-        rgba(255,255,255,.68);
-
-    color:#624e57;
-
-    font-size:.9rem;
-
-    line-height:1.65;
-
-    animation:
-        contentIn .4s both;
+    margin-top:16px; padding:13px 17px; border-radius:17px;
+    background:rgba(255,255,255,.68); color:#624e57; font-size:.9rem;
+    line-height:1.65; animation:contentIn .4s both;
 }
 
-/* =========================================================
-   PETALS
-========================================================= */
-
-.petals{
-    position:fixed;
-
-    inset:0;
-
-    z-index:100;
-
-    overflow:hidden;
-
-    pointer-events:none;
-}
-
-.petal{
-    position:absolute;
-
-    top:-60px;
-
-    animation:
-        petalFall linear forwards;
-}
-
+.petals{ position:fixed; inset:0; z-index:100; overflow:hidden; pointer-events:none; }
+.petal{ position:absolute; top:-60px; animation:petalFall linear forwards; }
 @keyframes petalFall{
-
-    0%{
-        opacity:0;
-
-        transform:
-            translateY(-10vh)
-            translateX(0)
-            rotate(0deg)
-            scale(.7);
-    }
-
-    10%{
-        opacity:1;
-    }
-
-    100%{
-        opacity:0;
-
-        transform:
-            translateY(115vh)
-            translateX(100px)
-            rotate(720deg)
-            scale(1);
-    }
+    0%{ opacity:0; transform:translateY(-10vh) translateX(0) rotate(0deg) scale(.7); }
+    10%{ opacity:1; }
+    100%{ opacity:0; transform:translateY(115vh) translateX(100px) rotate(720deg) scale(1); }
 }
 
-/* =========================================================
-   FOOTER
-========================================================= */
-
-.footer{
-    margin-top:25px;
-
-    text-align:center;
-
-    color:#a38e96;
-
-    font-size:.65rem;
-
-    letter-spacing:.13em;
-
-    text-transform:uppercase;
-}
-
-/* =========================================================
-   MOBILE
-========================================================= */
+.footer{ margin-top:25px; text-align:center; color:#a38e96; font-size:.65rem; letter-spacing:.13em; text-transform:uppercase; }
 
 @media(max-width:520px){
-
-    body{
-        padding:10px;
-    }
-
-    .card{
-        padding:
-            24px 17px;
-
-        border-radius:32px;
-    }
-
-    .content{
-        min-height:360px;
-    }
-
-    .icon{
-        width:80px;
-        height:80px;
-
-        font-size:2.45rem;
-    }
-
-    .description{
-        font-size:.94rem;
-    }
-
-    .quote{
-        font-size:.94rem;
-    }
-
-    .actions{
-        width:100%;
-    }
-
-    .btn{
-        width:100%;
-    }
-
-    .flower-inner img{
-        max-height:360px;
-    }
-
-    .personal-row{
-        flex-direction:column;
-
-        gap:4px;
-    }
-
-    .personal-row span:last-child{
-        text-align:left;
-    }
+    body{ padding:10px; }
+    .card{ padding:24px 17px; border-radius:32px; }
+    .content{ min-height:360px; }
+    .icon{ width:80px; height:80px; font-size:2.45rem; }
+    .description{ font-size:.94rem; }
+    .quote{ font-size:.94rem; }
+    .actions{ width:100%; }
+    .btn{ width:100%; }
+    .gallery-inner img{ max-height:280px; }
 }
 </style>
 </head>
@@ -1127,985 +236,364 @@ h2{
 <div class="card">
 
     <div class="header">
-        <span>A little something for you</span>
+        <span>A birthday surprise for you</span>
         <span class="header-heart">♡</span>
     </div>
 
-
     <div class="progress">
-        <div
-            class="progress-bar"
-            id="progressBar">
-        </div>
+        <div class="progress-bar" id="progressBar"></div>
     </div>
 
+    <div class="content" id="content"></div>
 
-    <div
-        class="content"
-        id="content">
-    </div>
-
-
-    <div
-        class="actions"
-        id="actions">
-    </div>
-
+    <div class="actions" id="actions"></div>
 
     <div id="final"></div>
 
-
     <div class="footer">
-        made with sincerity · trust · loyalty
+        made with love · just for Iqra
     </div>
 
 </div>
 
 
-<div
-    class="petals"
-    id="petals">
-</div>
+<div class="petals" id="petals"></div>
 
 
 <script>
-
 (function(){
-
 "use strict";
 
-
 /* =========================================================
-   IMAGE
+   IMAGES — replace these three files (same folder as this
+   HTML file) with your own pictures before opening it:
+   1) a flower photo
+   2) a photo of her face
+   3) a favourite memory photo of the two of you
 ========================================================= */
 
-const FLOWER_IMAGE =
-    "flower-photo.jpeg";
+const GALLERY = [
+    { src:"flower.jpg",  caption:"A flower for the most beautiful person I know 🌸" },
+    { src:"her-photo.jpg", caption:"This smile is my favourite thing in the world 🤍" },
+    { src:"memory.jpg",  caption:"One of my favourite memories with you 💫" }
+];
 
-
-/* =========================================================
-   PRIVATE DETAILS
-   Encoded so they aren't obvious plain-text constants.
-   Static HTML cannot provide true secret storage.
-========================================================= */
-
-const PRIVATE = {
-
-    name:
-        "Saba Afzal",
-
-    mobile:
-        atob("MDMzMzQ2NzIyMjA="),
-
-    cnic:
-        atob("MzUyMDEwODgwMjI5OA==")
-};
-
-
-/* =========================================================
-   EXPERIENCE
-========================================================= */
+const GIRLFRIEND_NAME = "Iqra Arooj Fatima";
 
 const STEPS = [
 
 {
-    icon:"🌙",
-
-    title:
-        "Hey… beautiful.",
-
-    text:
-        "I could have simply sent you a message, " +
-        "but somehow that didn't feel enough.",
-
-    whisper:
-        "Stay for a little while",
-
-    button:
-        "I'm listening →"
+    icon:"🎂",
+    title:"Hey… beautiful.",
+    text:"Before anything else today, I wanted to make you something — just a small little corner of the internet, made only for you.",
+    whisper:"Stay for a little while",
+    button:"I'm listening →"
 },
-
 
 {
     icon:"🤍",
-
-    title:
-        "Take a breath.",
-
-    text:
-        "Nothing complicated. Nothing you need to figure out. " +
-        "Just a small moment made especially for you.",
-
-    quote:
-        "Some of the most meaningful things in life begin quietly.",
-
-    button:
-        "I'm here"
+    title:"Take a breath.",
+    text:"Nothing complicated. Nothing you need to figure out. Just a small birthday moment made especially for you.",
+    quote:"Some of the most meaningful things in life begin quietly.",
+    button:"I'm here"
 },
-
 
 {
     icon:"✨",
-
-    title:
-        "There are things we don't always say.",
-
-    text:
-        "Sometimes a person becomes important without a single dramatic moment. " +
-        "It happens through conversations, kindness, laughter, and all those little things.",
-
-    button:
-        "Continue"
+    title:"Today is your day.",
+    text:"A whole year of you — your laugh, your kindness, the way you make ordinary days feel a little brighter. Today, all of it gets celebrated.",
+    button:"Continue"
 },
-
 
 {
     icon:"🌷",
-
-    title:
-        "And then… you notice.",
-
-    text:
-        "You notice that certain conversations stay in your mind a little longer. " +
-        "Certain smiles feel a little different.",
-
-    quote:
-        "The heart rarely announces when someone is becoming special. It simply starts remembering them.",
-
-    button:
-        "I understand"
+    title:"And I've noticed all of it.",
+    text:"I notice the little things — how certain conversations with you stay in my mind a little longer, how your smile changes my whole day.",
+    quote:"The heart rarely announces when someone becomes special. It simply starts remembering them.",
+    button:"I understand"
 },
-
 
 {
     icon:"💭",
-
-    title:
-        "If two people choose each other…",
-
-    text:
-        "What do you think matters most?",
-
+    title:"On your birthday, what matters most to you?",
+    text:"Pick whichever feels closest to how you feel today.",
     choices:[
-        "Trust 🤍",
-        "Loyalty ❤️",
-        "Understanding 🌸",
+        "Love 🤍",
+        "Laughter ❤️",
+        "Peace 🌸",
         "All of it ✨"
     ]
 },
 
-
 {
     icon:"🫶",
-
-    title:
-        "For me, loyalty means something.",
-
-    text:
-        "Beautiful words are easy. Being there, staying honest, respecting each other, and keeping your word — that's what makes something real.",
-
-    quote:
-        "I don't want something that only looks beautiful. I want something that remains beautiful because both people protect it.",
-
-    button:
-        "Continue →"
+    title:"Whatever you picked, I hope you get it — today and always.",
+    text:"You deserve a year that treats you gently. A year full of good news, easy days, and people who show up for you the way you show up for everyone else.",
+    quote:"I hope this new year of your life is kinder to you than the last, and every bit as beautiful as you are.",
+    button:"Continue →"
 },
-
 
 {
     icon:"🌸",
-
-    title:
-        "I appreciate the little things about you.",
-
-    text:
-        "Not just the way you look. Not just the way you smile. " +
-        "It's the person behind all of that — the way you are, the way you care, and the way you make ordinary moments feel different.",
-
-    button:
-        "Keep going"
+    title:"I appreciate the little things about you.",
+    text:"Not just the way you look, not just your smile — the person behind all of it. The way you care, the way you make ordinary moments feel different.",
+    button:"Keep going"
 },
-
-
-{
-    icon:"❤️",
-
-    title:
-        "I believe love should feel safe.",
-
-    text:
-        "Not like pressure. Not like possession. Not like constantly proving yourself.",
-
-    quote:
-        "It should feel like two people saying: I respect you, I trust you, and I choose you — even on ordinary days.",
-
-    button:
-        "That's beautiful"
-},
-
-
-{
-    icon:"🔐",
-
-    title:
-        "And here's something I believe.",
-
-    text:
-        "If someone gives you genuine loyalty, you don't answer it with the minimum. " +
-        "You value it. You protect it.",
-
-    quote:
-        "If you are loyal to me, I will be twice as loyal to you — not because I have to, but because that's the kind of person I want to be for you.",
-
-    button:
-        "One more"
-},
-
 
 {
     icon:"🥹",
-
-    title:
-        "I don't need perfection.",
-
-    text:
-        "I would rather have honesty when things are difficult, laughter when life is ordinary, patience when things aren't perfect, and two people who keep choosing each other.",
-
-    quote:
-        "The strongest relationships aren't made from perfect people. They're made from sincere people.",
-
-    button:
-        "Almost there…"
+    title:"I don't need perfection.",
+    text:"I would rather have honesty when things are difficult, laughter when life is ordinary, patience when things aren't perfect, and someone who keeps choosing me the way I choose them.",
+    quote:"The strongest relationships aren't made from perfect people. They're made from sincere people.",
+    button:"Almost there…"
 },
-
 
 {
-    icon:"🎀",
-
-    title:
-        "And this little flower…",
-
-    text:
-        "It's small compared with everything I could say. " +
-        "But I wanted to give you something beautiful with a simple message attached to it.",
-
-    whisper:
-        "A little something from my heart",
-
-    button:
-        "Show me 🌷"
+    icon:"🎁",
+    title:"And here's a little something…",
+    text:"It's small compared with everything I could say. But I wanted to give you a few little surprises today, with a simple message attached to each.",
+    whisper:"Three little things, just for you",
+    button:"Show me 🌷"
 },
-
-
-{
-    icon:"🌹",
-
-    title:
-        "One last thought.",
-
-    text:
-        "If life gives us thousands of ordinary days together, " +
-        "I hope we fill them with enough little moments to make those ordinary days beautiful.",
-
-    quote:
-        "The best kind of love feels like home — peaceful enough to trust, and beautiful enough to keep choosing.",
-
-    button:
-        "I'm ready"
-},
-
 
 {
     icon:"💌",
-
-    title:
-        "No more steps after this.",
-
-    text:
-        "Just one little surprise, one flower, and a few words I genuinely wanted you to hear.",
-
-    button:
-        "Open it ✨"
+    title:"No more steps after this.",
+    text:"Just three little surprises and a few words I genuinely wanted you to hear on your special day.",
+    button:"Open it ✨"
 },
 
-
 {
-    icon:"🌸",
-
-    title:
-        "Then this is for you.",
-
-    text:
-        "Take your time.",
-
-    quote:
-        "Some gifts are wrapped in paper. Some are wrapped in feelings.",
-
-    button:
-        "Open my surprise 🌸"
+    icon:"🎂",
+    title:"Then this is for you.",
+    text:"Take your time.",
+    quote:"Some gifts are wrapped in paper. Some are wrapped in feelings.",
+    button:"Open my surprise 🌸"
 }
 
 ];
 
 
-let current =
-    0;
+let current = 0;
+let selected = null;
+let opened = false;
 
-let selected =
-    null;
+const content = document.getElementById("content");
+const actions = document.getElementById("actions");
+const final = document.getElementById("final");
+const progressBar = document.getElementById("progressBar");
+const petals = document.getElementById("petals");
 
-let opened =
-    false;
-
-
-const content =
-    document.getElementById(
-        "content"
-    );
-
-const actions =
-    document.getElementById(
-        "actions"
-    );
-
-const final =
-    document.getElementById(
-        "final"
-    );
-
-const progressBar =
-    document.getElementById(
-        "progressBar"
-    );
-
-const petals =
-    document.getElementById(
-        "petals"
-    );
-
-
-/* =========================================================
-   PROGRESS
-========================================================= */
 
 function updateProgress(){
-
-    const percent =
-        ((current + 1) /
-        STEPS.length) * 100;
-
-    progressBar.style.width =
-        percent + "%";
+    const percent = ((current + 1) / STEPS.length) * 100;
+    progressBar.style.width = percent + "%";
 }
 
 
-/* =========================================================
-   RENDER
-========================================================= */
-
 function render(){
-
-    const step =
-        STEPS[current];
-
-    selected =
-        null;
+    const step = STEPS[current];
+    selected = null;
 
     updateProgress();
 
     content.classList.remove("out");
-
     void content.offsetWidth;
-
     content.classList.add("content");
 
-
     content.innerHTML = `
-
-        <div class="icon">
-            ${step.icon}
-        </div>
-
-        <h2>
-            ${step.title}
-        </h2>
-
-        <div class="description">
-            ${step.text}
-        </div>
-
-        ${
-            step.quote
-            ?
-            `
-            <div class="quote">
-                ${step.quote}
-            </div>
-            `
-            :
-            ""
-        }
-
-        ${
-            step.whisper
-            ?
-            `
-            <div class="whisper">
-                ${step.whisper}
-            </div>
-            `
-            :
-            ""
-        }
+        <div class="icon">${step.icon}</div>
+        <h2>${step.title}</h2>
+        <div class="description">${step.text}</div>
+        ${step.quote ? `<div class="quote">${step.quote}</div>` : ""}
+        ${step.whisper ? `<div class="whisper">${step.whisper}</div>` : ""}
     `;
 
-
-    actions.innerHTML =
-        "";
-
-
-    /* =====================================================
-       CHOICES
-    ===================================================== */
+    actions.innerHTML = "";
 
     if(step.choices){
+        const area = document.createElement("div");
+        area.className = "choice-area";
 
-        const area =
-            document.createElement(
-                "div"
-            );
+        step.choices.forEach(choice => {
+            const button = document.createElement("button");
+            button.className = "choice";
+            button.textContent = choice;
 
-        area.className =
-            "choice-area";
+            button.addEventListener("click", function(){
+                selected = choice;
+                area.querySelectorAll(".choice").forEach(el => el.classList.remove("selected"));
+                button.classList.add("selected");
+                continueButton.disabled = false;
+            });
 
+            area.appendChild(button);
+        });
 
-        step.choices.forEach(
-            choice => {
+        actions.appendChild(area);
 
-                const button =
-                    document.createElement(
-                        "button"
-                    );
+        const continueButton = document.createElement("button");
+        continueButton.className = "btn primary";
+        continueButton.textContent = "Continue →";
+        continueButton.disabled = true;
+        continueButton.style.marginTop = "11px";
+        continueButton.addEventListener("click", next);
 
-                button.className =
-                    "choice";
-
-                button.textContent =
-                    choice;
-
-
-                button.addEventListener(
-                    "click",
-                    function(){
-
-                        selected =
-                            choice;
-
-                        area
-                            .querySelectorAll(
-                                ".choice"
-                            )
-                            .forEach(
-                                el =>
-                                    el.classList.remove(
-                                        "selected"
-                                    )
-                            );
-
-                        button.classList.add(
-                            "selected"
-                        );
-
-                        continueButton.disabled =
-                            false;
-                    }
-                );
-
-
-                area.appendChild(
-                    button
-                );
-            }
-        );
-
-
-        actions.appendChild(
-            area
-        );
-
-
-        const continueButton =
-            document.createElement(
-                "button"
-            );
-
-        continueButton.className =
-            "btn primary";
-
-        continueButton.textContent =
-            "Continue →";
-
-        continueButton.disabled =
-            true;
-
-        continueButton.style.marginTop =
-            "11px";
-
-
-        continueButton.addEventListener(
-            "click",
-            next
-        );
-
-
-        actions.appendChild(
-            continueButton
-        );
-
-
+        actions.appendChild(continueButton);
         return;
     }
 
-
-    /* =====================================================
-       NORMAL ACTION
-    ===================================================== */
-
-    const button =
-        document.createElement(
-            "button"
-        );
-
-    button.className =
-        "btn primary";
-
-    button.textContent =
-        step.button;
-
-
-    button.addEventListener(
-        "click",
-        next
-    );
-
-
-    actions.appendChild(
-        button
-    );
+    const button = document.createElement("button");
+    button.className = "btn primary";
+    button.textContent = step.button;
+    button.addEventListener("click", next);
+    actions.appendChild(button);
 }
 
 
-/* =========================================================
-   NEXT
-========================================================= */
-
 function next(){
-
-    if(
-        current <
-        STEPS.length - 1
-    ){
-
-        content.classList.add(
-            "out"
-        );
-
-        setTimeout(
-            function(){
-
-                current++;
-
-                render();
-
-            },
-            260
-        );
-
+    if(current < STEPS.length - 1){
+        content.classList.add("out");
+        setTimeout(function(){
+            current++;
+            render();
+        }, 260);
     }else{
-
         reveal();
     }
 }
 
 
-/* =========================================================
-   FINAL
-========================================================= */
-
 function reveal(){
+    if(opened) return;
+    opened = true;
 
-    if(opened)
-        return;
-
-    opened =
-        true;
-
-    progressBar.style.width =
-        "100%";
+    progressBar.style.width = "100%";
 
     content.innerHTML = `
-
-        <div class="icon">
-            🌸
-        </div>
-
-        <h1>
-            Gorgeous Saba
-        </h1>
-
+        <div class="icon">🎂</div>
+        <h1>Happy Birthday</h1>
         <div class="description">
-            This little journey was simply my way
-            of saying something that words alone
-            don't always manage to say.
+            This little journey was simply my way of saying
+            something that words alone don't always manage to say.
         </div>
-
     `;
 
+    actions.innerHTML = "";
 
-    actions.innerHTML =
-        "";
-
+    const galleryHtml = GALLERY.map(item => `
+        <div class="gallery-item">
+            <div class="gallery-inner">
+                <img src="${item.src}" alt="${item.caption}">
+            </div>
+            <div class="gallery-caption">${item.caption}</div>
+        </div>
+    `).join("");
 
     final.innerHTML = `
 
-        <div class="flower-wrap">
-
-            <div class="flower-inner">
-
-                <img
-                    src="${FLOWER_IMAGE}"
-                    alt="A beautiful flower for Saba"
-                >
-
-            </div>
-
+        <div class="gallery">
+            ${galleryHtml}
         </div>
-
 
         <div class="final-message">
 
-            <h2>
-                Beautiful,sweet 🌸
-            </h2>
+            <h2>Happy Birthday, gorgeous 🌸</h2>
 
             <p>
-                This beautiful flower is for you —
-                just a little reminder of how special
-                and lovely you are.
-                I hope it brings a little smile to your face,
-                because you truly deserve it.
-                ❤️🌸
+                These three little things are for you —
+                a flower, your own beautiful smile, and a memory
+                I've kept close. I hope they bring one on your face
+                right now, because you truly deserve it. ❤️🌸
             </p>
 
+            <p>My sweet, gorgeous, wonderful ❤️</p>
 
             <p>
-                My sweet, gorgeous, beautiful ❤️
+                Every year with you in it is better than the one before.
+                I hope this birthday reminds you how loved, how valued,
+                and how special you really are — today and every day after.
             </p>
-
-
-            <p>
-                This little flower is for you 🌸 —
-                a small gift, but given with my whole heart.
-                Please accept it, because it carries
-                all the love, care, and warmth I have for you.
-                You deserve every beautiful thing in this world.
-                ❤️🌸
-            </p>
-
 
             <div class="signature">
-                With sincerity, respect, care,
-                and a heart that believes in loyalty. 🤍
+                With love, respect, and a heart that believes in you. 🤍
             </div>
 
         </div>
-
 
         <div class="personal-card">
-
             <div class="personal-top">
-
-                <div class="personal-label">
-                    Especially for you
-                </div>
-
-                <div class="badge">
-                    ✦ SPECIAL
-                </div>
-
+                <div class="personal-label">Especially for</div>
+                <div class="badge">✦ BIRTHDAY GIRL</div>
             </div>
-
-
-            <div class="personal-name">
-                ${PRIVATE.name}
-            </div>
-
-
-            <div class="personal-row">
-
-                <span>
-                    Full Name
-                </span>
-
-                <span>
-                    ${PRIVATE.name}
-                </span>
-
-            </div>
-
-
-
-
-
-        
-
+            <div class="personal-name">${GIRLFRIEND_NAME}</div>
         </div>
-
 
         <div class="closing-card">
-
-            <h3>
-                What I want you to know. 🤍
-            </h3>
-
+            <h3>What I want you to know. 🤍</h3>
             <p>
-                I don't promise that every day will be perfect.
-                Nobody can honestly promise that.
-                But I can value honesty, respect, trust,
-                patience and loyalty.
-                <br><br>
-                And if you give me your genuine loyalty,
-                you will never find me taking it for granted.
-                I'll give you twice the loyalty,
-                twice the respect,
-                and all the care I can.
+                I don't promise that every day will be perfect —
+                nobody can honestly promise that. But I can promise
+                honesty, respect, patience, and loyalty. On your birthday
+                and always, I hope you feel exactly how special you are to me.
             </p>
-
         </div>
 
-
         <div class="feelings">
-
-            <h3>
-                Now it's your turn… 🫣
-            </h3>
-
-            <div class="feelings-sub">
-                Tell me without saying a word.
-            </div>
-
+            <h3>Now it's your turn… 🫣</h3>
+            <div class="feelings-sub">Tell me without saying a word.</div>
 
             <div class="emoji-grid">
-
-                <button
-                    class="emoji"
-                    data-message="That smile is exactly what I hoped for. 🥹❤️"
-                >
-                    🥹
-                </button>
-
-
-                <button
-                    class="emoji"
-                    data-message="Okay… I'll happily take that reaction. 😍"
-                >
-                    😍
-                </button>
-
-
-                <button
-                    class="emoji"
-                    data-message="If I made you laugh, then this was absolutely worth it. 😂❤️"
-                >
-                    😂
-                </button>
-
-
-                <button
-                    class="emoji"
-                    data-message="Speechless? I'll consider that a very good sign. 😳🌸"
-                >
-                    😳
-                </button>
-
-
-                <button
-                    class="emoji"
-                    data-message="That heart means more than you probably know. ❤️"
-                >
-                    ❤️
-                </button>
-
-
-                <button
-                    class="emoji"
-                    data-message="Now you're making me blush too. 🙈"
-                >
-                    🙈
-                </button>
-
+                <button class="emoji" data-message="That smile is exactly what I hoped for. 🥹❤️">🥹</button>
+                <button class="emoji" data-message="Okay… I'll happily take that reaction. 😍">😍</button>
+                <button class="emoji" data-message="If I made you laugh, then this was absolutely worth it. 😂❤️">😂</button>
+                <button class="emoji" data-message="Speechless? I'll consider that a very good sign. 😳🌸">😳</button>
+                <button class="emoji" data-message="That heart means more than you probably know. ❤️">❤️</button>
+                <button class="emoji" data-message="Now you're making me blush too. 🙈">🙈</button>
             </div>
 
-
-            <div
-                class="reaction"
-                id="reaction"
-                style="display:none">
-            </div>
-
+            <div class="reaction" id="reaction" style="display:none"></div>
         </div>
     `;
 
-
     setupReactions();
-
     petalsAnimation();
 }
 
 
-/* =========================================================
-   REACTIONS
-========================================================= */
-
 function setupReactions(){
+    const buttons = document.querySelectorAll(".emoji");
+    const reaction = document.getElementById("reaction");
 
-    const buttons =
-        document.querySelectorAll(
-            ".emoji"
-        );
-
-    const reaction =
-        document.getElementById(
-            "reaction"
-        );
-
-
-    buttons.forEach(
-        button => {
-
-            button.addEventListener(
-                "click",
-                function(){
-
-                    buttons.forEach(
-                        el =>
-                            el.classList.remove(
-                                "active"
-                            )
-                    );
-
-
-                    button.classList.add(
-                        "active"
-                    );
-
-
-                    reaction.textContent =
-                        button.dataset.message;
-
-
-                    reaction.style.display =
-                        "block";
-                }
-            );
-        }
-    );
+    buttons.forEach(button => {
+        button.addEventListener("click", function(){
+            buttons.forEach(el => el.classList.remove("active"));
+            button.classList.add("active");
+            reaction.textContent = button.dataset.message;
+            reaction.style.display = "block";
+        });
+    });
 }
 
 
-/* =========================================================
-   PETALS
-========================================================= */
-
 function petalsAnimation(){
+    const flowers = ["🌸","🌷","🌹","🌺","🌼","💮","🎂","🎈"];
 
-    const flowers = [
-        "🌸",
-        "🌷",
-        "🌹",
-        "🌺",
-        "🌼",
-        "💮",
-        "❤️"
-    ];
+    for(let i = 0; i < 65; i++){
+        setTimeout(function(){
+            const petal = document.createElement("div");
+            petal.className = "petal";
+            petal.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+            petal.style.left = Math.random() * 100 + "%";
+            petal.style.fontSize = (1 + Math.random() * 1.35) + "rem";
+            petal.style.animationDuration = (4 + Math.random() * 5) + "s";
+            petals.appendChild(petal);
 
-
-    for(
-        let i = 0;
-        i < 65;
-        i++
-    ){
-
-        setTimeout(
-            function(){
-
-                const petal =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                petal.className =
-                    "petal";
-
-
-                petal.textContent =
-                    flowers[
-                        Math.floor(
-                            Math.random() *
-                            flowers.length
-                        )
-                    ];
-
-
-                petal.style.left =
-                    Math.random() *
-                    100 +
-                    "%";
-
-
-                petal.style.fontSize =
-                    (
-                        1 +
-                        Math.random() *
-                        1.35
-                    ) +
-                    "rem";
-
-
-                petal.style.animationDuration =
-                    (
-                        4 +
-                        Math.random() *
-                        5
-                    ) +
-                    "s";
-
-
-                petals.appendChild(
-                    petal
-                );
-
-
-                setTimeout(
-                    function(){
-
-                        petal.remove();
-
-                    },
-                    9500
-                );
-
-            },
-            i * 75
-        );
+            setTimeout(function(){ petal.remove(); }, 9500);
+        }, i * 75);
     }
 }
 
-
-/* =========================================================
-   START
-========================================================= */
 
 render();
 
