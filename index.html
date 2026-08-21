@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 
 <title>Happy Birthday Iqra 🎂</title>
 
@@ -11,6 +11,7 @@
     box-sizing:border-box;
     margin:0;
     padding:0;
+    -webkit-tap-highlight-color:transparent;
 }
 
 :root{
@@ -20,6 +21,8 @@
     --deepPink:#c72d6e;
     --purple:#8a63d2;
     --gold:#ffb703;
+    --teal:#3fc1b0;
+    --coral:#ff8a5c;
     --softPink:#ffe1ea;
     --lavender:#e9deff;
     --text:#2e2138;
@@ -38,12 +41,14 @@ body{
     align-items:center;
     justify-content:center;
     padding:18px;
+    padding-bottom:calc(18px + env(safe-area-inset-bottom));
     color:var(--text);
     font-family:Inter,"Segoe UI",Arial,sans-serif;
     background:
-        radial-gradient(circle at 10% 8%, rgba(255,183,3,.20), transparent 32%),
-        radial-gradient(circle at 90% 12%, rgba(138,99,210,.22), transparent 34%),
-        radial-gradient(circle at 85% 90%, rgba(255,92,141,.22), transparent 36%),
+        radial-gradient(circle at 8% 6%, rgba(255,183,3,.22), transparent 32%),
+        radial-gradient(circle at 92% 10%, rgba(138,99,210,.24), transparent 34%),
+        radial-gradient(circle at 88% 92%, rgba(255,92,141,.24), transparent 36%),
+        radial-gradient(circle at 10% 92%, rgba(63,193,176,.18), transparent 34%),
         linear-gradient(135deg, var(--ivory), var(--lavender) 55%, var(--cream));
     overflow-x:hidden;
 }
@@ -53,59 +58,75 @@ body{
 .orb.one{ width:300px; height:300px; background:#ff9ab8; left:-140px; top:-110px; }
 .orb.two{ width:340px; height:340px; background:#ffd166; right:-160px; bottom:-120px; animation-delay:-4s; }
 .orb.three{ width:250px; height:250px; background:#b79bff; left:45%; top:40%; animation-delay:-7s; opacity:.22; }
+.orb.four{ width:220px; height:220px; background:#6fe3d2; left:8%; bottom:-90px; animation-delay:-9s; opacity:.2; }
 @keyframes drift{ from{transform:translate(0,0) scale(1);} to{transform:translate(25px,-20px) scale(1.08);} }
 
 .card{
     position:relative; z-index:5; width:min(620px,100%);
-    padding:32px 28px 26px; border:1px solid rgba(255,255,255,.9);
-    border-radius:42px; background:var(--glass);
+    padding:clamp(20px,5vw,32px) clamp(16px,5vw,28px) 26px;
+    border:1px solid rgba(255,255,255,.9);
+    border-radius:38px; background:var(--glass);
     backdrop-filter:blur(26px); -webkit-backdrop-filter:blur(26px);
     box-shadow:0 40px 100px rgba(120,50,90,.18), 0 12px 35px rgba(120,50,90,.09);
     overflow:hidden;
 }
 
-.header{ display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; color:#9c7595; font-size:.67rem; letter-spacing:.2em; text-transform:uppercase; }
-.header-heart{ color:var(--pink); font-size:1rem; animation:heartbeat 2.1s ease-in-out infinite; }
+.header{ display:flex; align-items:center; justify-content:space-between; margin-bottom:22px; color:#9c7595; font-size:.65rem; letter-spacing:.16em; text-transform:uppercase; gap:10px; }
+.header span:first-child{ min-width:0; }
+.header-heart{ color:var(--pink); font-size:1rem; flex-shrink:0; animation:heartbeat 2.1s ease-in-out infinite; }
 @keyframes heartbeat{ 0%,100%{transform:scale(1);} 15%{transform:scale(1.18);} 30%{transform:scale(1);} 45%{transform:scale(1.08);} }
 
-.progress{ height:4px; width:100%; margin-bottom:34px; border-radius:20px; background:#f0e2ea; overflow:hidden; }
-.progress-bar{ height:100%; width:0%; border-radius:20px; background:linear-gradient(90deg, var(--pink), var(--gold), var(--purple)); background-size:200% 100%; transition:width 1s cubic-bezier(.2,.8,.2,1); }
+.progress{ height:4px; width:100%; margin-bottom:30px; border-radius:20px; background:#f0e2ea; overflow:hidden; }
+.progress-bar{
+    height:100%; width:0%; border-radius:20px;
+    background:linear-gradient(90deg, var(--pink), var(--gold), var(--purple), var(--teal), var(--pink));
+    background-size:300% 100%;
+    animation:shimmer 4s linear infinite;
+    transition:width 1s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes shimmer{ 0%{background-position:0% 50%;} 100%{background-position:300% 50%;} }
 
-.content{ min-height:350px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; animation:contentIn .75s cubic-bezier(.2,.8,.2,1) both; }
+.content{ min-height:340px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; animation:contentIn .75s cubic-bezier(.2,.8,.2,1) both; }
 .content.out{ animation:contentOut .28s ease both; }
 @keyframes contentIn{ from{opacity:0; transform:translateY(22px) scale(.985); filter:blur(5px);} to{opacity:1; transform:translateY(0) scale(1); filter:blur(0);} }
 @keyframes contentOut{ from{opacity:1; transform:translateY(0);} to{opacity:0; transform:translateY(-12px);} }
 
 .icon{
-    width:96px; height:96px; display:flex; align-items:center; justify-content:center;
-    margin-bottom:22px; border-radius:50%;
-    background:linear-gradient(145deg,#ffffff,#ffe4ee);
+    width:clamp(72px,18vw,96px); height:clamp(72px,18vw,96px);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:20px; border-radius:50%;
     border:1px solid rgba(199,45,110,.1);
     box-shadow:0 18px 40px rgba(150,60,110,.15), inset 0 1px 0 #fff;
-    font-size:2.85rem; animation:gentleFloat 4s ease-in-out infinite;
+    font-size:clamp(2.2rem,7vw,2.85rem);
+    animation:gentleFloat 4s ease-in-out infinite;
+    transition:background .3s ease;
 }
+.icon-c0{ background:linear-gradient(145deg,#ffffff,#ffe4ee); }
+.icon-c1{ background:linear-gradient(145deg,#ffffff,#fff1cf); }
+.icon-c2{ background:linear-gradient(145deg,#ffffff,#eae0ff); }
+.icon-c3{ background:linear-gradient(145deg,#ffffff,#d9f5f0); }
 @keyframes gentleFloat{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-7px);} }
 
 h1,h2,h3{ font-family:Georgia,"Times New Roman",serif; font-weight:500; letter-spacing:-.035em; }
-h1{ max-width:500px; margin-bottom:16px; font-size:clamp(2.25rem,8vw,3.6rem); line-height:1.04; background:linear-gradient(120deg,var(--deepPink),var(--purple)); -webkit-background-clip:text; background-clip:text; color:transparent; }
-h2{ max-width:500px; margin-bottom:16px; font-size:clamp(1.85rem,6vw,2.65rem); line-height:1.1; color:var(--deepPink); }
-.description{ max-width:475px; color:var(--muted); font-size:1rem; line-height:1.9; }
+h1{ max-width:500px; margin-bottom:14px; font-size:clamp(2.1rem,8vw,3.6rem); line-height:1.06; background:linear-gradient(120deg,var(--deepPink),var(--purple)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+h2{ max-width:500px; margin-bottom:16px; font-size:clamp(1.5rem,6vw,2.5rem); line-height:1.18; color:var(--deepPink); word-break:break-word; }
+.description{ max-width:475px; color:var(--muted); font-size:clamp(.9rem,3.6vw,1rem); line-height:1.85; }
 
 .quote{
-    max-width:470px; margin-top:22px; padding:18px 22px;
+    max-width:470px; margin-top:20px; padding:16px 20px;
     border-left:3px solid var(--pink); border-radius:0 20px 20px 0;
     background:rgba(255,255,255,.6); color:#5e4a5c;
-    font-family:Georgia,serif; font-style:italic; font-size:1.05rem; line-height:1.85;
+    font-family:Georgia,serif; font-style:italic; font-size:clamp(.9rem,3.6vw,1.03rem); line-height:1.8;
     text-align:left; box-shadow:0 8px 25px rgba(120,60,100,.06);
 }
 
-.whisper{ margin-top:20px; color:#a97a9e; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+.whisper{ margin-top:18px; color:#a97a9e; font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; }
 
-.choice-area{ width:100%; display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:25px; }
+.choice-area{ width:100%; display:flex; flex-wrap:wrap; justify-content:center; gap:9px; margin-top:22px; }
 .choice{
-    padding:12px 18px; border:1px solid var(--line); border-radius:50px;
+    padding:11px 16px; border:1px solid var(--line); border-radius:50px;
     background:rgba(255,255,255,.75); color:#6b4f66; cursor:pointer;
-    font-size:.9rem; transition:.28s ease;
+    font-size:.87rem; transition:.28s ease; max-width:100%;
 }
 .choice:hover{ transform:translateY(-3px); background:#fff; border-color:var(--pink); box-shadow:0 10px 25px rgba(150,60,110,.1); }
 .choice.selected{
@@ -114,35 +135,41 @@ h2{ max-width:500px; margin-bottom:16px; font-size:clamp(1.85rem,6vw,2.65rem); l
     transform:translateY(-2px);
 }
 
-.actions{ display:flex; align-items:center; justify-content:center; gap:10px; margin-top:12px; }
+.actions{ display:flex; align-items:center; justify-content:center; gap:10px; margin-top:10px; flex-wrap:wrap; }
 .btn{
-    min-width:190px; padding:13px 25px; border-radius:50px; cursor:pointer;
-    font-size:.92rem; font-weight:650; transition:transform .25s, box-shadow .25s, opacity .25s;
+    min-width:180px; padding:13px 22px; border-radius:50px; cursor:pointer;
+    font-size:.9rem; font-weight:650; transition:transform .25s, box-shadow .25s, opacity .25s;
+    border:none;
 }
 .btn:hover{ transform:translateY(-3px); }
 .primary{
-    border:none; color:white;
+    color:white;
     background:linear-gradient(135deg, var(--pink), var(--purple));
     box-shadow:0 13px 30px rgba(150,60,150,.28);
 }
 .gold-btn{
-    border:none; color:#5b3d00;
+    color:#5b3d00;
     background:linear-gradient(135deg, #ffe08a, var(--gold));
     box-shadow:0 13px 30px rgba(200,140,0,.25);
+}
+.teal-btn{
+    color:#043c35;
+    background:linear-gradient(135deg, #9df0e3, var(--teal));
+    box-shadow:0 13px 30px rgba(20,140,120,.22);
 }
 .btn:disabled{ opacity:.42; cursor:not-allowed; transform:none; }
 
 /* =========== GALLERY (3 surprises) =========== */
 
 .gallery{
-    display:flex; flex-direction:column; gap:18px;
-    width:100%; margin-top:26px;
+    display:flex; flex-direction:column; gap:16px;
+    width:100%; margin-top:24px;
 }
 
 .gallery-item{
-    padding:5px; border-radius:31px;
+    padding:5px; border-radius:28px;
     background:linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,183,3,.5), rgba(255,92,141,.4));
-    box-shadow:0 28px 70px rgba(150,50,100,.22);
+    box-shadow:0 24px 60px rgba(150,50,100,.22);
     animation:flowerOpen 1.2s cubic-bezier(.2,.8,.2,1) both;
 }
 .gallery-item:nth-child(2){ animation-delay:.15s; }
@@ -154,7 +181,7 @@ h2{ max-width:500px; margin-bottom:16px; font-size:clamp(1.85rem,6vw,2.65rem); l
     100%{ transform:scale(1) translateY(0); }
 }
 
-.gallery-inner{ overflow:hidden; border-radius:27px; background:#f9ecec; }
+.gallery-inner{ overflow:hidden; border-radius:24px; background:#f9ecec; }
 .gallery-inner img{
     display:block; width:100%; max-height:400px; object-fit:cover;
     transition:transform 1.5s ease;
@@ -162,58 +189,61 @@ h2{ max-width:500px; margin-bottom:16px; font-size:clamp(1.85rem,6vw,2.65rem); l
 .gallery-inner:hover img{ transform:scale(1.025); }
 
 .gallery-caption{
-    padding:14px 18px 6px;
+    padding:13px 16px 6px;
     font-family:Georgia,serif; font-style:italic;
-    color:var(--deepPink); font-size:.98rem; text-align:center;
+    color:var(--deepPink); font-size:.94rem; text-align:center; line-height:1.5;
 }
 
-.final-message{ margin-top:28px; animation:contentIn .9s .25s both; }
-.final-message p{ margin-top:13px; color:var(--muted); font-size:1rem; line-height:1.95; }
-.signature{ margin-top:22px; color:var(--deepPink); font-family:Georgia,serif; font-size:1.1rem; font-style:italic; }
+.final-message{ margin-top:26px; animation:contentIn .9s .25s both; }
+.final-message p{ margin-top:12px; color:var(--muted); font-size:.98rem; line-height:1.9; }
+.signature{ margin-top:20px; color:var(--deepPink); font-family:Georgia,serif; font-size:1.05rem; font-style:italic; line-height:1.6; }
 
 .love-list{
-    margin-top:24px; padding:22px 22px 8px; text-align:left;
+    margin-top:22px; padding:20px 20px 6px; text-align:left;
     background:rgba(255,255,255,.55); border-radius:22px;
     border:1px solid var(--line); animation:contentIn .8s .3s both;
 }
-.love-list h3{ font-size:1.2rem; color:var(--deepPink); margin-bottom:14px; text-align:center; }
+.love-list h3{ font-size:1.15rem; color:var(--deepPink); margin-bottom:12px; text-align:center; }
 .love-list ul{ list-style:none; }
 .love-list li{
-    padding:9px 0 9px 30px; position:relative;
-    color:#5c4a58; font-size:.93rem; line-height:1.7;
+    padding:8px 0 8px 28px; position:relative;
+    color:#5c4a58; font-size:.9rem; line-height:1.65;
     border-bottom:1px dashed rgba(199,45,110,.14);
 }
 .love-list li:last-child{ border-bottom:none; }
 .love-list li::before{
-    content:"✦"; position:absolute; left:0; top:9px; color:var(--gold); font-size:1rem;
+    content:"✦"; position:absolute; left:0; top:8px; color:var(--gold); font-size:1rem;
 }
 
+.music-btn-wrap{ margin-top:6px; }
+
 .personal-card{
-    margin-top:29px; padding:24px; border:1px solid var(--line); border-radius:27px;
+    margin-top:26px; padding:22px; border:1px solid var(--line); border-radius:25px;
     background:linear-gradient(145deg, rgba(255,255,255,.92), rgba(255,225,234,.7));
     box-shadow:inset 0 1px 0 #fff; text-align:center; animation:contentIn .8s .35s both;
 }
-.personal-top{ display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:14px; }
-.personal-label{ color:#ad7fa2; font-size:.65rem; letter-spacing:.2em; text-transform:uppercase; }
-.badge{ padding:6px 12px; border-radius:50px; background:linear-gradient(135deg,#ffe08a,var(--gold)); color:#5b3d00; font-size:.66rem; font-weight:700; }
-.personal-name{ color:#3b2438; font-family:Georgia,serif; font-size:1.95rem; }
+.personal-top{ display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:14px; flex-wrap:wrap; }
+.personal-label{ color:#ad7fa2; font-size:.63rem; letter-spacing:.18em; text-transform:uppercase; }
+.badge{ padding:6px 12px; border-radius:50px; background:linear-gradient(135deg,#ffe08a,var(--gold)); color:#5b3d00; font-size:.64rem; font-weight:700; }
+.personal-name{ color:#3b2438; font-family:Georgia,serif; font-size:clamp(1.5rem,6vw,1.95rem); word-break:break-word; }
+.personal-from{ margin-top:10px; color:#8a6a83; font-size:.85rem; font-style:italic; }
 
 .closing-card{
-    margin-top:22px; padding:22px; border-radius:23px;
+    margin-top:20px; padding:20px; border-radius:23px;
     background:rgba(255,255,255,.55); border:1px solid rgba(199,45,110,.12);
     animation:contentIn .8s .45s both;
 }
-.closing-card h3{ font-size:1.35rem; color:var(--deepPink); margin-bottom:11px; }
-.closing-card p{ color:var(--muted); font-size:.94rem; line-height:1.85; }
+.closing-card h3{ font-size:1.25rem; color:var(--deepPink); margin-bottom:10px; }
+.closing-card p{ color:var(--muted); font-size:.92rem; line-height:1.8; }
 
-.feelings{ margin-top:30px; padding-top:27px; border-top:1px dashed #e2b9cf; text-align:center; }
-.feelings h3{ font-size:1.45rem; color:var(--deepPink); }
-.feelings-sub{ margin-top:7px; color:var(--muted); font-size:.86rem; }
-.emoji-grid{ display:flex; flex-wrap:wrap; justify-content:center; gap:9px; margin-top:18px; }
+.feelings{ margin-top:28px; padding-top:25px; border-top:1px dashed #e2b9cf; text-align:center; }
+.feelings h3{ font-size:1.3rem; color:var(--deepPink); }
+.feelings-sub{ margin-top:6px; color:var(--muted); font-size:.84rem; }
+.emoji-grid{ display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:16px; }
 .emoji{
-    width:49px; height:49px; display:flex; align-items:center; justify-content:center;
+    width:46px; height:46px; display:flex; align-items:center; justify-content:center;
     border:1px solid var(--line); border-radius:50%; background:rgba(255,255,255,.75);
-    cursor:pointer; font-size:1.35rem; transition:.23s ease;
+    cursor:pointer; font-size:1.3rem; transition:.23s ease;
 }
 .emoji:hover{ transform:translateY(-4px) scale(1.05); background:white; }
 .emoji.active{
@@ -221,52 +251,62 @@ h2{ max-width:500px; margin-bottom:16px; font-size:clamp(1.85rem,6vw,2.65rem); l
     transform:scale(1.1); box-shadow:0 0 0 4px rgba(255,92,141,.14);
 }
 .reaction{
-    margin-top:16px; padding:13px 17px; border-radius:17px;
-    background:rgba(255,255,255,.7); color:#6b4f66; font-size:.9rem;
-    line-height:1.65; animation:contentIn .4s both;
+    margin-top:14px; padding:12px 16px; border-radius:17px;
+    background:rgba(255,255,255,.7); color:#6b4f66; font-size:.88rem;
+    line-height:1.6; animation:contentIn .4s both;
 }
 
-.surprise-more{ margin-top:28px; text-align:center; }
+.surprise-more{ margin-top:26px; text-align:center; }
 .surprise-box{
-    margin-top:20px; padding:26px; border-radius:24px; text-align:center;
+    margin-top:18px; padding:22px; border-radius:22px; text-align:center;
     background:linear-gradient(150deg, rgba(255,255,255,.85), rgba(233,222,255,.65));
     border:1px solid var(--line);
     box-shadow:0 20px 55px rgba(140,80,180,.16);
     animation:contentIn .8s both;
 }
-.surprise-box h3{ color:var(--purple); font-size:1.4rem; margin-bottom:12px; }
-.surprise-box p{ color:var(--muted); font-size:.97rem; line-height:1.9; }
-.surprise-box .signature{ margin-top:18px; }
+.surprise-box h3{ color:var(--purple); font-size:1.3rem; margin-bottom:10px; }
+.surprise-box p{ color:var(--muted); font-size:.93rem; line-height:1.85; }
+.surprise-box .signature{ margin-top:16px; }
 
 /* =========== FALLING / RISING ELEMENTS =========== */
 
 .petals{ position:fixed; inset:0; z-index:100; overflow:hidden; pointer-events:none; }
-.petal{ position:absolute; top:-60px; animation:petalFall linear forwards; }
+.petal{ position:absolute; top:-60px; animation:petalFall linear forwards; will-change:transform,opacity; }
 @keyframes petalFall{
     0%{ opacity:0; transform:translateY(-10vh) translateX(0) rotate(0deg) scale(.7); }
     10%{ opacity:1; }
     100%{ opacity:0; transform:translateY(115vh) translateX(100px) rotate(720deg) scale(1); }
 }
 
-.balloon{ position:absolute; bottom:-70px; animation:balloonRise linear forwards; }
+.balloon{ position:absolute; bottom:-70px; animation:balloonRise linear forwards; will-change:transform,opacity; }
 @keyframes balloonRise{
     0%{ opacity:0; transform:translateY(0) translateX(0) rotate(-6deg); }
     12%{ opacity:1; }
     100%{ opacity:0; transform:translateY(-125vh) translateX(70px) rotate(6deg); }
 }
 
-.footer{ margin-top:25px; text-align:center; color:#a9819d; font-size:.65rem; letter-spacing:.13em; text-transform:uppercase; }
+.footer{ margin-top:22px; text-align:center; color:#a9819d; font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; }
 
 @media(max-width:520px){
     body{ padding:10px; }
-    .card{ padding:24px 17px; border-radius:32px; }
-    .content{ min-height:360px; }
-    .icon{ width:80px; height:80px; font-size:2.45rem; }
-    .description{ font-size:.94rem; }
-    .quote{ font-size:.94rem; }
+    .card{ padding:20px 15px 22px; border-radius:30px; }
+    .content{ min-height:340px; }
     .actions{ width:100%; }
-    .btn{ width:100%; }
+    .btn{ width:100%; min-width:0; }
     .gallery-inner img{ max-height:280px; }
+    .header{ font-size:.58rem; }
+}
+
+@media(max-width:400px){
+    .card{ padding:16px 12px 18px; border-radius:24px; }
+    .icon{ margin-bottom:14px; }
+    .quote{ padding:13px 15px; }
+    .love-list{ padding:16px 16px 4px; }
+    .personal-card, .closing-card, .surprise-box{ padding:16px; }
+}
+
+@media(min-width:900px){
+    .card{ width:660px; }
 }
 </style>
 </head>
@@ -278,13 +318,14 @@ h2{ max-width:500px; margin-bottom:16px; font-size:clamp(1.85rem,6vw,2.65rem); l
     <div class="orb one"></div>
     <div class="orb two"></div>
     <div class="orb three"></div>
+    <div class="orb four"></div>
 </div>
 
 
 <div class="card">
 
     <div class="header">
-        <span>A birthday surprise for you</span>
+        <span>A birthday surprise from Tahir</span>
         <span class="header-heart">♡</span>
     </div>
 
@@ -299,7 +340,7 @@ h2{ max-width:500px; margin-bottom:16px; font-size:clamp(1.85rem,6vw,2.65rem); l
     <div id="final"></div>
 
     <div class="footer">
-        made with love · just for Iqra
+        made with love by Tahir · just for Iqra
     </div>
 
 </div>
@@ -318,14 +359,15 @@ h2{ max-width:500px; margin-bottom:16px; font-size:clamp(1.85rem,6vw,2.65rem); l
 
 const GALLERY = [
     { src:"flowern.jpg", caption:"🌸 A little flower for the most beautiful girl I know, who deserves all the beautiful things in the world. ✨❤️" },
-    { src:"arooj.jpeg",       caption:"This smile is my favourite thing in the world 🤍" },
-    { src:"memory.jpg",       caption:"One of my favourite memories with you 💫" }
+    { src:"arooj.jpeg",  caption:"This smile is my favourite thing in the world 🤍" },
+    { src:"memory.jpg",  caption:"One of my favourite memories with you 💫" }
 ];
 
 const GIRLFRIEND_NAME = "Iqra Arooj Fatima";
+const SENDER_NAME = "Tahir";
 
 /* =========================================================
-   SOUND — synthesized, no external audio file needed
+   SOUND — everything synthesized, no external audio file needed
 ========================================================= */
 
 let audioCtx = null;
@@ -380,6 +422,36 @@ function playFanfare(){
     });
 }
 
+/* Instrumental "Happy Birthday" melody — the song is public domain,
+   played here as synthesized tones (no recording or lyrics used). */
+const HBD_MELODY = [
+    [261.63,0.28],[261.63,0.28],[293.66,0.5],[261.63,0.5],[349.23,0.5],[329.63,1.0],
+    [261.63,0.28],[261.63,0.28],[293.66,0.5],[261.63,0.5],[392.00,0.5],[349.23,1.0],
+    [261.63,0.28],[261.63,0.28],[523.25,0.5],[440.00,0.5],[349.23,0.5],[329.63,0.5],[293.66,1.0],
+    [466.16,0.28],[466.16,0.28],[440.00,0.5],[349.23,0.5],[392.00,0.5],[349.23,1.0]
+];
+
+function playHappyBirthdayTune(){
+    const ctx = getCtx();
+    if(!ctx) return;
+    let t = ctx.currentTime + 0.05;
+    HBD_MELODY.forEach(([freq,dur]) => {
+        const noteLen = dur * 0.82;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "triangle";
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.0001, t);
+        gain.gain.exponentialRampToValueAtTime(0.26, t + 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t + noteLen);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(t);
+        osc.stop(t + noteLen + 0.05);
+        t += dur;
+    });
+}
+
 /* =========================================================
    CONFETTI / PETAL / BALLOON BURSTS
 ========================================================= */
@@ -431,16 +503,16 @@ function spawnBalloons(count, opts){
     }
 }
 
-/* small shower on every click */
+/* small colourful shower on every click */
 function clickBurst(){
     playChime();
-    spawnFalling(["🎂","🌸","✨"], 10, { minSize:1, sizeRange:1, minDur:2.2, durRange:1.4, stagger:35 });
+    spawnFalling(["🎂","🌸","✨","🎉","💛"], 10, { minSize:1, sizeRange:1, minDur:2.2, durRange:1.4, stagger:35 });
 }
 
 /* the big finale */
 function grandFinale(){
-    spawnFalling(["🌸","🌷","🌹","🌺","🌼","💮","🎂","🎉","🎊","✨","❤️"], 120, { minSize:1, sizeRange:1.4, minDur:4.5, durRange:4, stagger:35 });
-    spawnBalloons(18, { minDur:7, durRange:4, stagger:130 });
+    spawnFalling(["🌸","🌷","🌹","🌺","🌼","💮","🎂","🎉","🎊","✨","❤️","💜","🧡"], 130, { minSize:1, sizeRange:1.4, minDur:4.5, durRange:4, stagger:32 });
+    spawnBalloons(20, { minDur:7, durRange:4, stagger:120 });
 }
 
 /* =========================================================
@@ -454,7 +526,7 @@ const STEPS = [
     title:"Hey… beautiful.",
     text:"Before anything else today, I wanted to make you something — a small little corner of the internet, built only for you.",
     quote:"Some gifts fit in a box. This one just fits in a heart.",
-    whisper:"Stay for a little while",
+    whisper:"A little something from Tahir",
     button:"I'm listening →"
 },
 
@@ -503,6 +575,14 @@ const STEPS = [
 },
 
 {
+    icon:"🕯️",
+    title:"Okay… make a wish.",
+    text:"Close your eyes for just a second. Think of one thing you want most this year — big or small, it doesn't matter.",
+    quote:"A wish made with a full heart has a way of finding its way back to you.",
+    button:"I made my wish 🕯️"
+},
+
+{
     icon:"🌸",
     title:"I appreciate the little things about you.",
     text:"Not just the way you look, not just your smile — the person behind all of it. The way you care, the way you show up, the way you make ordinary moments feel different.",
@@ -511,11 +591,27 @@ const STEPS = [
 },
 
 {
+    icon:"🔐",
+    title:"Something about you I never want to forget saying.",
+    text:"You're beautiful — but what draws me in more is that you're honest. And if there's one thing I look for above everything else in a person, it's loyalty.",
+    quote:"Give me your loyalty, and I promise to give you double back — not because I have to, but because that's the kind of person I choose to be for you.",
+    button:"That means everything →"
+},
+
+{
     icon:"🥹",
     title:"I don't need perfection.",
     text:"I would rather have honesty when things are difficult, laughter when life is ordinary, patience when things aren't perfect, and someone who keeps choosing me the way I choose them.",
     quote:"The strongest bonds aren't made from perfect people. They're made from sincere ones.",
     button:"Almost there…"
+},
+
+{
+    icon:"🎈",
+    title:"This year, I wish you…",
+    text:"A few small wishes, from me to you.",
+    quote:"Health that never worries you.<br>Laughter that finds you on the hardest days.<br>People around you who are as loyal as you deserve.<br>And peace — real, quiet, unshakeable peace.",
+    button:"Continue →"
 },
 
 {
@@ -529,7 +625,7 @@ const STEPS = [
 {
     icon:"💌",
     title:"No more steps after this.",
-    text:"Just three little surprises, a small shower of flowers, and a few words I genuinely wanted you to hear on your special day.",
+    text:"Just three little surprises, a small shower of flowers, a little song, and a few words I genuinely wanted you to hear on your special day.",
     button:"Open it ✨"
 },
 
@@ -568,8 +664,10 @@ function render(){
     void content.offsetWidth;
     content.classList.add("content");
 
+    const iconClass = "icon-c" + (current % 4);
+
     content.innerHTML = `
-        <div class="icon">${step.icon}</div>
+        <div class="icon ${iconClass}">${step.icon}</div>
         <h2>${step.title}</h2>
         <div class="description">${step.text}</div>
         ${step.quote ? `<div class="quote">${step.quote}</div>` : ""}
@@ -644,11 +742,14 @@ function reveal(){
     progressBar.style.width = "100%";
 
     content.innerHTML = `
-        <div class="icon">🎂</div>
+        <div class="icon icon-c0">🎂</div>
         <h1>Happy Birthday</h1>
         <div class="description">
             This little journey was simply my way of saying
             something that words alone don't always manage to say.
+        </div>
+        <div class="music-btn-wrap">
+            <button class="btn teal-btn" id="playSongBtn">🎵 Play a birthday song</button>
         </div>
     `;
 
@@ -696,7 +797,8 @@ function reveal(){
             </div>
 
             <div class="signature">
-                With love, respect, and a heart that believes in you. 🤍
+                With love, respect, and a heart that believes in you.<br>
+                — Tahir 🤍
             </div>
 
         </div>
@@ -705,6 +807,7 @@ function reveal(){
             <h3>A few things I love about you 🌷</h3>
             <ul>
                 <li>The way your laugh changes the whole mood of a room.</li>
+                <li>How honest you are, even when it would be easier not to be.</li>
                 <li>How you care for the people around you without being asked to.</li>
                 <li>Your patience, even on the days it isn't easy to have any.</li>
                 <li>The way ordinary conversations with you never feel ordinary.</li>
@@ -718,6 +821,7 @@ function reveal(){
                 <div class="badge">✦ BIRTHDAY GIRL</div>
             </div>
             <div class="personal-name">${GIRLFRIEND_NAME}</div>
+            <div class="personal-from">with love, from ${SENDER_NAME} 🤍</div>
         </div>
 
         <div class="closing-card">
@@ -725,8 +829,9 @@ function reveal(){
             <p>
                 I don't promise that every day will be perfect —
                 nobody can honestly promise that. But I can promise
-                honesty, respect, patience, and loyalty. On your birthday
-                and always, I hope you feel exactly how special you are to me.
+                honesty, respect, patience, and loyalty. If you give me
+                your loyalty, I will always give you double back — on your
+                birthday, and every ordinary day after it.
             </p>
         </div>
 
@@ -754,7 +859,19 @@ function reveal(){
 
     setupReactions();
     setupOneMore();
+    setupPlaySong();
+
     grandFinale();
+    playHappyBirthdayTune();
+}
+
+
+function setupPlaySong(){
+    const btn = document.getElementById("playSongBtn");
+    btn.addEventListener("click", function(){
+        playHappyBirthdayTune();
+        spawnFalling(["🎵","✨","🎶"], 14, { minSize:1, sizeRange:.8, minDur:2.6, durRange:1.4, stagger:40 });
+    });
 }
 
 
@@ -791,14 +908,14 @@ function setupOneMore(){
                     <p>
                         Out of every birthday you'll ever have, I only get to be
                         part of this one exact way, this one exact year. So thank you
-                        for letting me be here for it — for your laugh, your late-night
-                        thoughts, your ordinary Tuesdays, all of it.
+                        for letting me be here for it — for your laugh, your honesty,
+                        your late-night thoughts, your ordinary Tuesdays, all of it.
                     </p>
                     <p>
                         Here's to another year of you being exactly, wonderfully
                         yourself. Happy Birthday, ${GIRLFRIEND_NAME}. 🎂🌸
                     </p>
-                    <div class="signature">Always in your corner. 🤍</div>
+                    <div class="signature">Always in your corner.<br>— Tahir 🤍</div>
                 </div>
             `;
             btn.textContent = "One more time 🎉";
